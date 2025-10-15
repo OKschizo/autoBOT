@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv
+
+# Vector DB
+chroma_db/
+
+# Scraped data
+scraped_data/website/
+scraped_data/blog/
+
+# Keep docs data committed (static)
+# scraped_data/gitbook_data.json
+# scraped_data/markdown/
+
+# Environment variables
+.env
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+

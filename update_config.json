@@ -1,0 +1,15 @@
+{
+  "last_updates": {
+    "docs": null,
+    "website": "2025-10-15T13:22:11.277296",
+    "blog": null,
+    "full": null
+  },
+  "schedule": {
+    "enabled": false,
+    "daily_time": "03:00",
+    "daily_type": "quick",
+    "weekly_day": "sunday",
+    "weekly_enabled": true
+  }
+}
