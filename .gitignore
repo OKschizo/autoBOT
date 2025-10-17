@@ -21,6 +21,10 @@ scraped_data/blog/
 
 # Environment variables
 .env
+.env.backup
+
+# Database files
+bot_conversations.db
 
 # OS
 .DS_Store

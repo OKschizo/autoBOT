@@ -20,7 +20,7 @@ class ConversationManager:
         """
         self.max_messages = max_messages
         self.timeout_seconds = timeout_minutes * 60
-        self.conversations: Dict[int, Dict] = {}  # user_id -> conversation data
+        self.conversations: Dict[tuple, Dict] = {}  # (user_id, chat_id) -> conversation data
         
         # For summarization
         self.anthropic_client = None
@@ -28,49 +28,54 @@ class ConversationManager:
         if api_key:
             self.anthropic_client = Anthropic(api_key=api_key)
     
-    def add_message(self, user_id: int, role: str, content: str):
+    def add_message(self, user_id: int, role: str, content: str, chat_id: int = None):
         """Add a message to the conversation"""
         now = time.time()
         
+        # Use (user_id, chat_id) as key for separate conversations per chat
+        conv_key = (user_id, chat_id) if chat_id else (user_id, user_id)  # DM uses user_id for both
+        
         # Initialize or check timeout
-        if user_id not in self.conversations:
-            self.conversations[user_id] = {
+        if conv_key not in self.conversations:
+            self.conversations[conv_key] = {
                 'messages': [],
                 'summary': None,
                 'last_activity': now
             }
         else:
             # Check timeout
-            if now - self.conversations[user_id]['last_activity'] > self.timeout_seconds:
+            if now - self.conversations[conv_key]['last_activity'] > self.timeout_seconds:
                 # Conversation timed out, start fresh
-                self.conversations[user_id] = {
+                self.conversations[conv_key] = {
                     'messages': [],
                     'summary': None,
                     'last_activity': now
                 }
         
         # Add message
-        self.conversations[user_id]['messages'].append({
+        self.conversations[conv_key]['messages'].append({
             'role': role,
             'content': content,
             'timestamp': now
         })
-        self.conversations[user_id]['last_activity'] = now
+        self.conversations[conv_key]['last_activity'] = now
         
         # Check if we need to summarize
-        if len(self.conversations[user_id]['messages']) > self.max_messages:
-            self._summarize_conversation(user_id)
+        if len(self.conversations[conv_key]['messages']) > self.max_messages:
+            self._summarize_conversation(conv_key)
     
-    def get_context(self, user_id: int, include_last_n: int = 5) -> str:
+    def get_context(self, user_id: int, chat_id: int = None, include_last_n: int = 5) -> str:
         """
         Get conversation context for RAG query
         
         Returns formatted context with summary + recent messages
         """
-        if user_id not in self.conversations:
+        conv_key = (user_id, chat_id) if chat_id else (user_id, user_id)
+        
+        if conv_key not in self.conversations:
             return ""
         
-        conv = self.conversations[user_id]
+        conv = self.conversations[conv_key]
         context_parts = []
         
         # Add summary if exists
@@ -87,16 +92,18 @@ class ConversationManager:
         
         return "\n".join(context_parts)
     
-    def get_messages_for_llm(self, user_id: int) -> List[Dict]:
+    def get_messages_for_llm(self, user_id: int, chat_id: int = None) -> List[Dict]:
         """
         Get conversation messages formatted for Claude API
         
         Returns list of message dicts with role and content
         """
-        if user_id not in self.conversations:
+        conv_key = (user_id, chat_id) if chat_id else (user_id, user_id)
+        
+        if conv_key not in self.conversations:
             return []
         
-        conv = self.conversations[user_id]
+        conv = self.conversations[conv_key]
         
         # If we have a summary, start with it as context
         messages = []
@@ -119,15 +126,15 @@ class ConversationManager:
         
         return messages
     
-    def _summarize_conversation(self, user_id: int):
+    def _summarize_conversation(self, conv_key: tuple):
         """Summarize the conversation and keep only recent messages"""
         if not self.anthropic_client:
             # No API key, just truncate
-            self.conversations[user_id]['messages'] = \
-                self.conversations[user_id]['messages'][-5:]
+            self.conversations[conv_key]['messages'] = \
+                self.conversations[conv_key]['messages'][-5:]
             return
         
-        conv = self.conversations[user_id]
+        conv = self.conversations[conv_key]
         
         # Get messages to summarize (all but last 3)
         messages_to_summarize = conv['messages'][:-3]
@@ -172,10 +179,11 @@ Keep it brief and conversational. Focus on what the user was asking about and ke
             # Fallback: just truncate
             conv['messages'] = conv['messages'][-5:]
     
-    def clear_conversation(self, user_id: int):
+    def clear_conversation(self, user_id: int, chat_id: int = None):
         """Manually clear a user's conversation"""
-        if user_id in self.conversations:
-            del self.conversations[user_id]
+        conv_key = (user_id, chat_id) if chat_id else (user_id, user_id)
+        if conv_key in self.conversations:
+            del self.conversations[conv_key]
     
     def get_stats(self) -> Dict:
         """Get statistics about active conversations"""

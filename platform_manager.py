@@ -25,17 +25,17 @@ class PlatformConfig:
             'name': 'Discord',
             'token_prefix': 'DISCORD_BOT_TOKEN_',
             'module': 'discord_bot',
-            'class': 'DiscordBot',
+            'class': 'AutoFinanceDiscordBot',
             'color': '#5865F2',
-            'status': 'planned'
+            'status': 'active'
         },
         'slack': {
             'name': 'Slack',
             'token_prefix': 'SLACK_BOT_TOKEN_',
             'module': 'slack_bot',
-            'class': 'SlackBot',
+            'class': 'AutoFinanceSlackBot',
             'color': '#4A154B',
-            'status': 'planned'
+            'status': 'active'
         }
     }
     
@@ -99,12 +99,22 @@ class BotLauncher:
     
     @staticmethod
     def launch_discord_bot(config: Dict):
-        """Launch Discord bot (future implementation)"""
+        """Launch Discord bot"""
         # Set the token for this specific bot
         os.environ['DISCORD_BOT_TOKEN'] = config['token']
         
-        # TODO: Implement Discord bot
-        raise NotImplementedError("Discord bot coming soon!")
+        from discord_bot import AutoFinanceDiscordBot
+        bot = AutoFinanceDiscordBot()
+        return bot
+    
+    @staticmethod
+    def launch_slack_bot(config: Dict):
+        """Launch Slack bot"""
+        os.environ['SLACK_BOT_TOKEN'] = config['token']
+        
+        from slack_bot import AutoFinanceSlackBot
+        bot = AutoFinanceSlackBot()
+        return bot
     
     @staticmethod
     def launch_bot(bot_config: Dict):
@@ -115,6 +125,8 @@ class BotLauncher:
             return BotLauncher.launch_telegram_bot(bot_config)
         elif platform == 'discord':
             return BotLauncher.launch_discord_bot(bot_config)
+        elif platform == 'slack':
+            return BotLauncher.launch_slack_bot(bot_config)
         else:
             raise ValueError(f"Unsupported platform: {platform}")
 

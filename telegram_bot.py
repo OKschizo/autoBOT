@@ -10,6 +10,7 @@ from telegram.ext import Application, CommandHandler, MessageHandler, filters, C
 from dotenv import load_dotenv
 from rag_agent_complete import CompleteRAGAgent
 from conversation_manager import ConversationManager
+from conversation_storage import ConversationStorage
 
 # Load environment variables
 load_dotenv()
@@ -26,6 +27,10 @@ class AutoFinanceBot:
     """Telegram bot for Auto Finance documentation"""
     
     def __init__(self):
+        # Reload .env to get latest changes
+        from dotenv import load_dotenv
+        load_dotenv(override=True)
+        
         # Load config from .env (support both old and new format)
         self.bot_token = (
             os.getenv('TELEGRAM_BOT_TOKEN') or 
@@ -38,15 +43,24 @@ class AutoFinanceBot:
         if not self.bot_token:
             raise ValueError("TELEGRAM_BOT_TOKEN not found in .env file! Add TELEGRAM_BOT_TOKEN_MAIN=your-token")
         
-        # Initialize RAG agent (uses complete dataset)
+        # Initialize RAG agent based on model (uses complete dataset)
         logger.info("Initializing RAG agent with complete dataset...")
-        self.agent = CompleteRAGAgent()
         
-        # Check if index is built
-        if self.agent.collection is None or self.agent.collection.count() == 0:
-            logger.info("Building vector index...")
-            self.agent.build_index()
-            logger.info("Index built successfully!")
+        # Choose agent based on model
+        if self.model.startswith('gpt'):
+            # Use OpenAI
+            from rag_agent_openai import OpenAIRAGAgent
+            self.agent = OpenAIRAGAgent()
+            logger.info(f"Using OpenAI model: {self.model}")
+        else:
+            # Use Claude
+            self.agent = CompleteRAGAgent()
+            logger.info(f"Using Claude model: {self.model}")
+        
+        # Verify index exists
+        if self.agent.collection is None:
+            logger.error("No index found! Run: python scrape_all_data.py")
+            raise ValueError("No index found. Run scrape_all_data.py first.")
         
         logger.info(f"Bot ready with {self.agent.collection.count()} chunks indexed")
         
@@ -58,6 +72,9 @@ class AutoFinanceBot:
             max_messages=10,  # Summarize after 10 messages
             timeout_minutes=30  # Clear after 30 mins inactivity
         )
+        
+        # Conversation storage (persistent)
+        self.storage = ConversationStorage()
         
         # Get bot username for mention detection
         self.bot_username = None
@@ -113,7 +130,8 @@ Bot is running smoothly! 🎯
     async def clear_command(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         """Handle /clear command - clears conversation history"""
         user = update.effective_user
-        self.conversation_manager.clear_conversation(user.id)
+        chat = update.message.chat
+        self.conversation_manager.clear_conversation(user.id, chat.id)
         
         await update.message.reply_text(
             "✅ Conversation cleared! Starting fresh.",
@@ -121,32 +139,39 @@ Bot is running smoothly! 🎯
         )
     
     async def handle_question(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
-        """Handle user questions - only when mentioned"""
-        message_text = update.message.text
+        """Handle user questions - when mentioned OR replying to bot"""
+        message = update.message
+        message_text = message.text
         user = update.effective_user
-        chat = update.message.chat
+        chat = message.chat
         
         # Get bot username if we don't have it
         if not self.bot_username:
             bot_info = await context.bot.get_me()
             self.bot_username = bot_info.username
         
-        # Check if bot is mentioned
-        bot_mentioned = False
+        # Check if bot should respond
+        bot_should_respond = False
         
         # Check for @username mention
         if f"@{self.bot_username}" in message_text:
-            bot_mentioned = True
+            bot_should_respond = True
             # Remove the mention from the question
             question = message_text.replace(f"@{self.bot_username}", "").strip()
         
-        # Also check for direct messages (private chat)
+        # Check for direct messages (private chat)
         elif chat.type == "private":
-            bot_mentioned = True
+            bot_should_respond = True
             question = message_text
         
-        # Ignore if not mentioned (in group chats)
-        if not bot_mentioned:
+        # Check if replying to bot's message
+        elif message.reply_to_message and message.reply_to_message.from_user.id == (await context.bot.get_me()).id:
+            bot_should_respond = True
+            question = message_text
+            logger.info(f"User replying to bot message")
+        
+        # Ignore if not mentioned/replying (in group chats)
+        if not bot_should_respond:
             return
         
         logger.info(f"Question from {user.username or user.id}: {question}")
@@ -155,8 +180,8 @@ Bot is running smoothly! 🎯
         await update.message.chat.send_action("typing")
         
         try:
-            # Get conversation context
-            conv_context = self.conversation_manager.get_context(user.id)
+            # Get conversation context (per user + per chat)
+            conv_context = self.conversation_manager.get_context(user.id, chat.id)
             
             # Build enhanced question with context
             if conv_context:
@@ -191,9 +216,26 @@ Bot is running smoothly! 🎯
                 # Markdown formatting failed, send as plain text
                 await update.message.reply_text(answer)
             
-            # Save to conversation history
-            self.conversation_manager.add_message(user.id, 'user', question)
-            self.conversation_manager.add_message(user.id, 'assistant', answer)
+            # Save to conversation history (per user + per chat)
+            self.conversation_manager.add_message(user.id, 'user', question, chat.id)
+            self.conversation_manager.add_message(user.id, 'assistant', answer, chat.id)
+            
+            # Save to persistent storage
+            try:
+                tokens_used = response.get('usage', {}).get('total_tokens', 0) if 'usage' in response else 0
+                self.storage.save_conversation(
+                    user_id=str(user.id),
+                    username=user.username or user.first_name or f"User{user.id}",
+                    chat_id=str(chat.id),
+                    question=question,
+                    answer=answer,
+                    platform='telegram',
+                    chat_type=chat.type,
+                    model=self.model,
+                    tokens_used=tokens_used
+                )
+            except Exception as e:
+                logger.warning(f"Failed to save conversation: {e}")
             
             self.questions_answered += 1
             logger.info(f"Successfully answered question from {user.username or user.id}")

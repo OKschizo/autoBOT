@@ -12,8 +12,11 @@ openai==1.12.0          # For GPT-4o-mini (fast & cheap)
 anthropic>=0.70.0       # For Claude (accurate & smart)
 tiktoken==0.6.0         # Token counting for OpenAI
 
-# Telegram Bot & Automation
+# Bot Platforms & Automation
 python-telegram-bot>=22.0  # For Telegram integration
+discord.py>=2.6.0          # For Discord integration
+slack-bolt>=1.18.0         # For Slack integration
+slack-sdk>=3.27.0          # Slack SDK
 python-dotenv>=1.0.0       # For .env configuration management
 schedule>=1.2.0            # For automated task scheduling
 

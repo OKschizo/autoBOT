@@ -34,9 +34,17 @@ class CompleteRAGAgent:
         
         # Setup Anthropic
         self.api_key = anthropic_api_key or os.getenv('ANTHROPIC_API_KEY')
+        
+        # Log key status (first/last chars only for security)
         if self.api_key:
+            if len(self.api_key) > 10:
+                key_preview = f"{self.api_key[:10]}...{self.api_key[-6:]}"
+            else:
+                key_preview = "INVALID (too short)"
+            print(f"Claude API Key loaded: {key_preview}")
             self.client = anthropic.Anthropic(api_key=self.api_key)
         else:
+            print("WARNING: No Claude API key found!")
             self.client = None
         
         # Setup ChromaDB with local embeddings
@@ -122,8 +130,29 @@ class CompleteRAGAgent:
         
         context = "\n".join(context_parts)
         
-        # Create prompt for Claude
-        system_prompt = """You're a helpful assistant knowledgeable about Auto Finance and DeFi.
+        # Load system prompt (allow customization)
+        system_prompt = self.load_system_prompt()
+        
+    def load_system_prompt(self, prompt_name="default"):
+        """Load system prompt from file or use default"""
+        import json
+        from pathlib import Path
+        
+        prompt_file = Path("system_prompts.json")
+        
+        if prompt_file.exists():
+            try:
+                with open(prompt_file, 'r') as f:
+                    prompts = json.load(f)
+                    return prompts.get(prompt_name, prompts.get('default', self.get_default_prompt()))
+            except:
+                return self.get_default_prompt()
+        else:
+            return self.get_default_prompt()
+    
+    def get_default_prompt(self):
+        """Get default system prompt"""
+        return """You're a helpful assistant knowledgeable about Auto Finance and DeFi.
 
 CRITICAL RULES:
 - NEVER say "from the docs" or "the documentation shows" or "according to"
@@ -168,7 +197,44 @@ Good: "Auto Finance integrates with Balancer, Curve, and Aave..."
 Bad: "Based on the documentation, their autopools are..."
 Good: "Autopools are automated vaults that handle rebalancing and yield optimization for you."
 """
-
+    
+    def ask(self, question: str, model: str = "claude-sonnet-4-20250514", 
+            max_tokens: int = 2000, n_results: int = 8) -> Dict:
+        """
+        Ask a question using Claude
+        
+        Args:
+            question: User's question
+            model: Claude model to use
+            max_tokens: Max response length
+            n_results: Number of chunks to retrieve
+        
+        Returns:
+            Dict with 'answer', 'sources', 'usage', etc.
+        """
+        if not self.client:
+            raise ValueError("Anthropic API key required. Set ANTHROPIC_API_KEY environment variable.")
+        
+        # Retrieve relevant chunks
+        print(f"Searching for: {question}")
+        results = self.search(question, n_results=n_results)
+        
+        # Build context from results
+        context_parts = []
+        sources = []
+        for i, result in enumerate(results, 1):
+            context_parts.append(f"[Source {i}] {result['title']}\n{result['text']}\n")
+            sources.append({
+                'title': result['title'],
+                'url': result['url'],
+                'relevance': 1 - result['distance'] if result['distance'] else None
+            })
+        
+        context = "\n".join(context_parts)
+        
+        # Load system prompt (allow customization)
+        system_prompt = self.load_system_prompt()
+        
         user_prompt = f"""Context (Auto Finance info - includes LIVE DATA from the website):
 {context}
 
