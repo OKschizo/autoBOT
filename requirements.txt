@@ -4,6 +4,7 @@ beautifulsoup4==4.12.3
 playwright>=1.40.0  # For JavaScript-heavy sites
 
 # RAG System - Vector DB & Embeddings
+numpy<2.0.0,>=1.24.0       # Pin to 1.x for compatibility
 chromadb==0.4.22
 sentence-transformers==2.5.1
 
