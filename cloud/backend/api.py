@@ -9,6 +9,8 @@ from typing import Optional, Dict, List
 from datetime import datetime
 from fastapi import FastAPI, HTTPException, Depends, Header
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from google.oauth2 import id_token
 from google.auth.transport import requests
@@ -251,6 +253,26 @@ async def health_check():
         "conversation_manager": "active",
         "storage": "active"
     }
+
+
+# Serve static frontend files
+frontend_path = os.path.join(os.path.dirname(__file__), "../frontend")
+if os.path.exists(frontend_path):
+    app.mount("/static", StaticFiles(directory=frontend_path), name="static")
+    
+    @app.get("/")
+    async def serve_frontend():
+        """Serve the frontend index.html"""
+        return FileResponse(os.path.join(frontend_path, "index.html"))
+    
+    @app.get("/{catchall:path}")
+    async def serve_frontend_files(catchall: str):
+        """Serve frontend static files (CSS, JS)"""
+        file_path = os.path.join(frontend_path, catchall)
+        if os.path.exists(file_path) and os.path.isfile(file_path):
+            return FileResponse(file_path)
+        # If file doesn't exist, serve index.html (for SPA routing)
+        return FileResponse(os.path.join(frontend_path, "index.html"))
 
 
 if __name__ == "__main__":

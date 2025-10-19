@@ -1,6 +1,6 @@
 // Configuration
-const API_URL = 'http://localhost:8000';  // Change to your deployed API URL
-const GOOGLE_CLIENT_ID = 'YOUR_GOOGLE_CLIENT_ID';  // Replace with your Google OAuth Client ID
+const API_URL = window.location.origin;  // Automatically uses current domain (works locally and in production)
+const GOOGLE_CLIENT_ID = 'PASTE_YOUR_ACTUAL_CLIENT_ID_HERE';  // Replace with your actual Google Client ID from .env
 
 // State
 let currentUser = null;

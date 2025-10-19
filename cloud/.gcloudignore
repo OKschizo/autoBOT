@@ -1,0 +1,17 @@
+# This file specifies files that are *not* uploaded to Google Cloud
+# using gcloud. It follows the same syntax as .gitignore
+
+.gcloudignore
+.git
+.gitignore
+.env
+*.pyc
+*.pyo
+__pycache__/
+*.egg-info/
+*.md
+test_api.py
+run_local.py
+start.sh
+start.bat
+
