@@ -1,6 +1,6 @@
 // Configuration
 const API_URL = window.location.origin;  // Automatically uses current domain (works locally and in production)
-const GOOGLE_CLIENT_ID = 'PASTE_YOUR_ACTUAL_CLIENT_ID_HERE';  // Replace with your actual Google Client ID from .env
+let GOOGLE_CLIENT_ID = null;  // Loaded from backend
 
 // State
 let currentUser = null;
@@ -20,34 +20,46 @@ const userName = document.getElementById('userName');
 const userAvatar = document.getElementById('userAvatar');
 const signOutButton = document.getElementById('signOutButton');
 
-// Initialize Google Sign-In
-window.onload = function() {
-    google.accounts.id.initialize({
-        client_id: GOOGLE_CLIENT_ID,
-        callback: handleCredentialResponse
-    });
-    
-    // Render sign-in button in auth gate
-    google.accounts.id.renderButton(
-        document.getElementById('googleSignInButton'),
-        { 
-            theme: 'filled_blue', 
-            size: 'large',
-            text: 'signin_with',
-            shape: 'rectangular',
-            width: 300
+// Initialize app
+window.onload = async function() {
+    try {
+        // Fetch config from backend (includes Google Client ID)
+        const configResponse = await fetch(`${API_URL}/api/config`);
+        const config = await configResponse.json();
+        GOOGLE_CLIENT_ID = config.google_client_id;
+        
+        // Update model badge
+        const modelName = config.model.includes('gpt') ? 'GPT-4o' : 'Claude Sonnet 4';
+        modelBadge.textContent = modelName;
+        
+        // Initialize Google Sign-In
+        google.accounts.id.initialize({
+            client_id: GOOGLE_CLIENT_ID,
+            callback: handleCredentialResponse
+        });
+        
+        // Render sign-in button in auth gate
+        google.accounts.id.renderButton(
+            document.getElementById('googleSignInButton'),
+            { 
+                theme: 'filled_blue', 
+                size: 'large',
+                text: 'signin_with',
+                shape: 'rectangular',
+                width: 300
+            }
+        );
+        
+        // Check if user is already signed in (from localStorage)
+        const savedUser = localStorage.getItem('autoFinanceUser');
+        if (savedUser) {
+            currentUser = JSON.parse(savedUser);
+            showChatInterface();
         }
-    );
-    
-    // Check if user is already signed in (from localStorage)
-    const savedUser = localStorage.getItem('autoFinanceUser');
-    if (savedUser) {
-        currentUser = JSON.parse(savedUser);
-        showChatInterface();
+    } catch (error) {
+        console.error('Failed to initialize app:', error);
+        alert('Failed to load app configuration. Please refresh the page.');
     }
-    
-    // Fetch model info
-    fetchModelInfo();
 };
 
 // Handle Google Sign-In
@@ -98,19 +110,6 @@ signOutButton.addEventListener('click', () => {
     userInfo.style.display = 'none';
     messagesContainer.innerHTML = getWelcomeMessage();
 });
-
-// Fetch model info
-async function fetchModelInfo() {
-    try {
-        const response = await fetch(`${API_URL}/api/health`);
-        const data = await response.json();
-        
-        const modelName = data.model.includes('gpt') ? 'GPT-4o' : 'Claude Sonnet 4';
-        modelBadge.textContent = modelName;
-    } catch (error) {
-        console.error('Failed to fetch model info:', error);
-    }
-}
 
 // Input handling
 questionInput.addEventListener('input', () => {

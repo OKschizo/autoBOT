@@ -133,6 +133,14 @@ async def root():
         "version": "1.0.0"
     }
 
+@app.get("/api/config")
+async def get_config():
+    """Get public configuration (safe to expose)"""
+    return {
+        "google_client_id": GOOGLE_CLIENT_ID,
+        "model": model
+    }
+
 @app.post("/api/auth/google")
 async def google_auth(request: GoogleAuthRequest):
     """Verify Google Sign-In token"""
