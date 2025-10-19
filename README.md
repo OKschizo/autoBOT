@@ -17,10 +17,22 @@ Complete AI-powered bot for Auto Finance across **Telegram**, **Discord**, and *
 ✅ **Professional GUI** - 6-tab desktop interface for complete control  
 ✅ **Reply Detection** - Responds to message replies (Telegram)  
 ✅ **Slash Commands** - Full command support (Discord)  
+✅ **Web Interface** - Deploy as web app with Google Sign-In ([cloud/](cloud/))
 
 ---
 
-## 🚀 Quick Start
+## 🌐 Two Deployment Options
+
+### **Option 1: Desktop App (This Guide)**
+Run bots on your computer with a GUI to manage Telegram, Discord, and Slack bots.
+
+### **Option 2: Web Application** 
+Deploy a web-based Q&A interface where team members sign in with Google.
+👉 **[See cloud/ directory](cloud/)** for web deployment guide.
+
+---
+
+## 🚀 Quick Start (Desktop App)
 
 ### **1. Install Dependencies**
 
