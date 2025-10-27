@@ -9,6 +9,7 @@ from pathlib import Path
 from typing import List, Dict, Optional
 import chromadb
 from chromadb.utils import embedding_functions
+from chromadb.errors import InvalidCollectionException
 
 try:
     import anthropic
@@ -54,36 +55,53 @@ class CompleteRAGAgent:
         )
         print("Using local embeddings (all-MiniLM-L6-v2)")
         
-        # Try to load complete collection first, fall back to docs-only
-        try:
-            self.collection = self.chroma_client.get_collection(
-                name="auto_finance_complete",
-                embedding_function=self.embedding_function
-            )
-            print(f"Loaded COMPLETE collection with {self.collection.count()} chunks")
-            print("  (includes docs + website + blog)")
-        except:
-            # Fall back to docs-only
+        self.collection = None
+        self.collection_name = None
+        self._load_collection()
+
+    def _load_collection(self):
+        """Attempt to load whichever collection is available."""
+        for name in ("auto_finance_complete", "auto_finance_docs"):
             try:
                 self.collection = self.chroma_client.get_collection(
-                    name="auto_finance_docs",
-                    embedding_function=self.embedding_function
+                    name=name,
+                    embedding_function=self.embedding_function,
                 )
-                print(f"Loaded docs-only collection with {self.collection.count()} chunks")
-                print("  (Run scrape_all_data.py to build complete collection)")
-            except:
-                self.collection = None
-                print("No collection found. Run scrape_all_data.py first.")
+                self.collection_name = name
+                print(f"Loaded '{name}' collection with {self.collection.count()} chunks")
+                if name == "auto_finance_complete":
+                    print("  (includes docs + website + blog)")
+                else:
+                    print("  (Run scrape_all_data.py to build complete collection)")
+                return
+            except InvalidCollectionException:
+                continue
+            except Exception:
+                continue
+
+        self.collection = None
+        self.collection_name = None
+        print("No collection found. Run scrape_all_data.py first.")
     
     def search(self, query: str, n_results: int = 5) -> List[Dict]:
         """Search for relevant documentation chunks"""
         if not self.collection:
             raise ValueError("Index not built. Run scrape_all_data.py first.")
         
-        results = self.collection.query(
-            query_texts=[query],
-            n_results=n_results
-        )
+        try:
+            results = self.collection.query(
+                query_texts=[query],
+                n_results=n_results
+            )
+        except InvalidCollectionException:
+            print(f"Collection '{self.collection_name}' stale; reloading.")
+            self._load_collection()
+            if not self.collection:
+                raise ValueError("Index not built. Run scrape_all_data.py first.")
+            results = self.collection.query(
+                query_texts=[query],
+                n_results=n_results
+            )
         
         # Format results
         formatted_results = []

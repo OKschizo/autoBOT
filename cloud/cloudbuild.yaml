@@ -26,10 +26,12 @@ steps:
       '--region', 'us-central1',
       '--platform', 'managed',
       '--allow-unauthenticated',
-      '--memory', '2Gi',
+      '--memory', '4Gi',
       '--cpu', '2',
       '--timeout', '600',
-      '--max-instances', '10'
+      '--max-instances', '10',
+      '--set-env-vars',
+      'GOOGLE_CLIENT_ID=${_GOOGLE_CLIENT_ID},ANTHROPIC_API_KEY=${_ANTHROPIC_API_KEY},OPENAI_API_KEY=${_OPENAI_API_KEY},BOT_MODEL=${_BOT_MODEL}'
     ]
 
 images:

@@ -200,6 +200,10 @@ class DataScraperService:
         except Exception as exc:
             errors.append(f"Docs: {exc}")
             logger.error("Failed to scrape docs: %s", exc, exc_info=True)
+        else:
+            if gitbook_count == 0:
+                logger.warning("Documentation scrape returned zero pages")
+                errors.append("Docs: No pages scraped")
 
         try:
             from scrape_website import WebsiteScraper
@@ -214,6 +218,10 @@ class DataScraperService:
         except Exception as exc:
             errors.append(f"Website: {exc}")
             logger.error("Failed to scrape website: %s", exc, exc_info=True)
+        else:
+            if website_count == 0:
+                logger.warning("Website scrape returned zero pages")
+                errors.append("Website: No pages scraped")
 
         try:
             from scrape_blog import BlogScraper
@@ -228,6 +236,10 @@ class DataScraperService:
         except Exception as exc:
             errors.append(f"Blog: {exc}")
             logger.error("Failed to scrape blog: %s", exc, exc_info=True)
+        else:
+            if blog_count == 0:
+                logger.warning("Blog scrape returned zero posts")
+                errors.append("Blog: No posts scraped")
 
         # Rebuild index when all scrapers finish.
         if not errors:
@@ -498,4 +510,3 @@ class DataScraperService:
 
 # Global singleton used by the FastAPI backend.
 scraper_service = DataScraperService(interval_minutes=10)
-

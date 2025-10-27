@@ -46,6 +46,7 @@ class BotInstance:
         self.error_message: Optional[str] = None
         self.activity_log: deque = deque(maxlen=100)  # Keep last 100 log entries
         self.stop_event = threading.Event()
+        self.loop: Optional[asyncio.AbstractEventLoop] = None
         
     def log(self, message: str, level: str = "INFO"):
         """Add a log entry"""
@@ -153,93 +154,186 @@ class CloudBotManager:
             
         # Start bot in background thread
         def run_bot():
+
+            local_loop: Optional[asyncio.AbstractEventLoop] = None
+
             try:
+
                 if bot.platform == "telegram":
+
                     bot.log("Initializing Telegram bot...")
+
                     
+
                     # Set environment variables for the bot
+
                     os.environ['TELEGRAM_BOT_TOKEN'] = bot.token
+
                     os.environ['BOT_MODEL'] = bot.model
+
                     
+
+                    # Bind a dedicated asyncio loop to this worker thread
+
+                    asyncio.set_event_loop_policy(asyncio.DefaultEventLoopPolicy())
+
+                    local_loop = asyncio.new_event_loop()
+
+                    asyncio.set_event_loop(local_loop)
+
+                    bot.loop = local_loop
+
+                    
+
                     # Create bot instance (reads from env vars)
+
                     bot.bot_instance = TelegramBot()
+
                     bot.status = "running"
+
                     bot.start_time = datetime.now()
-                    bot.log(f"✅ Telegram bot '{bot.name}' started successfully")
+
+                    bot.log(f"? Telegram bot '{bot.name}' started successfully")
+
                     
+
                     # Save status to storage
+
                     self._save_bot_status(bot_id)
+
                     
+
                     # Run the bot
+
                     bot.bot_instance.run()
+
                     
+
                 elif bot.platform == "discord":
+
                     bot.log("Initializing Discord bot...")
+
                     
+
                     # Set environment variables for the bot
+
                     os.environ['DISCORD_BOT_TOKEN'] = bot.token
+
                     os.environ['BOT_MODEL'] = bot.model
+
                     
+
                     # Create bot instance (reads from env vars)
+
                     bot.bot_instance = DiscordBot()
+
                     bot.status = "running"
+
                     bot.start_time = datetime.now()
-                    bot.log(f"✅ Discord bot '{bot.name}' started successfully")
+
+                    bot.log(f"? Discord bot '{bot.name}' started successfully")
+
                     
+
                     # Save status to storage
+
                     self._save_bot_status(bot_id)
+
                     
+
                     # Run the bot
+
                     asyncio.run(bot.bot_instance.start(bot.token))
+
                     
+
             except Exception as e:
+
                 bot.status = "error"
+
                 bot.error_message = str(e)
-                bot.log(f"❌ Error starting bot: {e}", "ERROR")
+
+                bot.log(f"? Error starting bot: {e}", "ERROR")
+
                 logger.error(f"Bot {bot_id} error: {e}", exc_info=True)
-                
+
+            finally:
+
+                if bot.platform == "telegram":
+
+                    bot.loop = None
+
+                    if local_loop and not local_loop.is_closed():
+
+                        local_loop.close()
+
+                    
+
         bot.thread = threading.Thread(target=run_bot, daemon=True)
         bot.thread.start()
         
         return {"success": True, "bot": bot.get_status()}
         
-    def stop_bot(self, bot_id: str) -> Dict:
-        """Stop a bot"""
-        with self.lock:
-            if bot_id not in self.bots:
-                return {"success": False, "error": "Bot not found"}
-                
-            bot = self.bots[bot_id]
-            
-            if bot.status != "running":
-                return {"success": False, "error": "Bot is not running"}
-                
-            bot.log("Stopping bot...")
-            
-            try:
-                if bot.bot_instance:
-                    if bot.platform == "telegram":
-                        # Stop Telegram bot
-                        if hasattr(bot.bot_instance, 'application'):
-                            asyncio.run(bot.bot_instance.application.stop())
-                    elif bot.platform == "discord":
-                        # Stop Discord bot
-                        if hasattr(bot.bot_instance, 'close'):
-                            asyncio.run(bot.bot_instance.close())
-                            
-                bot.status = "stopped"
-                bot.start_time = None
-                bot.log("✅ Bot stopped successfully")
-                
-                # Save status to storage
-                self._save_bot_status(bot_id)
-                
-            except Exception as e:
-                bot.log(f"Error stopping bot: {e}", "ERROR")
-                logger.error(f"Error stopping bot {bot_id}: {e}", exc_info=True)
-                
-            return {"success": True, "bot": bot.get_status()}
-            
+    def stop_bot(self, bot_id: str) -> Dict:
+        """Stop a bot"""
+        with self.lock:
+            if bot_id not in self.bots:
+                return {"success": False, "error": "Bot not found"}
+
+            bot = self.bots[bot_id]
+
+            if bot.status != "running":
+                return {"success": False, "error": "Bot is not running"}
+
+            bot.log("Stopping bot...")
+
+        try:
+            if bot.bot_instance:
+                if bot.platform == "telegram":
+                    if bot.loop and hasattr(bot.bot_instance, 'application'):
+                        try:
+                            stop_future = asyncio.run_coroutine_threadsafe(
+                                bot.bot_instance.application.stop(),
+                                bot.loop
+                            )
+                            stop_future.result(timeout=10)
+
+                            shutdown_future = asyncio.run_coroutine_threadsafe(
+                                bot.bot_instance.application.shutdown(),
+                                bot.loop
+                            )
+                            shutdown_future.result(timeout=10)
+                        except concurrent.futures.TimeoutError as timeout_error:
+                            bot.log(f"Timeout stopping Telegram bot: {timeout_error}", "ERROR")
+                        except Exception as stop_error:
+                            bot.log(f"Error stopping Telegram bot: {stop_error}", "ERROR")
+                        finally:
+                            try:
+                                bot.loop.call_soon_threadsafe(bot.loop.stop)
+                            except Exception:
+                                pass
+
+                    if bot.thread and bot.thread.is_alive():
+                        bot.thread.join(timeout=10)
+                        bot.thread = None
+
+                elif bot.platform == "discord":
+                    if hasattr(bot.bot_instance, 'close'):
+                        asyncio.run(bot.bot_instance.close())
+
+            bot.status = "stopped"
+            bot.start_time = None
+            bot.log("✅ Bot stopped successfully")
+
+            # Save status to storage
+            self._save_bot_status(bot_id)
+
+        except Exception as e:
+            bot.log(f"Error stopping bot: {e}", "ERROR")
+            logger.error(f"Error stopping bot {bot_id}: {e}", exc_info=True)
+
+        return {"success": True, "bot": bot.get_status()}
+
     def restart_bot(self, bot_id: str) -> Dict:
         """Restart a bot"""
         stop_result = self.stop_bot(bot_id)
@@ -382,4 +476,3 @@ class CloudBotManager:
 
 # Global bot manager instance
 bot_manager = CloudBotManager()
-
