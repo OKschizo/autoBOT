@@ -2,11 +2,19 @@
 fastapi==0.115.0
 uvicorn[standard]==0.30.0
 python-multipart==0.0.9
+websockets>=12.0  # For real-time bot logs
+
+# Google Cloud Storage (for persistent data)
+google-cloud-storage>=2.10.0
 
 # Google OAuth
 google-auth==2.34.0
 google-auth-oauthlib==1.2.1
 google-auth-httplib2==0.2.0
+
+# Bot Platforms
+python-telegram-bot==20.7
+discord.py==2.3.2
 
 # Core dependencies (reuse from parent)
 python-dotenv>=1.0.0
@@ -15,7 +23,8 @@ sentence-transformers==2.5.1
 numpy<2.0.0,>=1.24.0
 openai==1.12.0
 anthropic>=0.70.0
-tiktoken>=0.8.0  # Newer version has Python 3.13 wheels
+tiktoken==0.12.0  # Use exact version with prebuilt wheels
 requests==2.32.3
 beautifulsoup4==4.12.3
+playwright==1.40.0  # For website scraping
 

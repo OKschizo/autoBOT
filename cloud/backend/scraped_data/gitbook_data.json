@@ -1,0 +1,1242 @@
+[
+  {
+    "url": "https://docs.auto.finance",
+    "title": "Introduction",
+    "content": "Why Develop Autopools?\nProviding liquidity in DeFi, particularly to correlated trading pairs such as ETH LSTs/LRTs and stablecoins on decentralized exchanges (DEXs), or to lending markets like AAVE, Fluid, and Morpho, can be an extremely efficient onchain way to earn additional yield on one's assets. Despite this, it comes with many complexities to achieve that efficiency.\nAutopools were developed to address the many challenges liquidity providers (LPs) face when optimizing for best performance. No protocol currently offers fully autonomous, transparent and sophisticated rebalance solution focused solely on liquidity provision.\n\nThis dedicated approach offers great value not only to LPs, but also to a wide range of other ecosystem participants, making providing liquidity accessible.\nThe Status Quo for LPs\nLiquidity providers face a highly complex decision-making process when seeking to optimally rebalance their LP positions.\nIt requires an LP to account for a complex set of factors, including but not limited to:\nvariance of yields and their composition;\ndifferent fee and reward systems;\noffsetting various costs such as gas, slippage, and trading fees;\ndifferent AMM models.\nDifferentiating between AMM models warrants highlighting, as its complexity is an often neglected core challenge of manual liquidity provision. \n\nAdditional factors complicating the process include the significant amount of time LPs must spend researching opportunities and interacting with multiple protocols, making the process time-consuming and cumbersome. \n\nEven without considering these problems, the high costs of rebalancing and compounding often lead to underperformance and can prevent LPs from participating altogether.\nNext\nAutopools tl;dr\nLast updated\n1 month ago\nWas this helpful?",
+    "headings": [
+      {
+        "level": "h2",
+        "text": "Why Develop Autopools?"
+      },
+      {
+        "level": "h2",
+        "text": "The Status Quo for LPs"
+      }
+    ],
+    "metadata": {}
+  },
+  {
+    "url": "https://docs.auto.finance/using-the-app/with-wallet-services",
+    "title": "With Wallet Services",
+    "content": "Enterprise-grade wallet-as-a-service platforms can require additional setup or configuration to work with the Autopilot contracts and user interface. These guides will illustrate the setup for some of the most common platforms:\nFireblocks\nPrevious\nGuarded Launch Rewards\nNext\nFireblocks\nLast updated\n5 months ago\nWas this helpful?",
+    "headings": [],
+    "metadata": {}
+  },
+  {
+    "url": "https://docs.auto.finance/auto-pools-protocol/custom-autopools",
+    "title": "Custom Autopools",
+    "content": "Ecosystem Specific Autopools\nAutopools are in essence customizable networks of automated liquidity, tokenized and made composable by their respective receipt token. This allows for a new way to combine utility with distribution. \n\nFor instance, an autopool tailored for the XYZ DEX, featuring a custom selection of pools (e.g., correlated ETH pairs), which then distributes branded receipt tokens (e.g., xyzETH) to LPs.\nOnce set up, the user experience is simple: provide ETH, receive xyzETH, and the underlying liquidity remains optimally deployed, while remaining within the DEX ecosystem. \nThis approach creates passive yield opportunities for users, which retain all underlying liquidity within a single ecosystem, thus promoting sticky liquidity and broadening the addressable market.\nExample of a DEX specific Autopool\nThe Future of Autopools\nA natural next step is to enable the permissionless creation of autopools. This feature will allow users to express individual risk preferences and allows different participants, such as risk managers, to contribute specialized skills. \n\nThe architecture of autopools also allows to develop solutions for other problem sets requiring optimization, such as e.g. point systems.\nPrevious\nStaking TOKE\nNext\nGlossary\nLast updated\n1 month ago\nWas this helpful?",
+    "headings": [
+      {
+        "level": "h2",
+        "text": "Ecosystem Specific Autopools"
+      },
+      {
+        "level": "h2",
+        "text": "The Future of Autopools"
+      }
+    ],
+    "metadata": {}
+  },
+  {
+    "url": "https://docs.auto.finance/additional-links/community-resources",
+    "title": "Community Resources",
+    "content": "Links\nMain Site\nhttps://www.tokemak.xyz/\nApp\nhttps://app.tokemak.xyz/\nGithub\nhttps://github.com/Tokemak/v2-core-pub\nX - Main\nhttps://x.com/TokemakXYZ\nX - Backup (Old)\nhttps://x.com/TokenReactor\nTokemak Blog\nhttps://blog.tokemak.xyz/\nDiscord\nhttp://discord.gg/tokemak\nRadio (community built)\nhttp://tokemak.radio\nPrevious\nChecking for Stale Data\nLast updated\n1 year ago\nWas this helpful?",
+    "headings": [
+      {
+        "level": "h2",
+        "text": "Links"
+      }
+    ],
+    "metadata": {}
+  },
+  {
+    "url": "https://docs.auto.finance/using-the-app/troubleshooting",
+    "title": "Troubleshooting",
+    "content": "I cannot connect to the platform\nNetwork Selection:\nEnsure you select the correct network (Ethereum Mainnet). You can usually switch networks in the settings option of your wallet provider.\nUsing Ledger (Natively or with MetaMask):\nUnlock your Ledger device and select the Ethereum app.\nMake sure the 'Contract Data' setting is enabled in the Ethereum app settings.\nUsing Coinbase:\nUse the scan QR option to connect.\nTo access directly from the Coinbase wallet, open the browser within the app and go to app.aave.com.\nUsing WalletConnect:\nUse the scan QR code option to connect.\nUsing Rabby:\nUse the scan QR code option to connect.\nEnable contract data on Ledger\nMake sure to select the Ethereum app and enable contract data. To enable contract data:\nConnect and unlock your Ledger device.\nOpen the Ethereum application.\nPress the right button to navigate to Settings.\nThen press both buttons to validate.\nIn the Contract data settings, press both buttons to allow contract data in transactions.\nThe device displays Allowed.\nI cannot send transactions\nMake sure you have enough ETH in your wallet to interact with the platform. You must have ETH in your wallet for the transaction costs-- without it you won't be able to interact. Depending on the network status, the cost of the transactions may vary. At least 0.05 ETH may be required to interact properly.\nI do not find my position\nIf you used the Tokemak protocol in the past you will not find your positions on the current V2, you will need to visit he Tokemak V1 protocol. You can find an interface to interact with V1 version of the Tokemak protocol\nhere\n.\nThe site does not load\nThe following steps may solve your problems:\nIf you are using Brave browser, switch to another browser to see if the issues are coming from the browser. If it is related to Brave browser some helpful actions are:\nClearing cache data and cookies for the site\nHard refresh with control + F5 (or cmd + r)\nDisable brave wallet (or the wallet not being used as default, for example metamask, dapper, etc.)or other extensions that might be interfering with proper connection with the wallet\nIf the site still won't load after taking the steps above, you will have to use the platform in another browser.\nMake sure your internet connection is working and stable\nRestart the browser and try to connect again\nTry to hard refresh the site with control + F5\nCheck if there are any updates for your browser or wallet provider. If so, update it to the latest version.\nMy transaction is stuck pending confirmation\nIn this situation make sure to not keep sending transactions, as every new transaction will be stuck pending the oldest transaction to be confirmed. You can get rid of the stuck transaction by speeding it up or cancelling it. Depending on the wallet you are using, you may have that option natively. For example, metamask or trust wallet have both the options to cancel or speed up transactions.\nPrevious\nFireblocks\nNext\nContracts Overview\nLast updated\n1 year ago\nWas this helpful?",
+    "headings": [
+      {
+        "level": "h3",
+        "text": "I cannot connect to the platform"
+      },
+      {
+        "level": "h2",
+        "text": "Enable contract data on Ledger"
+      },
+      {
+        "level": "h2",
+        "text": "I cannot send transactions"
+      },
+      {
+        "level": "h2",
+        "text": "I do not find my position"
+      },
+      {
+        "level": "h2",
+        "text": "The site does not load"
+      },
+      {
+        "level": "h2",
+        "text": "My transaction is stuck pending confirmation"
+      }
+    ],
+    "metadata": {}
+  },
+  {
+    "url": "https://docs.auto.finance/",
+    "title": "Introduction",
+    "content": "Why Develop Autopools?\nProviding liquidity in DeFi, particularly to correlated trading pairs such as ETH LSTs/LRTs and stablecoins on decentralized exchanges (DEXs), or to lending markets like AAVE, Fluid, and Morpho, can be an extremely efficient onchain way to earn additional yield on one's assets. Despite this, it comes with many complexities to achieve that efficiency.\nAutopools were developed to address the many challenges liquidity providers (LPs) face when optimizing for best performance. No protocol currently offers fully autonomous, transparent and sophisticated rebalance solution focused solely on liquidity provision.\n\nThis dedicated approach offers great value not only to LPs, but also to a wide range of other ecosystem participants, making providing liquidity accessible.\nThe Status Quo for LPs\nLiquidity providers face a highly complex decision-making process when seeking to optimally rebalance their LP positions.\nIt requires an LP to account for a complex set of factors, including but not limited to:\nvariance of yields and their composition;\ndifferent fee and reward systems;\noffsetting various costs such as gas, slippage, and trading fees;\ndifferent AMM models.\nDifferentiating between AMM models warrants highlighting, as its complexity is an often neglected core challenge of manual liquidity provision. \n\nAdditional factors complicating the process include the significant amount of time LPs must spend researching opportunities and interacting with multiple protocols, making the process time-consuming and cumbersome. \n\nEven without considering these problems, the high costs of rebalancing and compounding often lead to underperformance and can prevent LPs from participating altogether.\nNext\nAutopools tl;dr\nLast updated\n1 month ago\nWas this helpful?",
+    "headings": [
+      {
+        "level": "h2",
+        "text": "Why Develop Autopools?"
+      },
+      {
+        "level": "h2",
+        "text": "The Status Quo for LPs"
+      }
+    ],
+    "metadata": {}
+  },
+  {
+    "url": "https://docs.auto.finance/developer-docs/integrating",
+    "title": "Integrating",
+    "content": "4626 Compliance\nLarge Withdrawals\nChecking for Stale Data\nPrevious\nHalborn - accTOKE Contract - Nov 2022\nNext\n4626 Compliance\nLast updated\n6 months ago\nWas this helpful?",
+    "headings": [],
+    "metadata": {
+      "description": "See below for important topics on integrating with the Autopilot system"
+    }
+  },
+  {
+    "url": "https://docs.auto.finance/auto-pools-protocol/glossary",
+    "title": "Glossary",
+    "content": "Term\nDefinition\nAutopool\nAn\nERC-4626\nTokenized Vault Standard pool within which user assets are deposited, which contains various different external destination contracts. Example destination contracts would be a Balancer or a Curve pool.\nautoLP\nAutomated Liquidity Provision, used in reference to the network capabilities of assets deposited into Autopools and their corresponding yield bearing tokens\nautoETH\nautoETH is the yield-bearing Autopilot receipt token (also referred to as LAT) received after depositing ETH (or Wrapped ETH) into Autopilot's first Autopool, focused on LST-centric destinations.\nautoLRT\nautoLRT is a yield-bearing Autopilot receipt token for an LRT-based Autopool.\nLP\nLiquidity Provider, user who provides tokens as trading liquidity to exchanges. In the context of Autopilot, an LP is a participant that supplies ETH (or otherwise) to an Autopool.\nReceipt Token\nLPs receive receipt tokens (e.g., autoETH) upon deposit into an autopool. In essence, receipt tokens are tokenized automated liquidity networks backed by LP positions. They enable a new kind of composability within DeFi, as a standalone token representing optimally deployed underlying liquidity.\nLST\nLiquid staking tokens (LST) are tokenized ownership claims on the ETH staked on the Consensus layer, such as stETH or rETH.\nLRT\nA liquid restaking token (LRT) is a token that gives users access to liquidity while participating in restaking.\nRebalance Logic\nComprised of a series of smart contracts, the Rebalance Logic is the primary system of the Auto Pools Protocol that rebalances between a subset of given autopool destinations.\nSolver\nThe Solver is an off-chain component that proposes rebalance solutions to interchangeably convert assets and LP tokens, as well as LP token into other LP tokens. The rebalance solutions are proposed to the Strategy, once they satisfy the Strategy’s imposed on-chain constraints a rebalance takes place.\nStrategy\nThe Strategy contract is responsible for determining if a given liquidity rebalance is in the best interest of an autopool.\nRebalance\nA deployment that occurs when: Idle assets move to a Destination, assets move from one Destination or another, or assets move from a Destination back to the idle state.\nDestination\nA liquidity pool within an autopool set that may be the destination venue of a potential asset rebalance.\nPrevious\nCustom Autopools\nNext\nApp Guide\nLast updated\n1 month ago\nWas this helpful?",
+    "headings": [],
+    "metadata": {
+      "description": "Important terms to know:"
+    }
+  },
+  {
+    "url": "https://docs.auto.finance/using-the-app/app-guide",
+    "title": "App Guide",
+    "content": "This guide contains all the information necessary to interact with all aspects of the Tokemak protocol.\nAutopools\nLearn how to provide liquidity with autopools and take advantage of their powerful LP optimization.\nRead more\nStaking TOKE\nThis section provides instructions on how to stake TOKE as sTOKE and earn rewards.\nRead more\nTOKE/ETH LP\nThis section will provide information on liquidity provision to TOKE/ETH liquidity pools on Curve and SushiSwap.\nRead more\nPrevious\nGlossary\nNext\nAutopools\nLast updated\n1 month ago\nWas this helpful?",
+    "headings": [
+      {
+        "level": "h2",
+        "text": "Autopools"
+      },
+      {
+        "level": "h2",
+        "text": "Staking TOKE"
+      },
+      {
+        "level": "h2",
+        "text": "TOKE/ETH LP"
+      }
+    ],
+    "metadata": {}
+  },
+  {
+    "url": "https://docs.auto.finance/auto-pools-protocol/staking-toke",
+    "title": "Staking TOKE",
+    "content": "Introduction\nThe sTOKE system is Auto Finance's staking mechanism that enables active ecosystem participation. By staking TOKE, users receive credits that they can allocate to different autopools. This allocation provides access to both reward streams and, when available, additional incentives specific to each autopool.\nStaking Mechanism\nStaking TOKE for sTOKE\nUsers can stake TOKE tokens for durations between 4 and 16 weeks, during which their TOKE converts to sTOKE and generates credits that can be allocated to autopools. The staking duration directly affects the boost multiplier - longer staking periods result in higher credit generation. This system balances rewards for protocol commitment while accommodating various user preferences.\nAutopool Reward Streaming\nAllocating Credits to Autopools\nDefault Allocation\nOnce your TOKE is staked, your credits will by default be evenly allocated to the available autopools. The default allocation will be applied to any newly staked TOKE.\nPersonalized Allocation\nYou have complete flexibility in how you want to allocate your available credits across autopools:\nYou can allocate to multiple autopools simultaneously.\nAllocation can be modified at any time without unstaking:\nAdjust your allocations across autopools at any time\nMonitor and optimize your credit allocation based on performance\nYour allocation of credits can be adjusted at any time, but reward calculations for the updated allocation take effect following the next snapshot. Note: when allocations are changed pre-snapshot, users will continue to earn rewards based on their previous allocation until the new snapshot goes live.\nThe distribution of credits is snapshotted weekly, with each snapshot determining reward distribution for the following week. This means rewards are backward-looking and are earned based on the voting snapshot at the beginning of each week.\nFor users looking to allocate voting credits to autopools on different chains, TOKE is required to be present on the specific chain. A seamless bridging solution is available to transfer your TOKE across networks, located in the Staking (or sTOKE) section of the UI.\nRead more about Staking TOKE in the\nApp Guide here\n.\nRewards\nsTOKE holders who allocate their credits to autopools earn rewards from multiple sources:\nRewards generated by the specific autopools\nAdditional benefits from protocol-owned asset deployment\nThese are used to purchase TOKE to be distributed to the TOKE stakers.\nThe reward structure is designed to align user incentives with the protocol's long-term success, encouraging active participation in the ecosystem's growth.\nLearn how to claim your rewards\nhere\n.\nPrevious\nAutopool Receipt Tokens\nNext\nCustom Autopools\nLast updated\n1 month ago\nWas this helpful?",
+    "headings": [
+      {
+        "level": "h3",
+        "text": "Introduction"
+      },
+      {
+        "level": "h2",
+        "text": "Staking Mechanism"
+      },
+      {
+        "level": "h3",
+        "text": "Staking TOKE for sTOKE"
+      },
+      {
+        "level": "h2",
+        "text": "Autopool Reward Streaming"
+      },
+      {
+        "level": "h3",
+        "text": "Allocating Credits to Autopools"
+      },
+      {
+        "level": "h4",
+        "text": "Default Allocation"
+      },
+      {
+        "level": "h4",
+        "text": "Personalized Allocation"
+      },
+      {
+        "level": "h2",
+        "text": "Rewards"
+      }
+    ],
+    "metadata": {}
+  },
+  {
+    "url": "https://docs.auto.finance/developer-docs/contracts-overview",
+    "title": "Contracts Overview",
+    "content": "Autopool ETH Contracts Overview\nContract Addresses\nPrevious\nTroubleshooting\nNext\nAutopool ETH Contracts Overview\nWas this helpful?",
+    "headings": [],
+    "metadata": {
+      "description": "Below you can find a collection of technical information/docs and their respective contracts"
+    }
+  },
+  {
+    "url": "https://docs.auto.finance/developer-docs/security-and-audits",
+    "title": "Security and Audits",
+    "content": "Bug Bounty\nOur current bug bounty program can be found on Remedy:\nhttps://r.xyz/bug-bounty/programs/tokemak\nAudits\nHexens\nautoUSD Audit - March 2025\nRead more\nAutopilot Full System Audit - May 2024\nRead more\nAutopilot Full System Follow Up - July 2024\nRead more\nCertora\nLMPStrategy Security Assessment & Formal Verification Report - Jan/March 2024\nRead more\nHats Finance - Autopilot\nCrowd Competition Smart Contract Audit, February - March 2024\nRead more\nHalborn - Autopilot\nAutopilot (Autopools) Contracts - Preliminary Smart Contract Audit - Sept 2023\nRead more\nHalborn - Autopilot\nAutopilot Pricing Contracts - Formal Verification Report - Sept 2023\nRead more\nSherlock - Autopilot\nAutopilot Contracts - Crowd Competition - Sept 2023\nRead more\nHalborn - accTOKE\naccTOKE Contract - Nov 2022\nRead more\nPrevious\nContract Addresses\nNext\nHexens: autoUSD March 25th 2025\nLast updated\n6 months ago\nWas this helpful?",
+    "headings": [
+      {
+        "level": "h2",
+        "text": "Bug Bounty"
+      },
+      {
+        "level": "h2",
+        "text": "Audits"
+      },
+      {
+        "level": "h3",
+        "text": "Hexens"
+      },
+      {
+        "level": "h3",
+        "text": "Certora"
+      },
+      {
+        "level": "h3",
+        "text": "Hats Finance - Autopilot"
+      },
+      {
+        "level": "h3",
+        "text": "Halborn - Autopilot"
+      },
+      {
+        "level": "h3",
+        "text": "Halborn - Autopilot"
+      },
+      {
+        "level": "h3",
+        "text": "Sherlock - Autopilot"
+      },
+      {
+        "level": "h3",
+        "text": "Halborn - accTOKE"
+      }
+    ],
+    "metadata": {
+      "description": "Various Security Audits Below"
+    }
+  },
+  {
+    "url": "https://docs.auto.finance/auto-pools-protocol/autopools-tl-dr",
+    "title": "Autopools tl;dr",
+    "content": "A New Way to LP\nThe Auto Pools protocol, a novel LP Aggregator, unlocks a new way to LP through automated yield optimization.\nUsers deposit assets into an autopool, each representing a set of potential deployment destinations for the autonomous rebalance logic.\nFrom there, the Autopool Rebalance Logic takes over, autonomously monitoring the underlying pools and leveraging its powerful framework to rebalance – thus abstracting the complexity associated with rebalancing, compounding, and staking of LP tokens away from the user.\n\nThe autopool receipt tokens (e.g., autoETH) are yield-bearing and can be seamlessly integrated across DeFi.\nEffortless Access to LP Optimization\nThe user experience is simple:\nLP chooses an autopool, deposit any asset via a simple, gas-optimized transaction and gets back the yield-bearing receipt token (e.g. autoETH)\nThe autopool monitors the underlying destinations and rebalances\nRewards auto-compound back into the autopool\nLP uses Dashboard to keep track of the autopool's performance and other metrics\nProviding liquidity to a set of destinations becomes as simple as swapping tokens or making a simple deposit.\n\"What DEX aggregators did for traders, autopools are doing for LPs.\"\nLearn more about using autopools in the\nApp Guide.\nPrevious\nIntroduction\nNext\nAuto-Rebalancing\nLast updated\n1 month ago\nWas this helpful?",
+    "headings": [
+      {
+        "level": "h2",
+        "text": "A New Way to LP"
+      },
+      {
+        "level": "h3",
+        "text": "Effortless Access to LP Optimization"
+      }
+    ],
+    "metadata": {}
+  },
+  {
+    "url": "https://docs.auto.finance/auto-pools-protocol/protocol-mechanics",
+    "title": "Protocol Mechanics",
+    "content": "Design Goals\nThe purpose of the Autopool Protocol is to continuously rebalance assets into destinations with the best risk-return profiles, aiming to outperform any individual destination included in the autopool over the long term. Earnings are auto-compounded back into the autopool and subsequently rebalanced.\n\nTo achieve this, the autopool's rebalance logic does not merely chase the highest advertised yield but instead processes a comprehensive set of data, applies sophisticated logic, and adheres to safety constraints. \n\nThis section will provide an accessible overview of the system's general architecture and essential features.\nComponents & Logic\nThis section provides a simplified overview of the components, their functions within the Autopool Protocol, and a summary of the rebalance logic to help users achieve a basic understanding of the autopools.\nRead more\nAsset Flow Example\nTo understand the general architecture and functioning of the system, it helps to consider a simplified flow of assets within the system\nRead more\nPrevious\nDashboard and Tracking\nNext\nComponents & Logic\nLast updated\n1 month ago\nWas this helpful?",
+    "headings": [
+      {
+        "level": "h2",
+        "text": "Design Goals"
+      },
+      {
+        "level": "h2",
+        "text": "Components & Logic"
+      },
+      {
+        "level": "h2",
+        "text": "Asset Flow Example"
+      }
+    ],
+    "metadata": {}
+  },
+  {
+    "url": "https://docs.auto.finance/auto-pools-protocol/autopool-receipt-tokens",
+    "title": "Autopool Receipt Tokens",
+    "content": "Enter the Auto Pools Protocol\nUsers gain access to autonomous LP optimization by depositing into an autopool, which use the highly composable ERC-4626 standard and can be configured with a set of destinations (pools/DEXs and lending markets for some autopools) to which assets may be deployed to. \n\nAssets deposited into an autopool are not subject to any lock ups or cooldown periods, meaning that users can withdraw their funds at any time.\n\nThe architecture was designed to be modular, allowing for plug-and-play integration of new assets and destinations. As a result, the system can adapt to the market swiftly by launching autopools which include e.g. a new pairings, or cater to specific ecosystems.\nComposable Receipt Tokens\nLPs depositing into an autopool receive reward bearing receipt tokens, which are composable across DeFi. Examples of common DeFi integrations include utilizing receipt tokens as collateral, integration into yield marketplaces to trade liquidity rates, and leverage them.\nLATs are tokenized of the underlying option set of destinations\nPrevious\nAsset Flow Example\nNext\nStaking TOKE\nLast updated\n1 month ago\nWas this helpful?",
+    "headings": [
+      {
+        "level": "h2",
+        "text": "Enter the Auto Pools Protocol"
+      },
+      {
+        "level": "h2",
+        "text": "Composable Receipt Tokens"
+      }
+    ],
+    "metadata": {}
+  },
+  {
+    "url": "https://docs.auto.finance/using-the-app/app-guide/guarded-launch-rewards",
+    "title": "Guarded Launch Rewards",
+    "content": "Claim autoETH Rewards\nTo claim your autoETH, you can go to the \"Staking\" section.\nPrevious\nToke/ETH LP\nNext\nWith Wallet Services\nLast updated\n10 months ago\nWas this helpful?",
+    "headings": [
+      {
+        "level": "h2",
+        "text": "Claim autoETH Rewards"
+      }
+    ],
+    "metadata": {}
+  },
+  {
+    "url": "https://docs.auto.finance/using-the-app/with-wallet-services/fireblocks",
+    "title": "Fireblocks",
+    "content": "Fireblocks is a highly configurable wallet-as-a-service that provides users many protections while transacting on a blockchain. Depending on the settings of your wallet, you may need additional configuration or transaction policy updates to be able to fully utilize the Autopilot UI.\nListing Assets\nTo ensure you can see the balance of the Autopool tokens after depositing you can you list them in your workspace. This can be done from the \"Assets\" section in your console:\nIn the search box you can search for \"Tokemak\" to see any existing assets. If the Autopool token does not appear in the results, click the \"List asset\" link at the bottom of the search results:\nSelect the appropriate blockchain in the modal that appears, Ethereum, Base, Sonic, etc., and continue. You will then be prompted to enter the contract address for the Autopool you wish to list. All of our Autopool contract addresses can be found on this page:\nContract Addresses\n. Common addresses are:\nEthereum Mainnet\nautoETH:\n0x0A2b94F6871c1D7A32Fe58E1ab5e6deA2f114E56\nautoLRT:\n0xE800e3760FC20aA98c5df6A9816147f190455AF3\nbalETH:\n0x6dC3ce9C57b20131347FDc9089D740DAf6eB34c5\nbaseETH:\n0xAADf01DD90aE0A6Bb9Eb908294658037096E0404\ndineroETH:\n0x35911af1B570E26f668905595dEd133D01CD3E5a\nautoUSD:\n0xa7569A44f348d3D70d8ad5889e50F78E33d80D35\nBase Mainnet\nbaseETH:\n0xAADf01DD90aE0A6Bb9Eb908294658037096E0404\nConfirm the details on the final page of the modal and click \"List asset\":\nNote: The asset may not show immediately in the search results after listing but should after a short period of time.\nRepeat the process for any additional tokens you wish to list.\nEnabling Contract Interactions\nIn addition to the Autopool you are wanting to interact with, the Autopilot UI relies on a router contract to streamline transactions. Depending on your wallet settings, both of these contracts may need configuration within your wallet.\nThrough a combination of whitelisting and your transaction policy, you'll need to enable transfers, approvals, contract calls, and optionally signing messages to the Autopool. The exact settings that are required depend on your existing setup.\nThe latest addresses can always be found on our\nContract Addresses\npage but at the time of writing the routers are:\nEthereum Mainnet -\n0x37dD409f5e98aB4f151F4259Ea0CC13e97e8aE21\nBase Mainnet -\n0xa18B89225491230fDb1883cFbda65E7931606931\nDefault Transaction Policy\nThe default transaction policy for Fireblocks allows contract calls and approvals to any contract but transfers only to whitelisted addresses. Follow the instructions in the following\nWhitelisting\nsection for details on adding the router and Autopool.\nCustom Transaction Policy\nIf you utilize a custom transaction policy then you'll need to ensure you have the proper rules in place to cover the calls the Autopilot UI will make. Given that these settings are highly dependent on your wallets configuration we won't go over the exact entries but in some form the policy should allow:\nTo the Autopilot Router\nTransfers\nContract Calls (both approval and deployment)\nApprovals\nTo the Autopool (autoETH, autoUSD, etc)\nTransfers\nContract Calls (both approve and deployment)\nApprovals\nFor reference, these \"allow\" rules are sufficient to cover deposit/withdraw/stake/unstake in our UI:\nNote: \"2 venues\" here are the Autopilot Router and the Autopool (autoUSD, autoETH, etc)\nApprovals\nWhen withdrawing assets or staking them, the Autopilot UI defaults to gas-less approvals. If you wish to use them, you will need to setup a rule in your transaction policy to allowed Typed Messages. We would recommend disabling gas-less approvals in the UI and using standard approvals. To disable, in the Autopilot UI find the gear icon at the top right of the Withdraw/Stake tab. and toggle the \"Disable gas-less approval\" option:\nWhitelisting\nIf you do not allow transactions with non-whitelisted destinations then you must add both contracts to the \"Whitelisted addresses\" section in your wallet. To check this setting you can go to the gear icon in the top right of your console -> General Tab -> One-time address transactions. If this setting is not enabled (the button will say \"Allow\" if this is the case), then proceed with adding the addresses.\nTo add the addresses, in your console go to the \"Whitelisted addresses\" page from the left-hand menu. In the top-right of the page section, click the \"Create wallet\" button. This should give you the \"Create whitelisted wallet\" model:\nSince these are both contracts you'll be interacting with, select the \"Contract\" type. Let's handle the router first. Give it a name that you'll recognize such as \"Tokemak Autopilot Router\" and click Create Wallet. This should create and take you to the next step where you can add the actual router address:\nClick \"Add address\" on this page and select the appropriate blockchain from the list. You should now be prompted to add the address:\nOnce you have entered the address and clicked\nyou are finished with this contract. Repeat the steps with the Autopool address which you can find above.\nPrevious\nWith Wallet Services\nNext\nTroubleshooting\nLast updated\n5 months ago\nWas this helpful?",
+    "headings": [
+      {
+        "level": "h2",
+        "text": "Listing Assets"
+      },
+      {
+        "level": "h2",
+        "text": "Enabling Contract Interactions"
+      },
+      {
+        "level": "h3",
+        "text": "Default Transaction Policy"
+      },
+      {
+        "level": "h3",
+        "text": "Custom Transaction Policy"
+      },
+      {
+        "level": "h3",
+        "text": "Approvals"
+      },
+      {
+        "level": "h3",
+        "text": "Whitelisting"
+      }
+    ],
+    "metadata": {}
+  },
+  {
+    "url": "https://docs.auto.finance/developer-docs/integrating/checking-for-stale-data",
+    "title": "Checking for Stale Data",
+    "content": "It is our recommendation to check for stale debt reporting before performing a read or write operation against the Autopool. While our systems strive to ensure that the reporting information is always up to date, outages or other network issues have the possibility to prevent this. Should the debt reporting data be stale, users shares and or value can be misrepresented.\nTo check for this state the Autopool exposes a\noldestDebtReporting()\nfunction. If this returned timestamp is older than 1 day, you should prevent your operation from executing.\nPrevious\nLarge Withdrawals\nNext\nCommunity Resources\nLast updated\n6 months ago\nWas this helpful?",
+    "headings": [],
+    "metadata": {}
+  },
+  {
+    "url": "https://docs.auto.finance/developer-docs/integrating/large-withdrawals",
+    "title": "Large Withdrawals",
+    "content": "Autopools allow you to deposit and withdraw in the same asset, the base asset,and to do so on-demand. This means when your withdrawal is large enough to require pulling assets from the underlying LP markets you may incur slippage from swapping back into the Autopool's base asset.\nBy default, the Autopilot system is configured to be able to swap out of these assets all on-chain with no additional work or information needed. However the quality of trade-execution back into the base asset is limited by the liquidity present in the configured routes that are on-chain. We'll outline here how to provide your own routes to optimize withdrawal execution and to set limit slippage controls.\nDetermining Swap Amounts\nThe first step in providing your own routes is to make a rough estimate as to the tokens and amounts that the Autopool will attempt to swap out of. For a TL;DR version, we have provided a package that will give this information for an Autopool and share amount:\nhttps://www.npmjs.com/package/@tokemak/autopilot-swap-route-calc\nIf you're able to use the package then you can skip the following section. However for those that wish to calculate these tokens manually, read on.\nCalculating Manually\nIf you wish to calculate these values on your own, you should inspect the logic that is performed during the\nredeem()\noperation on the Autopool:\nhttps://github.com/Tokemak/v2-core-pub/blob/main/src/vault/AutopoolETH.sol#L357\nSome parts to highlight:\nOne cannot receive more than assets than the shares valued using withdrawal pricing\nIf there are enough assets in idle to cover the value of the shares, no swaps are needed\nThe destinations used to pull assets are picked from the withdrawal queue on the Autopool: `getWithdrawalQueue()`\nHandling Swaps During Redemption\nAs with calculating the amounts to swap, we have an interface to get optimal swap executions as well. This is via an API that under the hood utilizes DEX aggregators such as 0x and Bebop. To call:\nCopy\nWhere the\ntokensToLiquidate\nis the output from the package\n@tokemak/autopilot-swap-route-calc\npackage above.\nsystemName\nstays \"gen3\".\nThe\nresults\nfrom the API output is what will be later passed into our Router for execution:\nCopy\nCustom Swap Handling\nIt's possible to use your own contracts as well during the swapping and redemption process instead our API and swapper contracts. To illustrate what would need to be done lets look at the execution flow.\nDuring the\nredeem()\nprocess, our swapper contracts are engaged 0..n times based on the amount of shares being redeemed and the Destinations/markets we need to pull from to satisfy. For example:\nUser is redeeming 100 Autopool shares worth 102 ETH (idle only has 5 ETH so it can't cover)\nThe Autopool has 50 ETH worth of assets deployed to the first Destination in the withdrawal queue and 200 ETH worth of assets deployed to the second Destination in the withdrawal queue.\nThe first Destination is a wstETH/WETH and the second a pxETH/rETH\nLets assume all assets are priced at 1 ETH. \nWe would expect our swapper contracts to be engaged 3 times:\nSwap 25 wstETH into WETH\nThis swaps to WETH because the asset() on the Autopool is WETH\nSince the second token in this Destination is already WETH, it is skipped for swapping\nSwap 26 pxETH into WETH\nSwap 26 rETH into WETH\nWe exhausted the 50 ETH worth of assets from the first Destination and then moved to the second to get the remainder\nUsing the output from our API as an example you'd construct an array of the\nfromToken,toToken,target,data\nfor each of three tokens above, wstETH, pxETH, and rETH:\ntarget\nis the contract you want us to call\ndata\nis the call data you'd want us to use to call your\ntarget\nBefore your function is called the assets to be swapped will be transferred to the\ntarget\nBefore the execution of the function ends, the contract should transfer the new assets back to the msg.sender.\nConstructing the Final Transaction\nRedemption with custom swap routes is only possible through our Autopilot Router multicall contract (see\nContract Addresses\n).  There are multiple ways to construct the call but ultimately you are attempting give the Router access to your tokens (through approvals, sending, or having the Router pull them) and calling\nredeemWithRoutes()\nPrevious\n4626 Compliance\nNext\nChecking for Stale Data\nLast updated\n8 months ago\nWas this helpful?",
+    "headings": [
+      {
+        "level": "h2",
+        "text": "Determining Swap Amounts"
+      },
+      {
+        "level": "h3",
+        "text": "Calculating Manually"
+      },
+      {
+        "level": "h2",
+        "text": "Handling Swaps During Redemption"
+      },
+      {
+        "level": "h3",
+        "text": "Custom Swap Handling"
+      },
+      {
+        "level": "h2",
+        "text": "Constructing the Final Transaction"
+      }
+    ],
+    "metadata": {
+      "description": "Learn how to optimize withdrawals to limit slippage."
+    }
+  },
+  {
+    "url": "https://docs.auto.finance/developer-docs/security-and-audits/halborn-acctoke-contract-nov-2022",
+    "title": "Halborn - accTOKE Contract - Nov 2022",
+    "content": "Previous\nSherlock - Autopilot Contracts - Crowd Competition - Sept 2023\nNext\nIntegrating\nWas this helpful?",
+    "headings": [],
+    "metadata": {}
+  },
+  {
+    "url": "https://docs.auto.finance/developer-docs/integrating/4626-compliance",
+    "title": "4626 Compliance",
+    "content": "Autopools are implemented on top of the ERC-4626 vault standard but do no strictly adhere to the spec. The changes and important information for integration are listed below.\nView Functions as Non-Payable\nDue to how pricing and estimation is handled within the Autopool the following functions which are to be\nview\nfunctions per the spec are instead implemented as non-payable. Its important to note that these functions DO NOT actually make any state updates but utilize a \"read-through-revert\" pattern to simulate certain values:\npreviewDeposit()\npreviewMint()\npreviewRedeem()\npreviewWithdraw()\nmaxDeposit()\nmaxMint()\nmaxRedeem()\nmaxWithdraw()\nSlippage\nDepending on the conditions of the Autopool, the overall market, and the timing of the debt reporting process slippage may be encountered on both entering and exiting the Autopool. It is very important to always check the shares received on entering, and the assets received on exiting, are greater than an expected amount.\nFuture functionality of Mint + Withdraw\nThe use of the\nmint()\nand\nwithdraw()\nflows is not advisable. While currently functional, they may begin to revert in the future. These functions also consistently have more slippage, and use more gas, than their\ndeposit()\nand\nredeem()\ncounterparts due to the necessary calculations performed.\nExiting the Autopool based on size\nThe Autopools make an effort to support depositors of any size. Given the number of destinations (DEX's, lending markets, etc) that assets may be deployed to, this quickly becomes a trade-off game involving the assets being worked with, slippage conditions in the market, and the gas needed to retrieve them.\nThe most gas-efficient route is to pull all the assets from either idle or from as few destinations as possible. This is the default behavior through\nredeem()\n. The Autopilot system keeps a cached set of swap routes on-chain to get out of the assets deployed to these destinations but, depending on size, these routes may be exhausted. To combat this, dynamic swap routes are able to be supplied by the caller. See\nLarge Withdrawals\nfor more information.\nOn the other end of the spectrum, when the size is so large that slippage outweighs the gas impact, additional functions are being added outside of the 4626 spec. These functions will return the pro-rata share of the underlying assets (LSTs, LRTs, USD derivatives, etc) owned by the user giving them complete control of how/when/if they return to the deposited asset.\nIt is up to the caller to decide the method for performing the exit.\nPrevious\nIntegrating\nNext\nLarge Withdrawals\nLast updated\n6 months ago\nWas this helpful?",
+    "headings": [
+      {
+        "level": "h3",
+        "text": "View Functions as Non-Payable"
+      },
+      {
+        "level": "h3",
+        "text": "Slippage"
+      },
+      {
+        "level": "h3",
+        "text": "Future functionality of Mint + Withdraw"
+      },
+      {
+        "level": "h3",
+        "text": "Exiting the Autopool based on size"
+      }
+    ],
+    "metadata": {}
+  },
+  {
+    "url": "https://docs.auto.finance/using-the-app/app-guide/autopools",
+    "title": "Autopools",
+    "content": "A list of available autopools can be found in the \"Autopools\" section on tokemak.xyz. Select an autopool in order to see detailed information and data associated with the specific autopool, such as historical performance, underlying pools and assets etc. From here you are also able to interact with the pool:\nDeposit and Withdraw\nLearn how to deposit into the autopool and earn more pool shares.\nRead more\nStake and Unstake\nStake your receipt token for additional incentives.\nRead more\nClaim Incentives\nClaim TOKE incentives and lock them for more autoETH pool shares.\nRead more\nView Positions\nUse the dashboard to track your portfolio and manage your autopool positions and TOKE locks.\nRead more\nPrevious\nApp Guide\nNext\nDeposit and Withdraw\nLast updated\n1 month ago\nWas this helpful?",
+    "headings": [
+      {
+        "level": "h2",
+        "text": "Deposit and Withdraw"
+      },
+      {
+        "level": "h2",
+        "text": "Stake and Unstake"
+      },
+      {
+        "level": "h2",
+        "text": "Claim Incentives"
+      },
+      {
+        "level": "h2",
+        "text": "View Positions"
+      }
+    ],
+    "metadata": {}
+  },
+  {
+    "url": "https://docs.auto.finance/using-the-app/app-guide/staking-toke",
+    "title": "Staking TOKE",
+    "content": "Staking Fundamentals\nStaking TOKE (sTOKE)\nChoose a staking duration of 1-4 months (4 to 16 weeks)\nCredits are generated based on amount of TOKE staked as well as lock duration (boost multiplier)\nLonger staking durations provide more credits through higher boost multipliers\nAdding TOKE to existing stakes restarts the staking period for your entire balance\nStakes auto-renew for the same duration unless unstaking is initiated\nUnstaking must be initiated during the final week of your staking period\nIf unstaking has been initiated, TOKE becomes available for withdrawal once the period ends\nInitiating the unstaking does not affect the rewards earned during the final week of the staking period.\nAutopool Streams\nAllocate credits to activate autopool streams and earn rewards\nAllocate to multiple autopools simultaneously\nAdjust allocations at any time without unstaking - this doesn't affect your staking period\nMake sure you are staking on the correct chain for your target autopool (e.g., TOKE on Base is required to allocate credits to the baseETH Autopool)\nStake TOKE and Allocate Credits\nLearn how to stake TOKE and allocating your credits.\nRead more\nUnstake and Withdraw\nLearn how to unstake and withdrawing your TOKE\nRead more\nClaim\nLearn how to claim your revenue streams TOKE rewards.\nRead more\nView Positions\nYou can see your staking positions on the Portfolio or under each of the Revenue Markets.\nRead more\nPrevious\nView Positions\nNext\nStake and Allocate\nLast updated\n1 month ago\nWas this helpful?",
+    "headings": [
+      {
+        "level": "h3",
+        "text": "Staking Fundamentals"
+      },
+      {
+        "level": "h4",
+        "text": "Staking TOKE (sTOKE)"
+      },
+      {
+        "level": "h4",
+        "text": "Autopool Streams"
+      },
+      {
+        "level": "h2",
+        "text": "Stake TOKE and Allocate Credits"
+      },
+      {
+        "level": "h2",
+        "text": "Unstake and Withdraw"
+      },
+      {
+        "level": "h2",
+        "text": "Claim"
+      },
+      {
+        "level": "h2",
+        "text": "View Positions"
+      }
+    ],
+    "metadata": {
+      "description": "This section provides instructions on how to stake TOKE as sTOKE, allocate voting credits to Autopools and earn rewards."
+    }
+  },
+  {
+    "url": "https://docs.auto.finance/using-the-app/app-guide/toke-eth-lp",
+    "title": "Toke/ETH LP",
+    "content": "Providing liquidity to a TOKE/ETH liquidity pool means depositing both TOKE and ETH into the pool to facilitate trading between them on a decentralized exchange (DEX). In return, you earn a share of the trading fees and may receive additional incentives.\n\nLiquidity pools are available on SushiSwap and Curve v2. While liquidity is provided outside of tokemak.xyz, you can find links to the pools and basic info on these LP positions under the TOKE/ETH LP tab.e\nPrevious\nClaim Rewards\nNext\nGuarded Launch Rewards\nLast updated\n1 year ago\nWas this helpful?",
+    "headings": [],
+    "metadata": {}
+  },
+  {
+    "url": "https://docs.auto.finance/using-the-app/app-guide/staking-toke/claim-rewards",
+    "title": "Claim Rewards",
+    "content": "Rewards are claimable once a week from the Manage button within the Portfolio tab (in the Staking section).\nNote: the first batch of staked TOKE rewards will become available Dec. 26th, 2024 - from there, rewards will be claimable weekly.\nPrevious\nView Positions\nNext\nToke/ETH LP\nLast updated\n10 months ago\nWas this helpful?",
+    "headings": [],
+    "metadata": {}
+  },
+  {
+    "url": "https://docs.auto.finance/developer-docs/contracts-overview/autopool-eth-contracts-overview",
+    "title": "Autopool ETH Contracts Overview",
+    "content": "At its simplest, this contract system is a set of a sub-systems that all revolve around, and reference each other through, a system registry. There are only a handful of user interactions that are mostly surfaced through a multicall router. Additionally, we have a few permissioned keeper-like processes that handle other parts of the system. Here we’ll run through general functionality and then dive deeper into each contract/system\nPrevious\nContracts Overview\nNext\nAutopool System High Level Overview\nWas this helpful?",
+    "headings": [],
+    "metadata": {}
+  },
+  {
+    "url": "https://docs.auto.finance/developer-docs/contracts-overview/contract-addresses",
+    "title": "Contract Addresses",
+    "content": "Ethereum Mainnet\nBase Mainnet\nSonic Mainnet\nEthereum Sepolia\nCore System Registry\nSystem Registry:\n0x2218F90A98b0C070676f249EF44834686dAa4285\nAccess Controller:\n0x37767cBfF88Cb623E9404e959560984F7D742dF6\nSystem Security:\n0x027a3359b803885261B140415873845f72238833\nAutopool Registry:\n0x7E5828a3A6Ae75426d739E798140513A2E2964E4\nDestination Template Registry:\n0xa698A94C0dCE389B862f58B08f618a981Ea99402\nDestination Vault Registry:\n0x3AaC1CE01127593CA0c7f87b1Aedb1E153e152aE\nDestination Vault Factory:\n0x37De6f9D23d26DfbCB6dbEE86Dc7ca538c0ff124\nSwap Router:\n0x6201523176dC66CCd249248b9c422Aac725eA3f2\nAsync Swapper Registry:\n0x73526d80aC5Db9ccD2aa46436744c542eF9c0b75\nRoot Price Oracle:\n0x61F8BE7FD721e80C0249829eaE6f0DAf21bc2CaC\nStats Calculator Registry:\n0xaE6b250841fA7520AF843c776aA58E23060E2124\nStats Calculator Factory:\n0x8198069F1709aDDC6A162c9433665776E5Bc917c\nCurve Resolver:\n0xC7c77B3a2C2641c6eE6c52bbD72EcfC86B53ba38\nLens:\n0x146b5564dd061D648275e4Bd3569b8c285783882\nIncentive Pricing Stats:\n0x8607bA6540AF378cbA64F4E3497FBb2d1385f862\nLiquidation Row:\n0xBf58810BB1946429830C1f12205331608c470ff5\nAutopilot Router:\n0x37dD409f5e98aB4f151F4259Ea0CC13e97e8aE21\nMessageProxy:\n0x20ea2F2ECf36bCb6Df086D923A120496DC616f76\nEthPerTokenSender:\n0xDd92511f1FbE5de911E22A0247Ba8c212D625A3d\nAutopools\nautoETH:\n0x0A2b94F6871c1D7A32Fe58E1ab5e6deA2f114E56\nautoLRT:\n0xE800e3760FC20aA98c5df6A9816147f190455AF3\nbalETH:\n0x6dC3ce9C57b20131347FDc9089D740DAf6eB34c5\nbaseETH:\n0xAADf01DD90aE0A6Bb9Eb908294658037096E0404\ndineroETH:\n0x35911af1B570E26f668905595dEd133D01CD3E5a\nautoUSD:\n0xa7569A44f348d3D70d8ad5889e50F78E33d80D35\nautoDOLA:\n0x79eb84b5e30ef2481c8f00fd0aa7aad6ac0aa54d\nAutopool Templates\nAutopoolETH Template:\n0xF90bB2BAa90B457A35c37c5A96De2720CE367281\nAutopoolETH Factory:\n0x7fEd74094B7010c6FB3010ed5EfC00772fD2ED1f\nAutopool Strategy Templates\nStandard:\n0xea7daf04144bbFfb8AB4F79F5115130D8AAe2Bd9\nWith Points Hook:\n0x63139fe3848aC53E5b668e19Df1DD4e6f31428C8\nSwap Router Swappers\nBalancer Swapper:\n0x780D5Bc2B1FFEfa1f5BBe1ab0C056C81774bA5F1\nCurve V1 Swapper:\n0x620fFcA1EF197f1CD9374BD31992b65A18E89Bc0\nCurve V2 Swapper:\n0xd3bF4ac5d54f262F977be28c761470ea0E612081\nUni V3 Swapper:\n0x106A60958c8637C9DC850757D1Ed2AC11c73963d\nOracles\nwstETH Oracle:\n0x31fec5a6C6bBF907144e6F81f60292BA7a5af883\neETH Oracle:\n0xAA573a9bf7560870a925Ea1704C061546486dF81\nETH Pegged Oracle:\n0xDEb361BAbf4C8277f0B2ee30914fb155b1A67DE3\nChainlink Oracle:\n0x701F115a4d58a44d9e4e437d136DD9fA7b1B6C3f\nCurve V1 Oracle:\n0xaeD535d737e80597452d1f04D1b64b4f2Ab8A92b\nCurve V2 Oracle:\n0xD460a37880C35AACF4f01ea6748F1195899aD160\nBalancer Meta Oracle:\n0x4D37d799a44515c25e43cA6ec9E4fF7a0a2a34d9\nBalancer Gyro Oracle:\n0x4c70ef1DefFC14e8C0a3D5135EC8EbAfEFcC1c58\nBalancer Composable Oracle:\n0x7C19e64904ABA791dD653ECF7F355d65d7665a8b\nRedstone Oracle:\n0xe1aDb6967e1dBD5332d499dFA2f42377d1DA5913\nCustom Set Oracle:\n0x53ff9D648a8A1cf70c6B60ae26B93047cc24066f\nPxETH Oracle:\n0x3cC52170fDEA5C485db6d412b78ea40F27FFC629\nZero Oracle:\n0x655fA98eA9BBcC6A2eB3F3c01F26929Fb3b8aa28\nMisc\nPoints Hook:\n0xA386067eB5F7Dc9b731fe1130745b0FB00c615C3\nbalETH Rate Provider:\n0xd4580a56e715F14Ed9d340Ff30147d66230d44Ba\nCalculator Templates\nAura Template:\n0x594BAa7aD9230084261e40aDfCE95f2ed612898a\nBalancer Comp Template:\n0xF4b143f94eEF97FCB44EEa54C7927ce15f96e23c\nBalancer Gyro Template:\n0x4a3688fA864d42FAbaEa9E364266e81B50730e91\nBalancer Meta Template:\n0x084E65a576949a431F7E8e4C9154D1DDd7F25A0c\ncbETH Template:\n0x24d783e5ed8e4A507583e0C79ABf489051069AbB\nConvex Template:\n0xd1E668Ea38c68740eec6ebad453a082211C98709\nCurve V1 No Rebasing Template:\n0xd48A39a087FC4DD152867C5059c2667eC5Fa0E4d\nCurve V1 Rebasing Locked Template:\n0xCB29D488efcC308c07c3168c63d5E7AEDe4bC3aE\nCurve V1 Rebasing Template:\n0xf5C49C69ec7735B7baB85c591CA93c8124825ab4\nCurve V2 No Rebasing Template:\n0xD8eF136051014E89E9Ea6aE32C3cd224778125e4\neETH Template:\n0xA87930c4e51Ce635065c9f5356A8578e94D4A71E\nETHx Template:\n0x2757f5FB6f62eF4B41B5F6236D1E3a77e15B0C55\nezETH Template:\n0xe3e73139d6B1a2Ce22C34897423AB56EE925b459\nfrxETH Template:\n0xad6d0eCeE007145D76c7a9B9551Af560A718a223\nosETH Template:\n0x3cC4397EE396B49408AE12fd34c7c3B40F257B1b\nProxy Template:\n0x8A26C73f5C4597e086254CB815403b98dc494E53\npxETH Template:\n0x37C9B7Fc138A7489C307A7BC6bc1124e3d06296a\nrETH Template:\n0x038516cb9bbc0572c2d55896Ce75F31FaB90FAc1\nrsETH LRT Template:\n0x114ca0Dc51aBd118125F84d15F87E01e7dceFA86\nrswETH LRT Template:\n0xe861c6eB5376aDA41bCc238080439724FE15B90f\nstETH LST Template:\n0xaea78e6D52A55dAA7EeBeb25068637659E02CEE7\nswETH Template:\n0x7Cbbb3Db2FF81B1221d50c8f9b9072348dAc7408\nLST/LRT Calculators\ncbETH Calculator:\n0xaB78a570252dd06FDbC1C5C566E842e571d01E08\neETH Calculator:\n0x4353e181C13f7E970f24016a0762C1af271350BA\nETHx Calculator:\n0x6D3C5F6670ABe46901De4BD39036cF21d178334C\nezETH Calculator:\n0xA84cc1d5aD1cDD5fAeb15Aa3f4aC5935D4b263D9\nfrxETH Calculator:\n0x449A957490e24e4d915fD5Dcf25Dd5446E787590\nosETH Calculator:\n0xB5aa595C4FE3C297D65bdCDCc6FA48eF8725AEbB\npxETH Calculator:\n0x9cB562083D29e027F21fAc4D8b66573deA972153\nrETH Calculator:\n0x9801098EE481ed6806C61A4dE259FBdDD5bb84a8\nrsETH Calculator:\n0x840A49a4b83E57718cf67c03D820C938A04FC210\nrswETH Calculator:\n0xeEdb3dD86F690a8c76006D606Db7951322B6741A\nstETH Calculator:\n0x66A466b838f981B39cF3B3E13E19AF5643Dbad0c\nswETH Calculator:\n0x60E98E2dAc20FAab84781076164290Cc31Ce3c9e\nweETH Calculator:\n0xDBFB637873D16DC5eFa43DB75Ff846934CaAA43f\nwstETH Calculator:\n0x24864cc03EFD84f9DF0e5F1D23aB69128325931E\nDEX Calculators\nBalancer rETH/WETH DEX:\n0x66664bd801fF4edF8778BaE66ACF1De9C29a59a4\nBalancer Aura rETH/WETH Incentive:\n0x4Ead64090fe1D07B8a2306b2E4897386d5Eb43eA\nBalancer WETH/osETH DEX:\n0x0e2b7536Ecb785dF0fa43C6622Dd6b670cE39bE4\nBalancer Aura WETH/osETH Incentive:\n0x4e4eb584CCea7eCe23dA46245Daf07457BC48348\nBalancer wstETH/WETH DEX:\n0x4c4d65167B6c6b112480D2295A35300bEb3A1970\nBalancer Aura wstETH/WETH Incentive:\n0xacdc4a1CD67e7E9fe85F00EC29D5f07B1305829d\nBalancer wstETH/WETH (Gyro) DEX:\n0xa9B8E439D140E8f2644e1b4D98f3AABdb85702aB\nBalancer Aura wstETH/WETH (Gyro) Incentive:\n0x662e3fCFD4348Ef74fF88C88a6e9f4E4119b018B\nBalancer wstETH/cbETH (Gyro) DEX:\n0x943673e7996a5D2Ac2E945d0eABF1aa39913e9D2\nBalancer Aura wstETH/cbETH (Gyro) Incentive:\n0xB57e41106Fc06a5c0b6ACCc8cF8F72dD25fb6621\nBalancer wstETH/ETHx DEX:\n0x63B0aC87bDa3Ee6D13802A93FC13918Df5832aE9\nBalancer Aura wstETH/ETHx Incentive:\n0x041679ACb4088288178589c059543b56ce74ea07\nBalancer pxETH/WETH DEX:\n0x2dF5D9eF6D48A456bA5edC444dd5de7ad7AB0981\nBalancer Aura pxETH/WETH Incentive:\n0x5968662CCfb6792bB4a0E4f45Cf303b85fB2CC43\nBalancer ezETH/WETH DEX:\n0xADF54e42990f5B7d9f423D66D8652B53812Dd5A6\nBalancer Aura ezETH/WETH Incentive:\n0xD09bDE15c0BdD222EdcD79912c0636e451e59c71\nBalancer rETH/weETH DEX:\n0xa639d9C66dFa096d5A5a8Bf0BBb482a0c295193c\nBalancer Aura rETH/weETH Incentive:\n0x0f5d9c23D365c114D3feBAe6CB2edbB06b65ACAD\nBalancer ezETH/weETH/rswETH DEX:\n0xb5652e10eB7E93Eec7DFF8909A99FC3e6Aea6866\nBalancer Aura ezETH/weETH/rswETH Incentive:\n0x5Ac9DC1ceF6cBD9d5B8a604e2d3B7D93F59D7F40\nBalancer rsETH/WETH DEX:\n0xab0b5440E1bBdd3b6309Ea82364b2a49DB27F9a5\nBalancer Aura rsETH/WETH Incentive:\n0xddFD0A9a979182fA45E0024fDb101Dd8079D84B2\nBalancer rsETH/ETHx DEX:\n0x4E79861b9026109a9C5769631C182b3211BD70e0\nBalancer Aura rsETH/ETHx Incentive:\n0xA4349B50D2E64b24B4c35b2C24ad06177508f3A0\nCurve osETH/rETH DEX:\n0x145e12608C133C2b9062D10E33305d153aC41879\nCurve Convex osETH/rETH Incentive:\n0x74C3B0547BBCAc9584d072c6FBAc543267269Ab7\nCurve ETH/ETHx DEX:\n0xB8E7a5f5f5324AbD46f3Bd92c814C9B9719B8c2a\nCurve Convex ETH/ETHx Incentive:\n0x4bbFa11223315a21b51F37cF9dd3Bd6200332276\nCurve WETH/rETH DEX:\n0x94b58E201EAE7434B9FdCEa12E6B0B4fB26C7a69\nCurve Convex WETH/rETH Incentive:\n0x355f39596a4bc907A84dBF8F627C7CA2BA13dE91\nCurve pxETH/stETH DEX:\n0x54939860E3D185Cd983421ace105Ace79156E3C8\nCurve Convex pxETH/stETH Incentive:\n0x83B6945E843A22Bbda6bEAA06E88Bc1312301D7A\nCurve WETH/pxETH DEX:\n0xd545EE3Ba242E89FA45Caa68665898BAF4201004\nCurve Convex WETH/pxETH Incentive:\n0xF7370f9bF50985209Efe114096cD0177ba4Ba9d7\nCurve WETH/frxETH DEX:\n0xd6884a251E3D116344100e76917Df3C535eE6154\nCurve Convex WETH/frxETH Incentive:\n0xbfDF3A66a97Ae5e168FcE478bE0bE9804c163841\nCurve WETH/weETHng DEX:\n0x542A6b32e08980a8e9f4cd778805CFcB7A99f0Fa\nCurve Convex WETH/weETHng Incentive:\n0xF25b36c77e869b01477860a0EABc4f4Ff745EAC3\nDestinations\nBalancer Aura rETH/WETH:\n0x867991C7737Ccbb152aE5a7E6EDB05cA0670717E\nBalancer Aura WETH/osETH:\n0xFDa49984eb4eA4075b8b451032849347C633E94b\nBalancer Aura wstETH/WETH:\n0x5A4B544B9734930DDC587c9a2f093dC5058A4f4D\nBalancer Aura wstETH/WETH (Gyro):\n0xA1b9297525388BA3985413D982863f31e2A29d05\nBalancer Aura wstETH/cbETH (Gyro):\n0x92294A62D6D9F0FbE30Ba3B543edb1806561baD7\nBalancer Aura wstETH/ETHx:\n0xdfE3fA7027E84f59b266459C567278C79fe86f0C\nBalancer Aura pxETH/WETH:\n0xc4Eb861e7b66f593482a3D7E8adc314f6eEDA30B\nBalancer Aura ezETH/WETH:\n0x2f2CC1bf461413014741dD68481dB4a3686DAC3D\nBalancer Aura rETH/weETH:\n0x40219bBda953ca811d2D0168Dc806a96b84791d9\nBalancer Aura ezETH/weETH/rswETH:\n0xC9b5D82652a1C8214b0971A004983d0EEeDD751C\nBalancer Aura rsETH/WETH:\n0xf9779aEF9f77e78C857CB4A068c65CcBee25BAAc\nBalancer Aura rsETH/ETHx:\n0x60339056EC88996e41757E05a798310E46972cca\nCurve osETH/rETH:\n0x3F55eedDe51504E6Ed0ec30E8289b4Da11EdB7F9\nCurve ETH/ETHx:\n0x1Ea622fa030e4a78F4CC2f305dd3c08DA3F08573\nCurve WETH/rETH:\n0x2B08137BeABd2454AD3631DEB754F97C5c93eB78\nCurve pxETH/stETH:\n0xe4433D00Cf48BFE0C672d9949F2cd2c008bffC04\nCurve WETH/pxETH:\n0xbA1462f43c6f60ebD1C62735c94E428aD073E01A\nCurve WETH/frxETH:\n0x356c79Ab2B2cEFAB685004CE827146058A6c3e77\nCurve WETH/weETHng:\n0x5c6aeb9ef0d5BbA4E6691f381003503FD0D45126\nCurve DOLA/sUSDe Dest Vault:\n0x0091Fec1B75013D1b83f4Bb82f0BEC4E256758CB\nCurve DOLA/sUSDS Dest Vault:\n0x2fa4C8a4aCda7746778dbd2f3B2Fc5ca41D9b171\nCurve DOLA/USR Dest Vault:\n0x88d0e045d91847a81e60f65073E4bC4FDEF90aB0\nCurve DOLA/deUSD Dest Vault:\n0x737f2e3a0958EF0fA77aEC405db60f13CB7f004b\nCurve reUSD/DOLA Dest Vault:\n0x9828b1a3742457D70cE428ddd3Aa51f84ffb37F2\nCurve DOLA/scrvUSD Dest Vault:\n0x23032a1ef0c082e619E3e64725E9D3b39c4e9d8C\nCurve sDOLA/alUSD Dest Vault:\n0xaFd498862d5D0B816D7cE150959Ba18F5C706a90\nCurve scrvUSD/DOLA Dest Vault:\n0xF4CeDDf4e2AEc1aa6b4ef2c64739eCaC5C948fA2\nERC20 sDOLA Dest Vault:\n0x116b3e86f2b04c21605c5fC4b95Ba6A82dBF8F3E\nCore System Registry\nSystem Registry:\n0x18Dc926095A7A007C01Ef836683Fdef4c4371b4e\nAccess Controller:\n0x20Dfa88e77D4eEB644F68C5752E7D1A3c21F27e8\nSequencer Checker:\n0x564c39C2C5D120724DA31d1428773c1AEaD23535\nSystem Security:\n0x8C58aFf94D7fCB0e8daC43fC3713fcddac8b4006\nAutopool Registry:\n0x4fE7916A10B15DADEFc59D06AC81757112b1feCE\nDestination Template Registry:\n0xA1afC8aAF80dF8Ceb179E99Bb1A8Fb4D26095BA1\nDestination Vault Registry:\n0xBBBB6E844EEd5952B44C2063670093E27E21735f\nDestination Vault Factory:\n0xF34F7975Df6CB3dd95849A6c3b9343196AE9AbB6\nSwap Router:\n0x23783E62282ca68fd5C3Fb45Fc7AD01F21B85666\nAsync Swapper Registry:\n0x3750d3315466A132eE7D10eBEe67f28e19577472\nRoot Price Oracle:\n0xBCf67d1d643C53E9C2f84aCBd830A5EDC2661795\nStats Calculator Registry:\n0x22dd2189728B40409476F4F80CA8f2f6BdB217D2\nStats Calculator Factory:\n0xD82664A9B7A766B2c311B76C9e4384E8838B0a1C\nLens:\n0xaF05c205444c5884F53492500Bed22A8f617Aa9C\nIncentive Pricing Stats:\n0xF28213d5cbc9f4cfB371599D25E232978848090d\nReceiving Router:\n0x32796698388fBC64281dEa9Fc4070DF80a12267E\nEth Per Token Store:\n0x57831780565ae1526eD1cc2296C1143B3ad68Dfe\nAutopilot Router:\n0xa18B89225491230fDb1883cFbda65E7931606931\nAutopools\nbaseETH address:\n0xAADf01DD90aE0A6Bb9Eb908294658037096E0404\nbaseUSD address:\n0x9c6864105aec23388c89600046213a44c384c831\nSwap Router Swappers\nBalancer Swapper:\n0x4EfCc03e33470Cfef7B2666EfF67667F4173918B\nUni V3 Swapper:\n0x0915f530eF9A52AAbAE9ac22DC2ecf5265Da6E71\nUsed for Aerodrome V3\nUni V3 L2 Swapper:\n0xe4FeF293650442991C695A055f54D2A54868CA11\nAerodrome V2 Swapper:\n0x2bb11C6407Bb9Dcbb5b776F789371DE5aaCA44a5\nMisc\nIncentive Harvester:\n0x1BFCDfa2722c17959ACD1306dF1f0406A7d5BE5e\nDestination Incentive Checker:\n0xc3FF90869ecb5Ce2a4153EEF6a5dEe08f6598323\nLiquidation + Async Swappers\nLiquidation Row:\n0xE2F00bbC3E5ddeCfBD95e618CE36b49F38881d4f\nLiquidation Executor:\n0x0294D71B2C9b88D10F6d3286f5b25026147b2C8c\nOracles\nETH Pegged Oracle:\n0xe33703C5C1E1A5415B260F8C8eb8A2f49e746Aa9\nChainlink Oracle:\n0xc7939c8337d01F32B669C6a16f20eD4a8E11641C\nBalancer Composable Oracle:\n0x859dDA370dDb15Bd59361CC756496E51b729399b\nRedstone Oracle:\n0x9AB4b68C3a3DdA0Cdf4Ec5C0ab9da2661Bdad1ee\nCustom Set Oracle:\n0x92C726da82389e0E9E81575960411BD6E8EAE3Ef\nAerodrome Oracle:\n0x099A7e3Ff39024C3d1E87568b4edA59A938900f4\nZero Oracle:\n0x01554657fa8c37161CAd0fdc090e6a26Aea1D14d\nService Accounts\nCustom Oracles:\n0x8CD98E74A5ef4020bcd6D0397EFe42C34Afa5f23\nDebt Reporting:\n0xb2A71EF7649B95d7d5A3b8084e619C381Fa79413\nSwap Routes:\n0xf772Fcd65aCAE9814e6E4b228e554c1054aE2765\nIncentive Harvester:\n0xcA7d8b1F4398D11b302853d7fFd5D2b65073dE11\nReward Liquidator:\n0xdEA337283410bAcC9418e13CbbB3b8F03dD2FBf7\nSolver Exec:\n0x91517Ba3793394008c461498de4899EEc2DB1658\nChainlink Upkeeps\nChainlink Incentive Prices Upkeep:\n0x08b0617747ad7A839396a909876104E392713E4d\nChainlink Stats Upkeep:\n0x30f285c7cB4304e82302ce06F24E285BD527c637\nLST/LRT Calculator Templates\nBridged LST Template:\n0x4Cb4b14128C868f35AFE9cac7c23cf821aA64F99\nDEX/Incentive Calculator Templates\nAura Template:\n0x9254926B61C205e8b64ED00681fE0b2de94B62f3\nBalancer Comp Template:\n0xBd0Fe980455e52e4D60c4EACBd6bC19A5cf29F6A\nAerodrome Incentive Template:\n0xc8756b85C5e7C2AB0Aa675Fd606aa91E14E6EF01\nAerodrome Dex Template:\n0xcef50Bf75ed027b8bAE5C49562B3f27B4f253985\nLST/LRT Calculators\nrETH LST Calculator:\n0xb5182945cAA19E3a9Fa35e70502fC3269d1fA9EA\ncbETH LST Calculator:\n0xB081af21468dEb33aaB9E37eAe6F5004Cc1cBDb0\nwstETH LST Calculator:\n0xA80b38Da84e7C7a094E6d0093DE374A00E892934\nweETH LST Calculator:\n0x58897eC6b7d7102BB24a29e99a14A6d9E517943e\nwrsETH LST Calculator:\n0xbaF2EE1C91cc8a00B386b14D65bdb4918604E1a7\nDEX/Incentive Calculators\nBalancer WETH/rETH:\n0x4fc45f7C2FEB07d5698cC12717f5b8D4f30002A9\nBalancer Aura WETH/rETH Incentive:\n0xb9e9818E551f676d6BE547Ed07e5875dC702B6E8\nBalancer weETH/WETH:\n0x800F535CE3F430B1F5475575d7D2Ff3A164820b3\nBalancer Aura weETH/WETH Incentive:\n0x7c4b58Eaa93005162Bc80285af2003517213c539\nAerodrome vAMM-weETH/WETH:\n0xC7B711A5d1fCC19195E82E8c0D827e2E0bD2Bd10\nAerodrome vAMM-weETH/WETH Incentive:\n0xd675D868c751A5B1F331Bcf5dCD1Fe7D45c2e76B\nAerodrome vAMM-WETH/wstETH:\n0xd9B54d16a2cD15Abe6E8A9B8B596239A7f8042E3\nAerodrome vAMM-WETH/wstETH Incentive:\n0xeaa026495601c47BFEb4bb6501c11Ba41a1ac028\nAerodrome vAMM-WETH/wrsETH:\n0xE40523f7Bd5799b3C62921357b104f58C4A7c240\nAerodrome vAMM-WETH/wrsETH Incentive:\n0x9813E3091278f41cD6B2686FF83255F97889F3e3\nAerodrome vAMM-cbETH/WETH:\n0xb02cb15597E214b9A843CCFf9EEfe628C057184e\nAerodrome vAMM-cbETH/WETH Incentive:\n0xe923f84CBbdCE6D12C7987511C0B2C122f425318\nBalancer Gyro cbETH/wstETH:\n0x9d95E1fEcd950110Ab1126Cc6ed3C87C61e39e33\nBalancer Gyro cbETH/wstETH Incentive:\n0xC5A9170d151Cfea07489bd9dB5ECf20B5b7654D4\nAutopool Templates\nAutopool Template:\n0x2ab4a3A8224726cBAA91d6b04D212979F06efdF9\nAutopoolETH Factory:\n0x78A7c45E3cC7B9567b4803AEAF9b33bC8c898451\nStrategy Template (No Hook):\n0xb111C5F02A04E1Bba747b6FF622F73Cf2eC2D9B0\nDestination Vault Templates\nBalancer Aura:\n0x2A7a163168682f58a5294089b7EB87A65d92b1ed\nAerodrome:\n0xDBD14969B9313E5BFdfeD2C7A29e813E6f02C627\nBal Gyro Aura:\n0xee5E7575Df9db1446f9D601769F448Bb4a10F3f7\nDestination Vaults\nBalancer Aura rETH/WETH:\n0xa6EFB95B7393cB419B48A933273F49b6bb48dd5D\nBalancer Aura weETH/WETH:\n0xb3723E69D6e4553239d7dAf514bF8ff7998500E0\nAerodrome vAMM-weETH/WETH:\n0x945a4f719018edBa445ca67bDa43663C815835Ad\nAerodrome vAMM-WETH/wstETH:\n0x58C2233399B85b53C5506f78eAaae9b0DBA1eD3E\nAerodrome vAMM-WETH/wrsETH:\n0xA94031Ed4b316B043464FDd5482877F42A39845a\nAerodrome vAMM-cbETH/WETH:\n0xd18db4dD6aF6A7536aD7F863C136463681e0CdAD\nBalancer Aura Gyro cbETH/wstETH:\n0xBd137c56f3116E5c36753037a784FF844F84F59c\nCore System Contracts\nSystem Registry:\n0x1a912EB51D3cF8364eBAEE5A982cA37f25aD8848\nAccess Controller:\n0xb4B6B1e14C0D520FE322F30B0cA9B747Fe7B4dbc\nSystem Security:\n0x479b7047C564B0dD7F75995Da2b46e68FA0072af\nAutopool Registry:\n0x63E8e5aeBcC8C77BD4411aba375FcBDd9ce8C253\nDestination Template Registry:\n0x0283a267Eb0B7479831fC049487D9E13EC3AFb61\nDestination Vault Registry:\n0x005B5DD2182F4ADf9fCA299e762029337FF79fA8\nDestination Vault Factory:\n0xD707A2083F36e03206982ee2809097913149928c\nSwap Router:\n0x7850cfA1E1679eF6Ae5d4747f524589c52D3f1b9\nAsync Swapper Registry:\n0x330f3c9bBffAdcaAc9d6eC0330dAbc085eCdaa93\nRoot Price Oracle:\n0x356d6e38efd2f33B162eC63534B449B96846751F\nCurve Resolver:\n0x6b8fBDa842612BBa0D1C0202aB86F7098c93F27B\nLens:\n0xCB7E450c32D21Eb0168466c8022Ae32EF785a163\nAutopilot Router:\n0xeB419f321ce4F086743963F4E8568C4D67FDDD64\nAutopools\n• sonicUSD:\n0xCb119265AA1195ea363D7A243aD56c73EA42Eb59\nHooks\nLst Price Hook:\n0x3fAb79E63b2140cACD9DFF96FE59B0a5661c0626\nMax Value Slippage Hook:\n0x720B31F8F46a4DCa2E71DbeC3AAAE6eD83DDee52\nMin Time Gap Hook:\n0x7a0C45fA836dCa6a4856d94289613A27B5A9c7BC\nNav Lookback Hook:\n0xA6c3201b813fcC7468D2c067EE50a178ECe29268\nSlippage Budget Hook:\n0x1A1c7e06fe24D822FbFbE93D6e2F4C70a77439C2\nTemplates + Owners\nwS Autopool Template:\n0x9075ECc69D1A75cc753df2bdcae9F16E4b187c2F\nwS Autopool Factory:\n0x98BbB7196dcf828289cE5Ca9e529a46c196b38e8\nwS Autopool Factory Admin:\n0x26f1a900A2deD0450301F1AfEE8A68Cc058d073a\nUSDC.e Autopool Template:\n0xFe0663433549Ad250bd64bFB794e5f1f067aA92E\nUSDC.e Autopool Factory:\n0x00D9caD65287d22C60D9C1957e844b06c4F489AF\nUSDC.e Autopool Factory Admin:\n0xb6f5B3dc4687C988893A31726A06a675BD29E5d7\nLiquidation and Async Swappers\nOdos Async Swapper:\n0x6D13DB293B4b6B9AA1760f7e093Fb26C24F345B2\nOdos Async Swapper (Transfer To Caller):\n0x394D4824548b66d75513Aef3994a2800e6D1Ef25\nLiFi Async Swapper:\n0x4D81455b4f1D152874AA421141A7a81829dc503e\nLiFi Async Swapper (Transfer To Caller):\n0x618E0055441c2F35cE751B39E6E2a60940eC164b\nOpenOcean Async Swapper:\n0x98b55E07156895814d2503036dC635316F9C9502\nOpenOcean Async Swapper (Transfer To Caller):\n0x971E935E436f3621FE8976Cdf2E2a511757456DA\nERC4626 Swapper:\n0xAb9F53c36B9c82AbBe397742d4A0aD75Df33241c\nERC4626 Swapper (Transfer):\n0xc3C4583F14d6c0499DdDe96DE774Ff66BCaf1790\nLiquidation Row:\n0xf3b137219325466004AEb91CAa0A0Bdd2A8afc8e\nLiquidation Executor:\n0x5A7110fF883BF3b314621a33e9f5Dc9E0a5D0ab3\nSwap Router Swappers\nBalancer V2 Swapper:\n0x02F3a9c40579E8974CAb3fF5935bA1f853932CFc\nCurve V1 Swapper:\n0x62CEa311bf76Bd7b7FB56EDcCC91F72eAC7f2f8E\nBalancer V3 Batch Swap:\n0x2CF4ab3c71433824A9b43d49892382d22D5e7E61\nShadow Dex Swap:\n0xAdC55207B2F7b9642c4c94a0725A29abB833E2cc\nShadow Dex Concentrated Swap:\n0x5520f61Ffa62E45f44370B118927399A6aC4acf8\nSwap X Classic Swap:\n0x09cf827DD2a80281D5e1Bbd210dF526f4338eeb9\nSwap X Concentrated Swap:\n0xB4ED0b7Fea9A1A03b4A9eF0c6B4B1738205D3960\nERC 4626 Swapper:\n0xE2239B1277FD0A90b9C21aA3075E9EFb32e55824\nOracles\nS Pegged Oracle:\n0xB074eE8443466E40fF1d8B234A833057746dF27f\nChainlink Oracle:\n0x84075D59940f2b6956F26Dd183fb92Ba7A1F0717\nBalancer Composable Oracle:\n0x377d75b04BE96455b227f9085a4dfFc624379132\nBalancer Gyro Oracle:\n0xc3FA83E2C669a8F28bC6E10a6914E3dE3083fB87\nBalancer V3 Oracle:\n0x8F0b5255023d0B620DD8a5E1fC0EF1F9620A3c93\nRedstone Oracle:\n0xA1Ce2373E69a0318f4Ca3A2B382C25BAC2874718\nERC4626NonLPSpotEthOracle:\n0x375E794EBCf4119bCcB83905aa3bA61207dAB4F1\nERC4626 Oracle:\n0x2Bae3984810B979F50CBd8F12071A7015fbe5f19\nCustom Set Oracle:\n0x9Dd5E7Abb57713607Ee36092AcB29979E4B87254\nCurve V1 Oracle:\n0x93Ef03c9475FFc8F68535C7d0922f8135E20FeBa\nRedStonePullOracle:\n0xc557B7aFb4000D7f3eA2520C572Dc4370b929d63\nZero Oracle:\n0xD2926f42Da8fAD44cA060b383acA35C5c6d0c69e\nNon Lp Standard Oracle:\n0x62949fc757b22862DdE2Da40FCC8297c06b628D2\nDestination Vault Templates\nBalancer Gauge Vault Template:\n0xDE1E9F59B6AD3919672c438Ec36430FEa32fC004\nBalancer V3 Gauge Template:\n0x77a09D3658De03643250E66e871282B5554704f2\nCurve Gauge Vault Template:\n0x76555B641616f41A10Ed18A02F719D5253c51403\nEuler Vault Template:\n0x59e6e9D53dB8FeAf8185c79a6c5116c7EBE12AfB\nAave V3 Vault Template:\n0xEa1E83B92616642b22eb35EC45d770c9869aF0f8\nERC20 Vault Template:\n0x3058Da3c19b0b5035613c04D298615FC7b261b2D\nDestination Vaults\nBalancer Gauge wS/stS Dest Vault:\n0xF628a2A6eA34c0f36cD331Cb2174627728E92768\nBalancer V3 Gauge wS(Silo)/anS Dest Vault:\n0xA9d35198aCF60EfD4EEab5CB81454aE9c265C6ac\nAave S Dest Vault:\n0x15184E683293AeDFa5aeEAA432F4eF6753631A10\nEuler wS (Re7) Dest Vault:\n0xd7Fc37Bf36f03249B2FF1Cff1ae9C725Edf68Aef\nEuler stS (Re7) Dest Vault:\n0xdfc0a07A42178f947c53900F24f5604AF31C2d30\nERC20 stS Dest Vault:\n0x787fd19387b7f3fc27A10E6c3FD4a85F9d38a17D\nERC20 wAnS Dest Vault:\n0xAAdEa6078FfF7EEB80E75384115c20e0b1EfbF06\nCurve scUSD/frxUSD Dest Vault:\n0x2fE75AEd0E1EFA62e47CE356814D16D9eb6450d1\nCurve USDT/USDC.e Dest Vault:\n0x310CCB9eC996A228cd6F4Eb2E70769ccDbeD163D\nBalancer V3 Gauge USDC(Aave)/wstkscUSD/scUSD(Silo) Dest Vault:\n0x3D35b1E0Fe434848490427CE4DE13b6839365Bd2\nBalancer V3 Gauge USDC(Beefy+Silo)/scUSD Dest Vault:\n0xE094d91741A88767ee82d67dDadF2bAa19cc3D41\nBalancer V3 Gauge USDC(Silo)/frxUSD(Silo) Dest Vault:\n0xc4A9757210b1071Cd2b66dA7568Fe5C82bF0D601\nEuler USDC.e (MEV) Dest Vault:\n0x4827788F01D7533710cbfa7C0b5991E8b99E277F\nEuler scUSD (Re7) Dest Vault:\n0x2Af19422D9f81A4c71306a409A540fC63d7f623B\nEuler scUSD (MEV) Dest Vault:\n0x13a23b219909Ce3EE454e121D6286E32594d055B\nEuler USDC.e (Re7) Dest Vault:\n0xD4E59aa6dfFE9Acd541f8B0a827683a6656f62a1\nSolver + Execution\nSolvers\nFlashBorrowerSolver (autoS):\n0xF5A10654BC75e09fB5F341d687305E9CC4b09EC0\nFlashBorrowerSolver (sonicUSD):\n0xAF6F21F1A0c6D47b61388B982954666dD030e10C\nExecution Helpers\nArraysConverter:\n0xb93c1927c12499106C4B14E86924a41A75daE2f2\nBlockchainInfo:\n0xf1e608c160D6ffb48b7e9B9Ffdd8f2F3a687AEBa\nBytes32:\n0x8737f97B4C4d521A838f5C292309AA6C108dCEf2\nInteger:\n0xAd333193BC8fb30FC546221f63e3e6267795F3F5\nSwapperAdapter:\n0x833adB5F597ef5F257914ff9F7f227812Bd3D4E3\nCurveAdapter:\n0xEaA74F5C924a2C4558DEAC6b4F6b24C775207b1F\nBalancerAdapter:\n0xB6787037b530A6997fb9621Ee36D53fBF676C266\nBalancerV3Adapter:\n0x43337657FBe1886F38b29B844D8CB746C6192834\nBalancer V3 Single Swap:\n0x65F1ac7F1213C5a01E7A6EDC4DD47a32c4590E48\nCore System Registry\nSystem Registry:\n0x25F603C1a0Ce130c7F25321A7116379d3c270c23\nAutopilot Router:\n0x69410c9155c863670f81B7eceC60C6706f01a3Dd\nAutopools\nautoETH:\n0xadEe3Fd7D10Ed834175Da327b95755B879194a03\nPrevious\nAutopool Contracts Glossary\nNext\nSecurity and Audits\nLast updated\n4 months ago\nWas this helpful?",
+    "headings": [
+      {
+        "level": "h3",
+        "text": "Core System Registry"
+      },
+      {
+        "level": "h3",
+        "text": "Autopools"
+      },
+      {
+        "level": "h3",
+        "text": "Autopool Templates"
+      },
+      {
+        "level": "h3",
+        "text": "Autopool Strategy Templates"
+      },
+      {
+        "level": "h3",
+        "text": "Swap Router Swappers"
+      },
+      {
+        "level": "h3",
+        "text": "Oracles"
+      },
+      {
+        "level": "h3",
+        "text": "Misc"
+      },
+      {
+        "level": "h2",
+        "text": "Calculator Templates"
+      },
+      {
+        "level": "h2",
+        "text": "LST/LRT Calculators"
+      },
+      {
+        "level": "h3",
+        "text": "DEX Calculators"
+      },
+      {
+        "level": "h3",
+        "text": "Destinations"
+      },
+      {
+        "level": "h3",
+        "text": "Core System Registry"
+      },
+      {
+        "level": "h3",
+        "text": "Autopools"
+      },
+      {
+        "level": "h3",
+        "text": "Swap Router Swappers"
+      },
+      {
+        "level": "h3",
+        "text": "Misc"
+      },
+      {
+        "level": "h3",
+        "text": "Liquidation + Async Swappers"
+      },
+      {
+        "level": "h3",
+        "text": "Oracles"
+      },
+      {
+        "level": "h3",
+        "text": "Service Accounts"
+      },
+      {
+        "level": "h3",
+        "text": "Chainlink Upkeeps"
+      },
+      {
+        "level": "h3",
+        "text": "LST/LRT Calculator Templates"
+      },
+      {
+        "level": "h3",
+        "text": "DEX/Incentive Calculator Templates"
+      },
+      {
+        "level": "h3",
+        "text": "LST/LRT Calculators"
+      },
+      {
+        "level": "h3",
+        "text": "DEX/Incentive Calculators"
+      },
+      {
+        "level": "h3",
+        "text": "Autopool Templates"
+      },
+      {
+        "level": "h3",
+        "text": "Destination Vault Templates"
+      },
+      {
+        "level": "h3",
+        "text": "Destination Vaults"
+      },
+      {
+        "level": "h3",
+        "text": "Core System Contracts"
+      },
+      {
+        "level": "h3",
+        "text": "Autopools"
+      },
+      {
+        "level": "h4",
+        "text": "Hooks"
+      },
+      {
+        "level": "h4",
+        "text": "Templates + Owners"
+      },
+      {
+        "level": "h3",
+        "text": "Liquidation and Async Swappers"
+      },
+      {
+        "level": "h3",
+        "text": "Swap Router Swappers"
+      },
+      {
+        "level": "h3",
+        "text": "Oracles"
+      },
+      {
+        "level": "h3",
+        "text": "Destination Vault Templates"
+      },
+      {
+        "level": "h3",
+        "text": "Destination Vaults"
+      },
+      {
+        "level": "h3",
+        "text": "Solver + Execution"
+      },
+      {
+        "level": "h4",
+        "text": "Solvers"
+      },
+      {
+        "level": "h4",
+        "text": "Execution Helpers"
+      },
+      {
+        "level": "h3",
+        "text": "Core System Registry"
+      },
+      {
+        "level": "h3",
+        "text": "Autopools"
+      }
+    ],
+    "metadata": {}
+  },
+  {
+    "url": "https://docs.auto.finance/developer-docs/security-and-audits/hexens-tokemak-autopilot-may-2024",
+    "title": "Hexens: Tokemak Autopilot May 2024",
+    "content": "19MB\ntokemak-audit-may-2024(Public).pdf\nPDF\nDownload\nOpen\nPrevious\nHexens: Autopilot Follow Up/Updates Audit July 2024\nNext\nCertora: LMPStrategy Security Assessment & Formal Verification Report - Jan/March 2024\nLast updated\n1 year ago\nWas this helpful?",
+    "headings": [],
+    "metadata": {}
+  },
+  {
+    "url": "https://docs.auto.finance/developer-docs/security-and-audits/sherlock-autopilot-contracts-crowd-competition-sept-2023",
+    "title": "Sherlock - Autopilot Contracts - Crowd Competition - Sept 2023",
+    "content": "https://audits.sherlock.xyz/contests/101/report\naudits.sherlock.xyz\nPrevious\nHalborn - Autopilot Pricing Contracts - Formal Verification Report - Sept 2023\nNext\nHalborn - accTOKE Contract - Nov 2022\nLast updated\n1 year ago\nWas this helpful?",
+    "headings": [],
+    "metadata": {}
+  },
+  {
+    "url": "https://docs.auto.finance/developer-docs/security-and-audits/halborn-autopilot-pricing-contracts-formal-verification-report-sept-2023",
+    "title": "Halborn - Autopilot Pricing Contracts - Formal Verification Report - Sept 2023",
+    "content": "Previous\nHalborn - Autopilot (Autopools) Contracts - Preliminary Smart Contract Audit - Sept 2023\nNext\nSherlock - Autopilot Contracts - Crowd Competition - Sept 2023\nWas this helpful?",
+    "headings": [],
+    "metadata": {}
+  },
+  {
+    "url": "https://docs.auto.finance/developer-docs/security-and-audits/certora-lmpstrategy-security-assessment-and-formal-verification-report-jan-march-2024",
+    "title": "Certora: LMPStrategy Security Assessment & Formal Verification Report - Jan/March 2024",
+    "content": "Previous\nHexens: Tokemak Autopilot May 2024\nNext\nHats.Finance, Crowd Competition Smart Contract Audit, February - March 2024\nWas this helpful?",
+    "headings": [],
+    "metadata": {
+      "description": "This report describes the specification and verification of the Tokemak v2 LMPStrategy contract using the Certora Prover and manual code review findings. The work was undertaken from January 2nd 2023"
+    }
+  },
+  {
+    "url": "https://docs.auto.finance/developer-docs/security-and-audits/halborn-autopilot-autopools-contracts-preliminary-smart-contract-audit-sept-2023",
+    "title": "Halborn - Autopilot (Autopools) Contracts - Preliminary Smart Contract Audit - Sept 2023",
+    "content": "Previous\nHats.Finance, Crowd Competition Smart Contract Audit, February - March 2024\nNext\nHalborn - Autopilot Pricing Contracts - Formal Verification Report - Sept 2023\nWas this helpful?",
+    "headings": [],
+    "metadata": {}
+  },
+  {
+    "url": "https://docs.auto.finance/developer-docs/security-and-audits/hats.finance-crowd-competition-smart-contract-audit-february-march-2024",
+    "title": "Hats.Finance, Crowd Competition Smart Contract Audit, February - March 2024",
+    "content": "tokemak-v2-core-fv/Report.md at main · Certora/tokemak-v2-core-fv\nGitHub\nPrevious\nCertora: LMPStrategy Security Assessment & Formal Verification Report - Jan/March 2024\nNext\nHalborn - Autopilot (Autopools) Contracts - Preliminary Smart Contract Audit - Sept 2023\nWas this helpful?",
+    "headings": [],
+    "metadata": {}
+  },
+  {
+    "url": "https://docs.auto.finance/developer-docs/security-and-audits/hexens-autousd-march-25th-2025",
+    "title": "Hexens: autoUSD March 25th 2025",
+    "content": "6MB\ntokemak-mar-25(Final).pdf\nPDF\nDownload\nOpen\nPrevious\nSecurity and Audits\nNext\nHexens: Autopilot Follow Up/Updates Audit July 2024\nLast updated\n6 months ago\nWas this helpful?",
+    "headings": [],
+    "metadata": {}
+  },
+  {
+    "url": "https://docs.auto.finance/developer-docs/security-and-audits/hexens-autopilot-follow-up-updates-audit-july-2024",
+    "title": "Hexens: Autopilot Follow Up/Updates Audit July 2024",
+    "content": "4MB\ntokemak-mainnet-follow-up-audit-july-2024(Public).pdf\nPDF\nDownload\nOpen\nPrevious\nHexens: autoUSD March 25th 2025\nNext\nHexens: Tokemak Autopilot May 2024\nLast updated\n1 year ago\nWas this helpful?",
+    "headings": [],
+    "metadata": {}
+  },
+  {
+    "url": "https://docs.auto.finance/auto-pools-protocol/autopools-tl-dr/dashboard-and-tracking",
+    "title": "Dashboard and Tracking",
+    "content": "Easy Tracking with the In‑App Dashboard\nThe dashboard gives you clarity at a glance so you always know\nwhat you own, where it’s deployed, and how it’s doing\n—without spelunking through multiple protocols.\nWhat you’ll see:\nCurrent allocation\n— your destinations and percentages right now.\nPerformance\n— earned to date and recent changes, net of moves.\nOne‑click actions\n— add more or withdraw whenever you want.\nTip\nYou can change the denomination of your portfolio where it says \"Currency,\" e.g. show it denominated in USD, ETH, etc.\nFAQs\nHow fast does it update?\nUpdates happen in near real-time.\nMobile friendly?\nCheck out the app on your mobile phone - it's optimized to work well there too.\nPrevious\nAuto-Compounding\nNext\nProtocol Mechanics\nLast updated\n1 month ago\nWas this helpful?",
+    "headings": [
+      {
+        "level": "h3",
+        "text": "Easy Tracking with the In‑App Dashboard"
+      }
+    ],
+    "metadata": {}
+  },
+  {
+    "url": "https://docs.auto.finance/auto-pools-protocol/autopools-tl-dr/yield-optimizing",
+    "title": "Yield Optimizing",
+    "content": "How the Autopool Protocol Optimizes Across Destinations for Better Yield\nEach\nautopool\nhas a pre‑selected\nset of eligible destinations\n(these can be DEXs, lending protocols, and soon yield markets). The rebalance logic scores those options using a blended view of return\nand\ncost—headline APRs, fees, rewards, available liquidity, and the “hidden” stuff like volatility and potential impermanent loss.\nInstead of chasing whatever advertises the highest APY today, the logic aims to\nbeat any single venue over time\non a risk‑aware basis.\nThe goal is steady, risk‑aware outperformance, not whiplash‑inducing APY chasing.\nFAQs\nHow are destinations chosen?\nThey’re curated for fit (asset type, liquidity depth, integrations, historical behavior) and continuously reviewed.\nDo you add new destinations?\nOn occasion, when they meet safety and strategy criteria. Generally only battle tested destinations are chosen.\nMore autopools are continually being added, so check back frequently.\nPrevious\nAuto-Rebalancing\nNext\nAuto-Compounding\nLast updated\n1 month ago\nWas this helpful?",
+    "headings": [
+      {
+        "level": "h3",
+        "text": "How the Autopool Protocol Optimizes Across Destinations for Better Yield"
+      }
+    ],
+    "metadata": {}
+  },
+  {
+    "url": "https://docs.auto.finance/auto-pools-protocol/autopools-tl-dr/auto-compounding",
+    "title": "Auto-Compounding",
+    "content": "How Deposits Auto‑Compound\nWhen your autopool position earns fees or rewards, they are\nautomatically reinvested\nback into the position. This creates a simple “earn → reinvest → repeat” loop — what is generally known as\ncompounding\n.\nLet the autopool do the hard work for you:\nLess busywork (no manual claiming, swapping, and redepositing), fewer missed reward windows, and more time with your full balance working for you.\nGas cost will no longer restrict you from compounding your gains, as you are now swimming along with everyone else in the pool.\nFAQs\nDo I need to claim rewards?\nRewards from destinations are handled automatically by the strategy. Additional incentives, such as in the form of $TOKE, do need to be manually claimed.\nHow often does compounding happen?\nOn a periodic basis and/or alongside rebalances; timing is tuned to minimize costs and maximize net benefit.\nIn what asset are rewards reinvested?\nBack into the autopool’s strategy so your position grows in place.\nPrevious\nYield Optimizing\nNext\nDashboard and Tracking\nLast updated\n1 month ago\nWas this helpful?",
+    "headings": [
+      {
+        "level": "h3",
+        "text": "How Deposits Auto‑Compound"
+      }
+    ],
+    "metadata": {}
+  },
+  {
+    "url": "https://docs.auto.finance/auto-pools-protocol/autopools-tl-dr/auto-rebalancing",
+    "title": "Auto-Rebalancing",
+    "content": "How Autopools Auto‑Rebalances Between DeFi Destinations\nAutopools spread your deposit across a curated set of pools and protocols (we call these\ndestinations\n) and\nadjusts\nthat mix as conditions change. When a different destination looks better\nafter\naccounting for costs like swaps, the autopool shifts only what makes sense.\nWhat’s happening under the hood:\nIt continuously\nmonitors\nyield signals and market conditions.\nIt\ncompares\npotential improvements vs. the cost of moving.\nIt\nmoves\nonly when the expected benefit outweighs the costs.\nAutopools mean you're not getting chopped up!\nYou’re not stuck in yesterday’s “best pool,” and you’re not paying churny fees. Rebalances aim to be\ninfrequent but meaningful\n.\nA single deposit, and the autopool takes it from there: monitoring, comparing, and only moving when it's worth it.\nFAQs\nHow often does it rebalance?\nOnly when the improvement is meaningful net of costs. There’s no fixed cadence; it’s opportunity‑driven.\nWill it ever move everything at once?\nUsually not; it prefers measured shifts to keep costs and slippage low.\nWho pays the transaction costs?\nCosts are part of the decision logic—rebalances simply won’t happen unless the expected benefit clears those costs.\nPrevious\nAutopools tl;dr\nNext\nYield Optimizing\nLast updated\n1 month ago\nWas this helpful?",
+    "headings": [
+      {
+        "level": "h3",
+        "text": "How Autopools Auto‑Rebalances Between DeFi Destinations"
+      }
+    ],
+    "metadata": {}
+  },
+  {
+    "url": "https://docs.auto.finance/auto-pools-protocol/protocol-mechanics/asset-flow-example",
+    "title": "Asset Flow Example",
+    "content": "To understand the general architecture and functioning of the system, it helps to consider a simplified flow of assets within the system:\nDeposit\n– User deposits assets into an autopool. After this action, the autopool has idle assets and the user gets the respective receipt token in return;\nRebalance\n– After a certain threshold of assets are deposited into the autopool, the Strategy backing it starts to accept proposals from the Solver. Once a proposal satisfies the constraints imposed by the Strategy, the assets in the autopool are sent to the Solver which will then return LP tokens to the autopool;\nAuto-compounding\n– On a periodic basis, rewards from destinations are claimed and collected via a keeper process. These tokens are then converted into the autopool base asset;\nDebt Reporting\n– Each autopool goes through a debt reporting where the system re-values the LP tokens held by that autopool. During that process, any available auto-compounded rewards are claimed and come into the autopool as idle funds;\nRestart\n– With sufficient idle assets in the autopool, another rebalance can occur.\nIn other words, users deposit assets into autopools, the stats contracts provide on-chain information about the market, and the solver proposes rebalances to the strategy. To be accepted, the proposed rebalance must meet the strategy's constraints.\n\nThe above outline focused on idle → LP rebalances but the rebalance step can occur for LP → LP rebalances as well. So long as the proposal results in a higher potential return (and satisfies other constraints) it can be executed.\nPrevious\nComponents & Logic\nNext\nAutopool Receipt Tokens\nLast updated\n1 month ago\nWas this helpful?",
+    "headings": [],
+    "metadata": {}
+  },
+  {
+    "url": "https://docs.auto.finance/auto-pools-protocol/protocol-mechanics/components-and-logic",
+    "title": "Components & Logic",
+    "content": "This section provides a simplified overview of the components, their functions within the Auto Pools Protocol, and a summary of the Rebalance Logic to help users achieve a basic understanding of the autopools.\nFor a comprehensive breakdown of the system, its components, and functionality, please refer to the\nDeveloper docs\n.\nSystem Components\nIndividual autopools, when viewed as a system and not as a product or concept, are comprised of multiple components that as a whole fulfill the purpose of continuously rebalancing assets from the autopool into the destinations with the best risk/return profile.\nSchematic overview with highlighted asset flow\nAutopool\nStats System\nSolver\nStrategy Contract\nModular Option Set\nAutopools are the system component which the user interacts with directly by depositing and withdrawing the base asset, the autopool returning the depositor a receipt token. \n\nAutopools use the ERC-4626 standard and represents a fixed set of destinations (pools and DEXs) to which assets may be deployed to.\nProviding Data\nThe Stats System is responsible for making various signals available on-chain and keeping the destination data up-to-date. These signals are then stored and processed by “calculators” that are kept up to date through a keeper network.\n\nOther system components rely on the data to get an accurate picture of the destination (e.g. trading fees).\nFinding the Solution\nSimply put, the Solver is an off-chain component that listens to opportunities to rebalance into higher yielding destinations and finds the path and timing for rebalances, which it proposes to the Strategy for validation.\nInversely, it will also solve for and propose solutions to rebalance out of destinations that violate safety constraints.\n\nThis is similar to how off-chain swap routing software (DEX aggregators) will find and split up trades between many pools to get the best price.\nThe Gatekeeper\nThe Strategy is a set of gatekeeping contracts responsible for determining if a given rebalance proposal meets its requirements and is in the best interest of an autopool. Additionally, the Strategy will ensure that the immutable constraints are not violated.\nRebalance Logic\nThis explanation will highlight a few of the components and steps necessary to arrive at a valid rebalance solution.\nThe Data\nThe logic does not simply chase the highest yield\n, but processes a comprehensive set of data in order to attain long-term rather than short-term outperformance. The Stats System is collecting, storing and processing this data, for example:\nAPR and it's different components:\nETH Staking Yield: ETH yield generated by Consensus and Execution Layer rewards\nFee APR: Yield generated from swap fees\nIncentive APR: Additional rewards paid to liquidity providers\nPrice return:\nExchange rate vs underlying ETH backing\nRebalancing costs:\nGas fees\nSlippage\nTrading fees\nThe above factors are weighted in order to account for e.g. likelihood of APR stability. \nMore detail on the different yield types and APR weights can be found\nhere\n.\nSolution and Constraints\nBased on the data made available by the Stats System, the Solver proposes rebalance solutions to interchangeably convert assets and LP tokens, as well as LP token into other LP tokens. The rebalance solutions are proposed to the Strategy backing the autopool. \n\nThe Strategy verifies on-chain the validity of the proposal and adherence to immutable constraints, also by use of the Stats System's data. Among the strategy’s key features we have the following:\nComposite Return Metric\n- The Composite Return Metric is a score associated with destinations for liquidity within autopools. This metric breaks down APRs into separate parts. As such, the rebalance logic has the flexibility of overweighting/underweighting different components for further optimization. A valid rebalance needs to observe an increase of this metric.\nAdaptive Rebalance Offset Period\n- The adaptive rebalance constraint is a gatekeeping condition for rebalances, which states that the expected return associated with a rebalance needs to be recouped over a given period. It is worth noting that this is a self-learning mechanism with a variable cost offset period that adapts to different market environments based on the observed yield volatility.\nLastly, the Strategy has a multitude of additional immutable constraints, such as the total slippage (i.e. total difference in the value of the in and out LP tokens), as well as lookback tests that validate an increase in net asset value (NAV) over time.\n\nOnce fully validated by the Strategy, the rebalance proposal is executed.\nPrevious\nProtocol Mechanics\nNext\nAsset Flow Example\nLast updated\n1 month ago\nWas this helpful?",
+    "headings": [
+      {
+        "level": "h2",
+        "text": "System Components"
+      },
+      {
+        "level": "h4",
+        "text": "Modular Option Set"
+      },
+      {
+        "level": "h4",
+        "text": "Providing Data"
+      },
+      {
+        "level": "h4",
+        "text": "Finding the Solution"
+      },
+      {
+        "level": "h4",
+        "text": "The Gatekeeper"
+      },
+      {
+        "level": "h2",
+        "text": "Rebalance Logic"
+      },
+      {
+        "level": "h3",
+        "text": "The Data"
+      },
+      {
+        "level": "h3",
+        "text": "Solution and Constraints"
+      }
+    ],
+    "metadata": {}
+  },
+  {
+    "url": "https://docs.auto.finance/using-the-app/app-guide/autopools/stake-and-unstake",
+    "title": "Stake and Unstake",
+    "content": "Staking Autopool Receipt Tokens\nIn case you have unstaked receipt tokens that you wish to stake, navigate to the respective Aatopool. If you are unsure about the autopool or the status of your positions, you can browse your \"Portfolio\" section and check the Staking Status:\nStaked:\nAll the receipt tokens associated with this autopool position have been staked.\nPartially Staked:\nReceipt tokens associated with this positon have partially been staked.\nUnstaked:\nNo receipt tokens associated with this autopool position have been staked.\nClick on \"Manage\" and you will be taken to the autopool where you can use the dialog to stake your receipt tokens.\nSelect the \"Stake\" tab in the dialog.\nEnter the amount you wish to stake and click \"Stake.\" Note that the first staking transaction  will require an additional approval transaction.\nConfirm the transaction(s) in your wallet.\nUnstaking Autopool LATs?\nIn order to withdraw from the autopool or otherwise utilize your receipt tokens, you will need to unstake them. Either navigate to the autopool via the 'Autopools' section or select it from your Portfolio view.\nSelect the \"Unstake\" tab in the dialog.\nEnter the amount you  wish to unstake and click \"Unstake.\"\nConfirm the transaction(s) in your wallet.\nPrevious\nDeposit and Withdraw\nNext\nClaim Incentives\nLast updated\n1 month ago\nWas this helpful?",
+    "headings": [
+      {
+        "level": "h2",
+        "text": "Staking Autopool Receipt Tokens"
+      },
+      {
+        "level": "h2",
+        "text": "Unstaking Autopool LATs?"
+      }
+    ],
+    "metadata": {}
+  },
+  {
+    "url": "https://docs.auto.finance/using-the-app/app-guide/autopools/view-positions",
+    "title": "View Positions",
+    "content": "Where can I see my Autopool Positions?\nAll your positions can be found in the \"Portfolio\" section.\nTotal Autopools Balance\nThis is your total balance across all your autopool positions.\nAutopool Allocations\nHere you can see the allocation to DEXs and assets across all autopools you have deposited into.\nAutopools\nHere you can track and manage your individual positions.\nTotal Autopools Balance: T\notal balance across all autopools.\nTotal Returns:\nTotal cumulative return across all autopools.\nAverage Daily Returns:\nAverage return across all autopools.\nHigh daily Composite Return Metric, 7-day moving average, 30-day moving average depending on autopool age.\nAverage APR:\nAverage APR across all autopools.\nHigh daily Composite Return Metric, 7-day moving average, 30-day moving average depending on autopool age.\nRewards:\nCurrent balance of additional earned rewards.\nTVL:\nTotal Value Locked of the autopool.\nDeposited:\nCumulative deposits made into the autopool.\nReturns:\nTotal cumulative return earned in the autopool.\nAPR:\nAPR of the autopool.\nHigh daily Composite Return Metric, 7-day moving average, 30-day moving average depending on autopool age.\nStaking Statuses\nYou can see your stake status under the portfolio on the autopool section.\nStaked.\nYour amount of receipt token stake is the same as the total amount of your position.\nPartially Staked.\nYour amount of  receipt token stake is no the total amount of your position.\nUnstaked.\nYou do not have staked  receipt tokens.\nHow Do I Manage My Autopool Positions?\nIn your Portfolio, click on the 'Manage' button to go to the specific autopool page, where you can manage your autopool position:\nDeposit / Withdrawal\nStake / Unstake\nPrevious\nClaim Incentives\nNext\nStaking TOKE\nLast updated\n1 month ago\nWas this helpful?",
+    "headings": [
+      {
+        "level": "h2",
+        "text": "Where can I see my Autopool Positions?"
+      },
+      {
+        "level": "h2",
+        "text": "Total Autopools Balance"
+      },
+      {
+        "level": "h2",
+        "text": "Autopool Allocations"
+      },
+      {
+        "level": "h2",
+        "text": "Autopools"
+      },
+      {
+        "level": "h3",
+        "text": "Staking Statuses"
+      },
+      {
+        "level": "h3",
+        "text": "How Do I Manage My Autopool Positions?"
+      }
+    ],
+    "metadata": {}
+  },
+  {
+    "url": "https://docs.auto.finance/using-the-app/app-guide/autopools/deposit-and-withdraw",
+    "title": "Deposit and Withdraw",
+    "content": "Depositing into an Autopool\nBrowse to the \"Autopools\" section to select an autopool and view additional details by clicking on it. Once you are ready, use the dialog box to deposit into the autopool:\nIf your wallet is not connected to tokemak.xyz, or you need to connect to a different network for this autopool, the main button of the dialog will prompt you to do so by clicking it.\nSelect the asset and amount you wish to deposit. You can deposit any asset, which will subsequently be swapped into the base asset of the autopool (e.g. , ETH). \nYou can select a specific slippage tolerance for the swap and deposit by clicking the cog icon.\nSetting the \"Auto-Stake\" toggle to \"on\" will add the transactions to stake the receipt token to the deposit transaction. If left in the \"off\" position, you will receive the receipt tokens into your wallet. These can always be staked at a later point.\nClick \"Deposit\" in order to start the deposit process. Note that the first deposit of an asset will require an additional approval transaction.\nWithdrawing from the Autopool\nAutopool deposits are not subject to lock-ups or cool-down periods, meaning you can withdraw your assets at any time. You can start the process by either clicking \"Manage\" in the autopools of the \"Portfolio\" section, or by selecting the autopool from the list in the \"Autopools\" section.\nSelect the \"Withdraw\" tab of the dialog.\nSelect the amount you wish to to withdraw and the asset you want to receive. You can withdraw as any asset; the system will make the swap for you. You can select a specific slippage tolerance for the withdrawal and swap by clicking the cog icon.\nClick \"Withdraw\" to start the withdrawal process.\nPrevious\nAutopools\nNext\nStake and Unstake\nLast updated\n1 month ago\nWas this helpful?",
+    "headings": [
+      {
+        "level": "h2",
+        "text": "Depositing into an Autopool"
+      },
+      {
+        "level": "h2",
+        "text": "Withdrawing from the Autopool"
+      }
+    ],
+    "metadata": {}
+  },
+  {
+    "url": "https://docs.auto.finance/using-the-app/app-guide/autopools/claim-incentives",
+    "title": "Claim Incentives",
+    "content": "What Are Incentives and How Are They Calculated?\nAutopool LPs who stake their  receipt tokens currently receive additional TOKE rewards, allocated every two weeks. A defined amount of TOKE is distributed pro rata among LPs, based on the total percentage of the total staked receipt tokens they represent.\nThe amount of rewards and the split across the different pools is subject to change.\nHow Do I Claim and Manage My Incentives?\nNavigate to your Portfolio and locate the \"Autopools\" section. Under \"Rewards,\" click \"Claim\" to initiate the claim process. During this process, you can choose either to compound your TOKE incentives to earn autoETH or to claim liquid TOKE directly to your wallet.\nCompound Claim\nCompound Claim will lock your claimed TOKE for four weeks, earning additional autoETH receipt tokens. These tokens are the same as the LP receipt tokens you receive for depositing into the autoETH autopool.\nYou can learn more about TOKE locking\nhere\n.\nBasic Claim\nBasic Claim allows you to claim liquid TOKE directly to your wallet. Liquid TOKE can, for example, be used to provide liquidity to the TOKE/ETH pools on SushiSwap or Curve. \nLearn more about TOKE/ETH LP\nhere\n.\nPrevious\nStake and Unstake\nNext\nView Positions\nLast updated\n1 month ago\nWas this helpful?",
+    "headings": [
+      {
+        "level": "h2",
+        "text": "What Are Incentives and How Are They Calculated?"
+      },
+      {
+        "level": "h2",
+        "text": "How Do I Claim and Manage My Incentives?"
+      },
+      {
+        "level": "h3",
+        "text": "Compound Claim"
+      },
+      {
+        "level": "h3",
+        "text": "Basic Claim"
+      }
+    ],
+    "metadata": {}
+  },
+  {
+    "url": "https://docs.auto.finance/using-the-app/app-guide/staking-toke/unstake-and-withdraw",
+    "title": "Unstake and Withdraw",
+    "content": "Unstake and Withdraw\nTo withdraw your TOKE, you need to initiate the unstaking during the unstaking window (final week of your staking period). Once your staking period ends, your TOKE then becomes available for withdrawal.\nSubmit Withdrawal Request\nVisit the Staking page during the final week of your staking period\nOpen the Staking Panel and select the Unstake tab\nEnter the amount of sTOKE you wish to unstake\nYou continue to earn rewards while the unstaking is in process\nComplete Withdrawal\nOnce your staking period ends, your TOKE becomes available\nReturn to the Staking Panel and select the Withdraw tab\nClaim your available TOKE\nPrevious\nStake and Allocate\nNext\nView Positions\nLast updated\n10 months ago\nWas this helpful?",
+    "headings": [
+      {
+        "level": "h2",
+        "text": "Unstake and Withdraw"
+      },
+      {
+        "level": "h2",
+        "text": "Submit Withdrawal Request"
+      }
+    ],
+    "metadata": {}
+  },
+  {
+    "url": "https://docs.auto.finance/using-the-app/app-guide/staking-toke/stake-and-allocate",
+    "title": "Stake and Allocate",
+    "content": "In order to allocate credits and activate Reward Streams, you need to stake TOKE as sTOKE using the Staking Panel:\nStaking TOKE as sTOKE\nVisit the Staking page\nSelect a Network/chain (eg. Ethereum)\nClick Manage on the Staking Lateral Panel\nEnter the amount of TOKE you wish to stake\nChoose a staking interval\nReview your boost multiplier based on the selected duration\nProceed with the staking transaction\nWhen adding more TOKE to an existing stake, the entire staked balance will restart its lock period with the newly selected duration. This means your total staked amount (existing + new) will begin a fresh lock period. The minimum staking period for the added TOKE is the currently selected staking duration.\nAllocating Your Credits\nVisit the Staking page\nSelect a Network (e.g. Ethereum)\nClick \"Manage\" on the Allocation Panel\nUse the plus symbol (+) to add or the minus symbol (-) to change the allocation, or you can enter allocation percentages that total 100%\nWhen allocation ready, click “Save\"\nYou can change your allocation of credits at any time – the changes go into effect with the next snapshot. Snapshots are taken once a week.\nPrevious\nStaking TOKE\nNext\nUnstake and Withdraw\nLast updated\n10 months ago\nWas this helpful?",
+    "headings": [
+      {
+        "level": "h2",
+        "text": "Staking TOKE as sTOKE"
+      },
+      {
+        "level": "h2",
+        "text": "Allocating Your Credits"
+      }
+    ],
+    "metadata": {}
+  },
+  {
+    "url": "https://docs.auto.finance/using-the-app/app-guide/staking-toke/view-positions",
+    "title": "View Positions",
+    "content": "Your staked TOKE (sTOKE) positions can be viewed in your dashboard in the Portfolio tab of the app.\nFrom there, you can manage your  sTOKE credit allocations (per network) by clicking on the manage button.\nPrevious\nUnstake and Withdraw\nNext\nClaim Rewards\nLast updated\n10 months ago\nWas this helpful?",
+    "headings": [],
+    "metadata": {}
+  },
+  {
+    "url": "https://docs.auto.finance/developer-docs/contracts-overview/autopool-eth-contracts-overview/autopool-contracts-glossary",
+    "title": "Autopool Contracts Glossary",
+    "content": "Autopool System\n- Name of the overall system\nAutopool\n- A 4626 vault that users deposit assets into\nAutoPoolETH\n- A specific implementation of an AutoPool denominated in ETH/WETH\nDestination\n- An external contract, or set of contracts, that we LP/stake user funds into\nExamples\nA Balancer pool\nA Balancer pool with LP staked into Aura\nA Curve pool with LP staked into Convex\nDestinationVault\n- A contract that sits in front of a Destination in our system. These act has a proxy and give us a common interface to that Destination to perform our operations.\nSolver\n- Contract that can turn assets into LP tokens, LP tokens into other LP tokens, or LP tokens into assets\nStrategy\n- A contract that determines whether a Rebalance is in the best interest of an Autopool\nRebalance\n- The deployment of:\nIdle funds to a Destination\nFunds from one Destination to another Destination\nFunds from one Destination back to Idle\nLiquidation -\nThe process of taking rewards and auto-compounding them into WETH\nPrevious\nAutopools\nNext\nContract Addresses\nLast updated\n1 month ago\nWas this helpful?",
+    "headings": [],
+    "metadata": {}
+  },
+  {
+    "url": "https://docs.auto.finance/developer-docs/contracts-overview/autopool-eth-contracts-overview/autopool-contracts-and-systems",
+    "title": "Autopool Contracts and Systems",
+    "content": "The contracts were designed with a couple concepts in mind:\nIt is possible that Tokemak could run multiple, separate, instances of this system on the same chain and the majority of contracts would not be safe to share between the two.\nMisconfigurations are a potential source of bugs and this is a highly configurable system. Any validations that can be performed during registration and setup, should.\nTo assist in enforcing these points, the system revolves around a SystemRegistry contract (\nsrc/SystemRegistry.sol\n), and most contracts inherit from a SystemComponent (\nsrc/SystemComponent.sol\n) contract that requires a reference to a SystemRegistry. These allow us to tie the various contracts together and provide a lookup point for the various contracts to talk to one another.\nPrevious\nAutopool System High Level Overview\nNext\nAutopool Contract Security\nWas this helpful?",
+    "headings": [],
+    "metadata": {}
+  },
+  {
+    "url": "https://docs.auto.finance/developer-docs/contracts-overview/autopool-eth-contracts-overview/autopool-system-high-level-overview",
+    "title": "Autopool System High Level Overview",
+    "content": "The purpose of the Autopool System is to continuously rebalance assets into the Destinations with the best return/risk profile. Earnings are auto-compounded for the users, reinvested into the Autopool, and then rebalanced out to begin earning. We’ll give an overview of how things work by looking at how the assets flow through the system.\nStep 1: Users deposit assets\nUsers must deposit assets into an Autopool for there to be assets to deploy. If this is a contract-to-contract interaction, this can happen directly in an Autopool. If this is a user interaction, through our UI, this will happen through our Router. The end-result is that the Autopool has idle assets sitting in it and the external party has Autopool shares in their wallet.\nStep 2: Rebalance\nOnce a sufficient number of assets are deposited, the Autopool, or more importantly the Strategy backing the Autopool, will begin to accept rebalance proposals from our Solver. When a proposal satisfies the constraints of the Strategy:\nThe Autopools underlying asset, WETH in this case, will be sent to the Solver specified in the proposal\nThe Solver will take those underlying assets and turn them into the LP tokens for the Destination specified in the proposal. This can involve swaps, liquidity provisioning, or w/e other means the Solver has to procure the LP tokens.\nThe Solver will send those LP tokens back to the Autopool\nOnce validating everything looks good with the Strategy, the Autopool deposit those LP tokens into the corresponding DestinationVault for that Destination.\nThe DestinationVault will do what it needs to with the LP tokens depending on the type of Destination it is. If its just a pool Destination then the LP tokens can stay there. If its a Curve+Convex Destination, then the DestinationVault will stake the tokens into Convex.\nThe DestinationVault mints the Autopool 1:1 shares of itself to represent the deposit\nEach DestinationVault has its own Rewarder where its shares are virtually staked on the Autopools behalf.\nAt the end of the rebalance, the Autopool has less of its base asset, and some number of DestinationVault shares representing a claim on some LP tokens.\nStep 3: Auto-Compounding\nOn a periodic basis, rewards from the Destinations will claimed and collected via a permissioned keeper process. This is most-likely, though not restricted to, incentive tokens through say Convex or Aura, for example.\nThese tokens all go to a central LiquidationRow contract where they can be liquidated to the base asset in bulk at a later time.\nWhen that liquidation occurs, assets are sent back proportionately to the DestinationVaults that contributed to their balance. These assets are held in the DestinationVaults Rewarder where the Autopools earn them over a short period of time.\nStep 4: Debt Reporting\nAt least every 24 hours, each Autopool goes through a debt reporting where we re-value the LP tokens held by that Autopool. During that process, any available auto-compounded rewards are claimed and come into the Autopool as idle funds.\nStep 5: Rinse and Repeat\nWith sufficient idle assets in the Autopool, another rebalance can occur. There is no requirement that funds earned from a Destination must go back to that Destination.\nThe above outline focused on idle → LP rebalances but the rebalance step can occur for LP → LP rebalances as well. So long as the proposal results in a higher potential return (and satisfies other constraints) it can be executed.\nPrevious\nAutopool ETH Contracts Overview\nNext\nAutopool Contracts and Systems\nLast updated\n1 month ago\nWas this helpful?",
+    "headings": [
+      {
+        "level": "h3",
+        "text": "Step 1: Users deposit assets"
+      },
+      {
+        "level": "h3",
+        "text": "Step 2: Rebalance"
+      },
+      {
+        "level": "h3",
+        "text": "Step 3: Auto-Compounding"
+      },
+      {
+        "level": "h3",
+        "text": "Step 4: Debt Reporting"
+      },
+      {
+        "level": "h3",
+        "text": "Step 5: Rinse and Repeat"
+      }
+    ],
+    "metadata": {}
+  },
+  {
+    "url": "https://docs.auto.finance/developer-docs/contracts-overview/autopool-eth-contracts-overview/autopool-contracts-and-systems/autopool-strategy",
+    "title": "Autopool Strategy",
+    "content": "The purpose of Autopool System is to continuously rebalance  assets into the destinations with the best return/risk profile. However, the best risk/return profile is somewhat subjective, as such, each Autopool has an assigned\nStrategy\nthat is responsible for determining if a given rebalance (e.g., swap Pool A LP units for Pool B LP units) meets its requirements. For the LST vaults, there are a number of criteria that are considered in deciding if a rebalance is favorable, including:\nTotal Slippage - the absolute difference in the value of the in and out LP tokens. Priced using safe price oracles (previously audited).\nIncrease in expected return metric between the assets being swapped. Expected return is composed of (1) LST base yield, (2) DEX fee return, (3) incentive APR. Expected return metric is calculated as follows:\nCopy\nSwap Loss Offset Period - how long it takes for the incremental expected return to offset the immediate loss (swap cost). The Autopool will utilize an adaptive offset period that determines how strict or loose the offset period is. The LMP rebalance transactions (a.k.a pool/destination swaps) will occur only if the following condition is met:\nE\nT\nH\n_\ng\na\ni\nn\np\nr\ne\nd\ni\nc\nt\ne\nd\n∗\ns\nw\na\np\n_\nc\no\ns\nt\n_\no\nf\nf\ns\ne\nt\n_\np\ne\nr\ni\no\nd\n365\n>\ns\nw\na\np\n_\nc\no\ns\nt\nETH\\_gain_{predicted}*{swap\\_cost\\_offset\\_period\\above{1pt} 365} > swap\\_cost \\\\\nET\nH\n_\ng\nai\nn\np\nre\nd\ni\nc\nt\ne\nd\n​\n∗\n365\ns\nw\na\np\n_\ncos\nt\n_\no\nff\nse\nt\n_\np\ner\ni\no\nd\n​\n>\ns\nw\na\np\n_\ncos\nt\nwhere,\nE\nT\nH\n_\ng\na\ni\nn\np\nr\ne\nd\ni\nc\nt\ne\nd\n=\nA\nP\nR\nn\ne\nw\n∗\nE\nT\nH\nv\na\nl\nu\ne\nn\ne\nw\n−\nA\nP\nR\no\nl\nd\n∗\nE\nT\nH\nv\na\nl\nu\ne\no\nl\nd\ns\nw\na\np\n_\nc\no\ns\nt\n_\no\nf\nf\ns\ne\nt\n_\np\ne\nr\ni\no\nd\nm\ni\nn\n=\n7\ns\nw\na\np\n_\nc\no\ns\nt\n_\no\nf\nf\ns\ne\nt\n_\np\ne\nr\ni\no\nd\nm\na\nx\n=\n60\ns\nw\na\np\n_\nc\no\ns\nt\n=\nm\na\nx\n(\nE\nT\nH\nv\na\nl\nu\ne\no\nl\nd\n−\nE\nT\nH\nv\na\nl\nu\ne\nn\ne\nw\n,\n0\n)\nETH\\_gain_{predicted} = APR_{new} * ETHvalue_{new} - APR_{old} * ETHvalue_{old} \\\\\nswap\\_cost\\_offset\\_period_{min} = 7 \\\\\nswap\\_cost\\_offset\\_period_{max} = 60 \\\\\nswap\\_cost = max(ETHvalue_{old} - ETHvalue_{new}, 0)\nET\nH\n_\ng\nai\nn\np\nre\nd\ni\nc\nt\ne\nd\n​\n=\nA\nP\nR\nn\ne\nw\n​\n∗\nET\nH\nv\na\nl\nu\ne\nn\ne\nw\n​\n−\nA\nP\nR\no\nl\nd\n​\n∗\nET\nH\nv\na\nl\nu\ne\no\nl\nd\n​\ns\nw\na\np\n_\ncos\nt\n_\no\nff\nse\nt\n_\np\ner\ni\no\nd\nmin\n​\n=\n7\ns\nw\na\np\n_\ncos\nt\n_\no\nff\nse\nt\n_\np\ner\ni\no\nd\nma\nx\n​\n=\n60\ns\nw\na\np\n_\ncos\nt\n=\nma\nx\n(\nET\nH\nv\na\nl\nu\ne\no\nl\nd\n​\n−\nET\nH\nv\na\nl\nu\ne\nn\ne\nw\n​\n,\n0\n)\nE\nT\nH\n_\ng\na\ni\nn\np\nr\ne\nd\ni\nc\nt\ne\nd\nETH\\_gain_{predicted}\nET\nH\n_\ng\nai\nn\np\nre\nd\ni\nc\nt\ne\nd\n​\nis the annualized gain in ETH expected to be earned as a result of this rebalance transaction.\nA\nP\nR\n_\nn\ne\nw\nAPR\\_new\nA\nPR\n_\nn\ne\nw\nand\nA\nP\nR\n_\no\nl\nd\nAPR\\_old\nA\nPR\n_\no\nl\nd\nare the new and old composite APRs for the destination involved in the swap/rebalance transaction.\ns\nw\na\np\n_\nc\no\ns\nt\n_\no\nf\nf\ns\ne\nt\n_\np\ne\nr\ni\no\nd\nswap\\_cost\\_offset\\_period\ns\nw\na\np\n_\ncos\nt\n_\no\nff\nse\nt\n_\np\ner\ni\no\nd\nis defined as period in days allowed for this rebalance transaction to recoup or recover the slippage loss. Default value is 28. At the minimum value of 7 days, approximately 525 bps of incremental APR will be needed to offset a swap cost of 10 bps. Similarly, a value of 60 days allows ~ 60 bps of incremental APR at 10 bps of swap cost.\ns\nw\na\np\n_\nc\no\ns\nt\nswap\\_cost\ns\nw\na\np\n_\ncos\nt\nis the loss in value in ETH units as a result of this transaction primarily driven by slippage, token swap fees, gas used to execute the rebalance operations.\nAdditional Rebalance Gatekeeping Features\na.\nAdaptive Swap Loss Offset Period\nSwap loss offset period determines how loose or strict the constraint to allowing a pool swap is. A large value relaxes the constraint and will allow many swap transactions to go through. In comparison, a value such as 7 days will require a large hurdle to be met before a destination pool swap transaction is allowed.\nIf the value of swap loss offset period is fixed at a high value, the Autopool system could exhibit increased turnover and experience increased swapping cost. The following describes the mechanism to adapt the swap loss offset period and tighten or loosen the pool swapping constraint should conditions warrant.\nAt every pool swap-out transaction, we determine the time elapsed since the last time we added to this pool. A pool swap-out transaction is a non trivial swap out i.e. swaps from WETH reserves (base asset of the Autopool) are not included. Let this time be $t$. Next, we define a constraint violation event as a pool swap out transaction where $t$ ≤ swap_cost_offset_period.\nAfter 5 or greater constraint violation swaps within 10 swaps, the swap loss offset period is decreased by x (tighten step size) days until it reaches the minimum allowed value of 7.\nAfter no swaps transactions occur for the period of y (constraint relax period) days, the swap loss offset period is increased by z (relax step size) day until it reaches the maximum allowed value of 60 days.\nb.\n30-60-90 NAV Test (LookBack Test)\nThis is a test conducted on the NAV (per unit or token) of the Autopool. Swapping costs should be carefully monitored to provide positive value to the Autopool. The 30 followed by 60, 90 day test is meant to allow enough time for the Autopool to earn back the swap costs. Should a lot of swaps have recently occurred (i.e. frequent swaps is not a feature of the system but just happen to occur in clusters some times), looking back in the past far enough should result a positive NAV delta i.e. NAV per token should have increased over time. A variant of this test is a 30-60 NAV test.\nThe following steps are conducted in this test.\nAligned with some time reference (i.e. 30th of every month), record the NAV of the Autopool.\nCalculate the delta with the NAV recorded 30 days in the past.\nCalculate the delta with the NAV recorded 60 days in the past\nRepeat with NAV recorded 90 days in the past.\nIf all of the three delta values are negative, pause pool swaps until\nthe NAV reaches the highest NAV recorded (of the 3 values - 30, 60, 90 days in the past)\n90 days have lapsed since the test was conducted\nAfter the pause, set the value of $swap\\_cost\\_offset\\_period$ at the minimum value $swap\\_cost\\_offset\\\nperiod\n{min}$\nReferences:\nverifyRebalance Interface\nverifyRebalance is called\nhere\nby Autopool on rebalance to ensure it is a favorable rebalance.\nCall Flow to the Strategy\nRebalance\nClick to Expand Image\nDuring Debt Reporting\nAt least every 24 hours, each Destination configured on the Autopool has its cached price information updated. This has the potential to lower the nav/share of the Autopool right at that moment. When the Autopool sees a profit during debt reporting, that profit is locked up for a period time, say 24 hours. This means any nav/share increase unlocks over that same time period. At the end of a call to debt reporting,\nAutopoolStrategy.navUpdate()\nis called.\nPrevious\nStats\nNext\nPricing\nLast updated\n1 month ago\nWas this helpful?",
+    "headings": [
+      {
+        "level": "h3",
+        "text": "Additional Rebalance Gatekeeping Features"
+      },
+      {
+        "level": "h4",
+        "text": "a.Adaptive Swap Loss Offset Period"
+      },
+      {
+        "level": "h4",
+        "text": "b.30-60-90 NAV Test (LookBack Test)"
+      },
+      {
+        "level": "h3",
+        "text": "Call Flow to the Strategy"
+      },
+      {
+        "level": "h4",
+        "text": "Rebalance"
+      },
+      {
+        "level": "h4",
+        "text": "During Debt Reporting"
+      }
+    ],
+    "metadata": {}
+  },
+  {
+    "url": "https://docs.auto.finance/developer-docs/contracts-overview/autopool-eth-contracts-overview/autopool-contracts-and-systems/autopools",
+    "title": "Autopools",
+    "content": "Autopools will be the main jumping off point for end-user interactions with the system (though technically this is the Router, these are the tokens the user will get back). Users will deposit and withdraw the base asset from here. Vaults are ERC 4626 + Permit compatible.\nAn Autopool is actually a pair of contracts. These contracts are:\nThe pool itself\nA Convex-like, block height+rate style, Rewarder\nThe purpose of an Autopool is to represent a set of destinations that deposited assets may be deployed. It acts almost as an index. If an Autopool points to 5 destinations then your assets may be deployed to one or all of those destinations depending on how much those destinations are currently earning.\nBase Asset\nAn Autopool should track it’s “base asset”. This is the asset that will be deposited and withdrawn from the pool. Any auto-compounding that happens will be in terms of the base asset, as well. However, it is expected that the Autopools associated Rewarder can emit any token(s).\nTracked Tokens\nAutopools support being able to recover tokens that are erroneously sent to it. However, we would not want the ability to be able to transfer out any tokens that are core to operation of the Autopool. This would include the base asset and any DestinationVault shares that it currently holds. Tokens that should not be transferred are called “tracked”.\nDebt Reporting\nAt least every 24 hours, or whenever valuations deviate by a certain threshold, the value of the DestinationVault tokens that are held by the Autopool are re-valued. Deposits and withdraws from the Autopool are based on these cached values. Should this debt reporting result in an increase in value, shares will be minted to the Autopool to offset the increase. This is to ensure there isn’t a sharp increase in the nav/share of Autopool. Auto-compounded rewards are also incorporated during this time.\nFees\nTwo types of fees can be taken by the Autopool and they are taken during Debt Reporting.\nPeriodic Fee - This is a set fee annualized fee that is taken each Debt Reporting\nStreaming Fee - This fee is taken on profit earned by the Autopool. Optionally, this fee can only be taken when profit exceeds previous values (the high watermark).\nShould the high watermark be enabled and not be broken for a period of 60 days, it will start to decay until we are able to take fees again\nAny locked profit will be burned to offset the dilution incurred by any minted fee shares\nValuation\nAn Autopool tracks three valuations for any LP units it holds via a Destination Vault. These are the safe, spot, and mid point price of the LP tokens (see\nhttps://docs.tokemak.xyz/developer-docs/contracts-overview/autopool-eth-contracts-overview/autopilot-contracts-and-systems/pricing\n). These values are used for different purposes in the life cycle of assets in the Autopool:\nHigher of safe and spot: Used during deposit to value the assets held by the Autopool\nLower of safe and spot: Used during withdraw to value the assets held by the Autopool\nMid point: Used for general reporting and fee calculations\nTo value shares for general purposes the standard ERC4626\nconvertToAssets(uint256)\nshould be used.\nMax Withdraw Value\nUsing different valuations depending on the operation means that to find the maximum amount of assets one would receive during a\nredeem()\ncall we need something more than the standard\nconvertToAssets(uint256)\n. For this, we have an extension to the standard function:\nCopy\nMax Deposit Value\nCalculating the shares you'd receive on a deposit follows very closely to the previous example\nCopy\nEstimating Withdraw Value\nAbove we went through how the Autopool values the tokens it holds and how to calculate a max return value. However, there is another aspect to a\nredeem()\ncall that can affect the assets returned to the user. An Autopool holds a certain percentage of assets in idle to cover small withdraws. However, if an attempted withdraw needs more assets than sit in idle, the Autopool will start the redemption process by going to the market first. This entails removing liquidity from one or more destinations, and swapping out of non-WETH assets. These swaps can result in slippage and fee's taken in the liquidity pool being swapped through. The Autopool will also ensure that any recent price positive movements in the LP tokens being liquidated are captured. All of this is considered slippage that is passed on to the user performing the\nredeem()\n.\nTo retrieve an accurate estimation of assets that would be returned one can use the\npreviewRedeem()\ncall. However, it should be noted that this call deviates from the ERC4626 spec in that it is a nonpayable function instead of a view function. No state changes are made as a result of the call, but to provide the estimate state changes are necessary which are later reverted. This should not be called on-chain.\nDue to this possible slippage, it is important to note that any call to\nredeem()\nshould be checked that an expected amount of assets were received and to revert if not.\nRebalancing\nAssets can be rebalanced between destinations according the rules of the Autopools configured strategy. Autopools support the ERC3156 flash loan interface and can grant our Solver access to funds to be able convert them into a more desirable Destinations LP token.\nArchitecture\nGIven that the creation of Autopools may vary widely depending on the type of Autopool being created (future looking), Autopools and their corresponding Factory are a 1:1 relationship. This differs from other factory+register+template relationships in our system:\nPrevious\nDestination Vaults\nNext\nAutopool Contracts Glossary\nLast updated\n1 year ago\nWas this helpful?",
+    "headings": [
+      {
+        "level": "h3",
+        "text": "Base Asset"
+      },
+      {
+        "level": "h3",
+        "text": "Tracked Tokens"
+      },
+      {
+        "level": "h3",
+        "text": "Debt Reporting"
+      },
+      {
+        "level": "h4",
+        "text": "Fees"
+      },
+      {
+        "level": "h3",
+        "text": "Valuation"
+      },
+      {
+        "level": "h4",
+        "text": "Max Withdraw Value"
+      },
+      {
+        "level": "h4",
+        "text": "Max Deposit Value"
+      },
+      {
+        "level": "h4",
+        "text": "Estimating Withdraw Value"
+      },
+      {
+        "level": "h3",
+        "text": "Rebalancing"
+      },
+      {
+        "level": "h3",
+        "text": "Architecture"
+      }
+    ],
+    "metadata": {}
+  },
+  {
+    "url": "https://docs.auto.finance/developer-docs/contracts-overview/autopool-eth-contracts-overview/autopool-contracts-and-systems/message-proxy",
+    "title": "Message Proxy",
+    "content": "This contract is an interface to be able push data or events to other chains. It is exposed to the rest of the system as a generic interface but currently relies entirely on Chainlinks CCIP. It is designed to support a couple core features:\nFan-out messaging. Given a sender and message type, send the provided data to one or many destination chains\nRetries. The last message of a given sender+type can be re-sent to a destination. This serves a few purposes\nShould CCIP ever be down and messages unable to be sent, we should be able to get the data off that we need when it comes back online\nOur contract could be out of funds when the send is attempted. We need processes that send the message to continue without reverting, but we want to be able to send that message eventually\nSeeding information when standing up the destination chain. Some messages have large delays between them being sent. This can make standing up dependent contracts on the destination difficult and time consuming. Being able to re-send the last message ensures we have the information we need as soon as we can.\nUsage\nCurrent usage is restricted to just the LST calculators through the LSTCalculatorBase. The stats related to LSTs are specific to their native chain.\nPrevious\nCurve Resolver\nNext\naccTOKE\nWas this helpful?",
+    "headings": [
+      {
+        "level": "h3",
+        "text": "Usage"
+      }
+    ],
+    "metadata": {}
+  },
+  {
+    "url": "https://docs.auto.finance/developer-docs/contracts-overview/autopool-eth-contracts-overview/autopool-contracts-and-systems/destination-vaults",
+    "title": "Destination Vaults",
+    "content": "Destination Vaults act as our proxy to the greater DeFi ecosystem. Their goal is to provide a common interface for us to deposit/withdraw LP tokens and earn yield. Each type of Destination has its own unique concrete DestinationVault implementation. Currently we support:\nBalancer Pools\nBalancer Pools with LP staked into Aura\nCurve Pools with LP staked into Convex\nMaverick Boosted Positions\nCore Functionality\nDepositing and Withdrawing LP Tokens\nAutopool’s will be the main actors interacting with a Destination Vault. Primarily this will come in the form of deposit and withdrawing LP tokens. The actions taken after a deposit aren’t much of a concern to the Autopool and can vary depending on the specific type of Destination. If this is a just a “Balancer Pool” type of Destination then the LP tokens will stay in the Destination Vault. If this is a Destination that say stakes into Aura, then that operation will happen upon deposit.\nWithdrawing can come in two forms: as the LP units, or as the base asset. The LP unit can be withdrawn as part of a rebalance. During a user withdraw where we have to pull from the market, the LP units burned and the resulting tokens will be swapped into the base asset. All base assets in the system will be WETH at this time. Additional validations will be required to support additional base assets.\nCollecting Rewards\nDepending on the type of Destination Vault, rewards may be due to us for holding or staking the LP units. The implementation of this can be hard coded to return nothing, or to interact with an external protocol. Resulting claimed tokens are sent to the caller of\ncollectRewards()\n.\nMarketplace Rewards\nThese functions are intentionally left empty at this time.\nArchitecture\nPrevious\nLiquidation\nNext\nAutopools\nLast updated\n3 months ago\nWas this helpful?",
+    "headings": [
+      {
+        "level": "h3",
+        "text": "Core Functionality"
+      },
+      {
+        "level": "h4",
+        "text": "Depositing and Withdrawing LP Tokens"
+      },
+      {
+        "level": "h4",
+        "text": "Collecting Rewards"
+      },
+      {
+        "level": "h4",
+        "text": "Marketplace Rewards"
+      },
+      {
+        "level": "h3",
+        "text": "Architecture"
+      }
+    ],
+    "metadata": {}
+  },
+  {
+    "url": "https://docs.auto.finance/developer-docs/contracts-overview/autopool-eth-contracts-overview/autopool-contracts-and-systems/pricing",
+    "title": "Pricing",
+    "content": "The valuation of tokens is core to the operation of this system. All token valuations are performed through the\nRootPriceOracle\nand different approaches for pricing are used depending on the type of token (native or LP) and the intended usage of the price:\nTypes of Prices\n“Safe” Prices\nThese are prices that are calculated/queried from off-chain sources. This includes sources such as Chainlink, Redstone, and Tellor. These are exposed through three calls on the\nRootPriceOracle\n:\ngetPriceInEth()\n,\ngetPriceInQuote()\n, and one of the return values of\ngetRangePriceLP()\nThese are mainly used for operations where we aren’t executing with the price at that moment. This can include pricing debt in the Autopools, calculating statistics, etc.\nSpot Prices\nThese are prices that are calculated/queried from primarily on-chain sources. These are always in reference to a specific pool that want to know the spot price of the tokens from. To calculate these values, a small amount of token is trial swapped through a pool to determine its execution price and then any fees are factored back in.\nFor requests that don’t have the requested quote token as one of the tokens in the pools, “safe” prices are used to complete the steps in the conversion.\nThese prices are exposed through\ngetSpotPriceInEth()\nand one of the return values of\ngetRangePriceLP()\n.\nSpot prices are checked against some tolerance when used within the system to ensure they are safe to use. The spot price of the token must be within some bps of the safe price. These are used during rebalance execution to measure impact on pools we are operating against as well as one of the ends of the\ngetRangePriceLP()\ncall.\nFloor & Ceiling LP Prices\nThese prices are exclusively used in the Autopools when debt reporting has gone stale. While this should never actually be an occurrence, should a pool enter this state, debt that is stale will be re-valued using this method of pricing. This will take the worst price (depending on the operation that could be the highest or the lowest) between the safe and spot prices of all the tokens that constitute the LP token, and value all the reserves that back that LP back at that single price. This is to ensure that any potential manipulation that could be occurring cannot negatively impact the Autopool.\nArchitecture\nThe system-at-large will only ever interact with the RootPriceOracle. All specific implementations related to the method of pricing an asset are hidden behind here:\nThe majority of functions on the RootPriceOracle are not view functions even though they are performing “view” type operations. This is due to methods used for pricing. Since we use swaps to calculate prices, and we can’t count on every DEX to have a view operation to perform this, we have to keep the interface as payable.\nSafe Price Call Flow\nThe following is an example call flow for resolving a complex price. We will assume that the requested price is for the $ABC token in ETH. $ABC token has an $ABC/USD feed through Redstone:\nLP Price Call Flow\nThe following is an example call flow for resolving the safe and spot price of an LP token. We will assume this is a Curve pool:\nPrevious\nAutopool Strategy\nNext\nSwap Router\nWas this helpful?",
+    "headings": [
+      {
+        "level": "h3",
+        "text": "Types of Prices"
+      },
+      {
+        "level": "h4",
+        "text": "“Safe” Prices"
+      },
+      {
+        "level": "h4",
+        "text": "Spot Prices"
+      },
+      {
+        "level": "h4",
+        "text": "Floor & Ceiling LP Prices"
+      },
+      {
+        "level": "h3",
+        "text": "Architecture"
+      },
+      {
+        "level": "h3",
+        "text": "Safe Price Call Flow"
+      },
+      {
+        "level": "h3",
+        "text": "LP Price Call Flow"
+      }
+    ],
+    "metadata": {}
+  },
+  {
+    "url": "https://docs.auto.finance/developer-docs/contracts-overview/autopool-eth-contracts-overview/autopool-contracts-and-systems/curve-resolver",
+    "title": "Curve Resolver",
+    "content": "Getting information generically about a given Curve pool can be a tricky task given the slight variations between their different types of pools. This is a task we need to perform in many different areas of the app and so this contract was built to assist in that.\nLuckily, Curve provides a meta registry themselves that can perform this lookup. However, at the time of writing this, there is a type of pool that is not supported by their registry and that is their Stable-NG type pools. To get around this, the CurveResolver has a fallback method where it attempts to figure out the information based on the successful execution of various functions.\nThis approach currently works for the types of pools we are interested in supporting. Should new types of pools be introduced in the future, the approaches outlined may need to be re-evaluated.\nPrevious\nSwap Router\nNext\nMessage Proxy\nWas this helpful?",
+    "headings": [],
+    "metadata": {}
+  },
+  {
+    "url": "https://docs.auto.finance/developer-docs/contracts-overview/autopool-eth-contracts-overview/autopool-contracts-and-systems/acctoke",
+    "title": "accTOKE",
+    "content": "accToke gives users the ability to stake their TOKE and earn rewards in WETH. This contract is largely based on\nhttps://docs.oeth.com/governance/ogv-staking\n.\nDifferences to call out\nRewards can accrue in the contract for a user and don’t actual claiming\nRewards are queued instead of being on an emissions schedule. Rewards will not be added in large amounts to ensure there can’t being meaningful gaming of, and spikes in,\naccRewardPerShaer\nInteractions\nGenerally accToke sits on the outside of the platform. It doesn’t have a integration into the Autopilot router. The exception to this is within the AutopoolMainRewarder. We optionally have the ability to configure that if TOKE is the token being rewarded, it can be staked for a period of time into AccToke upon claim.\nPrevious\nMessage Proxy\nNext\nAutopool Router\nWas this helpful?",
+    "headings": [
+      {
+        "level": "h3",
+        "text": "Interactions"
+      }
+    ],
+    "metadata": {}
+  },
+  {
+    "url": "https://docs.auto.finance/developer-docs/contracts-overview/autopool-eth-contracts-overview/autopool-contracts-and-systems/autopool-router",
+    "title": "Autopool Router",
+    "content": "The Autopool Router is the main entry for users in the system. This is a multicall-type contract where the exposed functions are designed to be chained together to perform various operations. This can include but is not limited to:\nDepositing into an Autopool and staking the tokens into a rewarder:\ndeposit(autoPool, router, amount, min)\napprove(autoPool, rewarder, max)\nstakeVaultToken(autoPool, max)\nMigrating from one Autopool to another\nwithdrawVaultToken(autoPool, rewarder, amount, true)\nselfPermit(autoPool, amount,….)\nredeem(autoPool, router, amount, min)\napprove(weth, autoPool2, max)\ndepositBalance(autoPool2, router, min)\nstakeVaultToken(autoPool2, max)\nThe router also has the ability to swap tokens utilizing one of the AsyncSwappers configured in our system. Whether or not a swap can be utilized depends on the type of operation being performed. If we are able to know the exact number of input tokens upfront then it can be performed. Otherwise, we cannot.\nRouter should hold no balance\nGiven the flexibility of the Router it is possible to leave funds in the contract should the order of operations be incorrect. Those funds can then be withdrawn by anyone. This is expected. The Router will be integrated into our front-end and only specific flows will be supported ensuring that all token balances are sent back to the user when appropriate.\nPrevious\naccTOKE\nNext\nLiquidation\nLast updated\n1 month ago\nWas this helpful?",
+    "headings": [
+      {
+        "level": "h3",
+        "text": "Router should hold no balance"
+      }
+    ],
+    "metadata": {}
+  },
+  {
+    "url": "https://docs.auto.finance/developer-docs/contracts-overview/autopool-eth-contracts-overview/autopool-contracts-and-systems/liquidation",
+    "title": "Liquidation",
+    "content": "Liquidation in Autopilot refers to the process of auto-compounding rewards from our various asset deployments. For efficiency reasons, LiquidationRow attempts to batch as much of the claiming and swapping process as possible. This is broken up into two processes:\nClaiming\nEach DestinationVault is required to implement a\ncollectRewards()\nfunction which will claim and transfer any reward tokens back to the liquidator. The exact details of how a claim happen are not of a concern to the liquidator, it is only worried about being told how much of some token it has received. Call flow:\nLiquidation\nBoth the process of claiming and liquidation can be gas intensive given how many DestinationVaults and reward tokens we may need to process in the system. Both of these processes are designed to be able to work on a subset of either the DestinationVaults or the tokens to combat this. The goal is batch as match of the work as possible for efficiency, though. So, during liquidation the balance of tokens across many DestinationVaults are compiled, swapped as a single operation, and the proceeds distributed back to the DestinationVaults according to the share they contributed. Call flow:\nFees\nThis process is one that is permissioned and run by Tokemak. To support the gas and fees required to perform this a fee can optionally be enabled against any liquidated funds.\nPrevious\nAutopool Router\nNext\nDestination Vaults\nWas this helpful?",
+    "headings": [
+      {
+        "level": "h3",
+        "text": "Claiming"
+      },
+      {
+        "level": "h3",
+        "text": "Liquidation"
+      },
+      {
+        "level": "h3",
+        "text": "Fees"
+      }
+    ],
+    "metadata": {}
+  },
+  {
+    "url": "https://docs.auto.finance/developer-docs/contracts-overview/autopool-eth-contracts-overview/autopool-contracts-and-systems/swap-router",
+    "title": "Swap Router",
+    "content": "When there is a withdraw from an Autopool, a couple things can happen. If there are enough assets to cover the withdrawal sitting idle in the Autopool, then all of the assets come from there. However, if there is not, then we must pull from the market. Just retrieving the LP positions doesn’t help the user, we must provide them back their funds in the base asset of the Autopool. This is where the SwapRouter comes in.\nThe SwapRouter contains routes for all the tokens that make up the constituents of any LP token we support, back to the base asset of the Autopool. This is a list that will be kept up to date by the team to ensure users receive the best execution when exiting the pools.\nExample Routes\nThe routes can be simple or complex. We can use the same pools we are in as Destinations or completely different pools should there be better execution.\nSimple Example for TokenA → TokenD:\nSwap TokenA → TokenD in Balancer TokenA/TokenD Pool\nComplex Example for TokenA → TokenD\nSwap TokenA → TokenB in Curve TokenA/TokenB Pool\nSwap TokenB → TokenC in Uni V3 TokenB/TokenC Pool\nSwap TokenC → TokenD in Balancer TokenC/TokenD Pool\nSwap Adapters\nThe chaining of operations all happen at the SwapRouter level. The only thing an adapter needs to be able to do is to swap between two tokens and validate that a given configuration is supported in the specified pool. They are only callable by the Currently we support:\nBalancer Pools\nCurve StableSwap Pools\nCurve CryptoSwap Pools\nUniV3 Pools\nPrevious\nPricing\nNext\nCurve Resolver\nWas this helpful?",
+    "headings": [
+      {
+        "level": "h3",
+        "text": "Example Routes"
+      },
+      {
+        "level": "h3",
+        "text": "Swap Adapters"
+      }
+    ],
+    "metadata": {}
+  },
+  {
+    "url": "https://docs.auto.finance/developer-docs/contracts-overview/autopool-eth-contracts-overview/autopool-contracts-and-systems/stats",
+    "title": "Stats",
+    "content": "The Stats System is responsible for making all required signals (e.g., staking yield, fee yield, incentive yield, etc) available on-chain. These signals are read by the Strategy to determine if a rebalance is in the best interest of its Autopool. A\nCalculator\nis responsible for storing, augmenting, and cleaning data required to provide one of those signals. Let’s take an example Destination and see how it’s stats are built:\nCurve osETH/rETH + Convex Staking\nStat calculators depend on each other to build the full picture of a Destination, with only the top-most calculator being referenced directly by the DestinationVault. In this case, the top-most calculator is the\nConvexCalculator\n. This calculator is an example of an Incentive calculator. LP tokens staked into Convex automatically earn CRV and CVX. This pool is also configured with SWISE and RPL tokens as extra rewards. And so, some annualized amount of CRV, CVX, SWISE, and RPL will be reported to the Strategy where it will calculate what the yield of those tokens are.\nAs a dependency, the\nConvexCalculator\ntakes a reference to a calculator responsible for providing stats about the DEX pool itself, a\nCurveV1PoolNoRebasingStatsCalculator\n(V1 calculators work for both Stableswap and Cryptoswap pools). This calculator provides the trading fee yield for the pool.\nThe last piece(s) are the stats about the LST tokens themselves, osETH and rETH. These calculators,\nOsethLSTCalculator\nand\nRethLSTCalculator\n, were provided to the\nCurveV1PoolNoRebasingStatsCalculator\nas dependencies when it was created. These calculators provide stats such as the base yield and price-to-book value.\nWith all of these calculators each providing their own data to the overall picture, a Strategy can get an accurate reading of a Destinations return.\nTypes of Calculators\nIncentive - Responsible for tracking the return of the incentives available when staking in Convex/Aura/Maverick/etc.\nDEX - Responsible for tracking the trading fee yield of a given DEX pool\nLST - Responsible for tracking the base yield and backing of an LST\nKeeping Data Up-to-Date\nA keeper network is used to periodically snapshot new data. Each calculator type defines the frequency and conditions under which a snapshot should be taken. Importantly, each calculator only stores the required information to provide its stats. If it needs to provide stats from another calculator, those are read at the time of the request to ensure that data is consistent.\nArchitecture\nPrevious\nAutopool Contract Security\nNext\nAutopool Strategy\nWas this helpful?",
+    "headings": [
+      {
+        "level": "h3",
+        "text": "Types of Calculators"
+      },
+      {
+        "level": "h3",
+        "text": "Keeping Data Up-to-Date"
+      },
+      {
+        "level": "h3",
+        "text": "Architecture"
+      }
+    ],
+    "metadata": {}
+  },
+  {
+    "url": "https://docs.auto.finance/developer-docs/contracts-overview/autopool-eth-contracts-overview/autopool-contracts-and-systems/autopool-contract-security",
+    "title": "Autopool Contract Security",
+    "content": "With the exception of the SystemRegistry contract which uses an “onlyOwner” setup for security (which will be granted to a multisig and eventually a Governor contract), all other contracts follow a RBAC security system.\nAccessController\nsrc/security/AccessController.sol\nThis is largely an OZ AccessControlEnumerable contract with the setup functions exposed, however, instead of each contract managing their own permissions, they all reference this one through the\nSecurityBase\ncontract.\nGiven the sensitive nature of this contract, it is one of the contracts that can never be changed or upgraded in the system.\nSystemSecurity\nsrc/security/SystemSecurity.sol\nThis contract allows us to coordinate operations across all Autopools in the system. This coordination falls into two areas:\nPausing\nNAV operation coordination\nPausing\nVia the usage of this contract, we are able to pause all Autopool operations in the system. Autopools can still be paused locally or one-by-one, but this gives us a way pause all of them in one go.\nNAV Operation Coordination\nOperations in an Autopool can be broken down into ones that can see nav/share go down, and ones that can’t. To ensure proper calculations, operations that\nSHOULD NOT see\na nav/share decrease can never be executed within the context of those that can.\nOperations that can see a decrease in nav/share:\nDebt reporting -\nupdateDebtReporting()\nRebalances -\nflashRebalance()\nOperations that shouldn’t:\nUser balance management -\ndeposit() / mint() / redeem() / withdraw()\nThis restrictions applies cross-Autopool as well. An\nupdateDebtReporting()\ncall in one Autopool for example, blocks\ndeposit()\nin all Autopools during its execution.\nPausable\nsrc/security/Pausable.sol\nA near duplicate of the OZ contract by the same name. However, this one incorporates our SystemSecurity contract to support our global-pause behavior. It is used only by our Autopools.\nPrevious\nAutopool Contracts and Systems\nNext\nStats\nWas this helpful?",
+    "headings": [
+      {
+        "level": "h3",
+        "text": "AccessController"
+      },
+      {
+        "level": "h3",
+        "text": "SystemSecurity"
+      },
+      {
+        "level": "h4",
+        "text": "Pausing"
+      },
+      {
+        "level": "h4",
+        "text": "NAV Operation Coordination"
+      },
+      {
+        "level": "h3",
+        "text": "Pausable"
+      }
+    ],
+    "metadata": {}
+  }
+]

@@ -3,95 +3,241 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Auto Finance Bot - Ask Anything</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Auto Finance Bot Manager</title>
+    <link rel="stylesheet" href="/styles.css">
     <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="header-content">
-            <div class="logo">
-                <h1>🤖 Auto Finance Bot</h1>
-                <p class="subtitle">Ask anything about Auto Finance, Autopools, and DeFi</p>
+    <!-- Top Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-left">
+                <div class="logo">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="#BFFF00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M2 17L12 22L22 17" stroke="#BFFF00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M2 12L12 17L22 12" stroke="#BFFF00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span>AUTO BOT MANAGER</span>
+                </div>
             </div>
-            <div class="user-section" id="userSection">
-                <div id="signInButton"></div>
-                <div id="userInfo" class="user-info" style="display: none;">
-                    <img id="userAvatar" class="user-avatar" src="" alt="User">
-                    <span id="userName"></span>
-                    <button id="signOutButton" class="sign-out-btn">Sign Out</button>
+            <div class="nav-center">
+                <button class="nav-tab active" data-tab="bots">Bots</button>
+                <button class="nav-tab" data-tab="chat">Q&A Chat</button>
+                <button class="nav-tab" data-tab="data">Data Status</button>
+            </div>
+            <div class="nav-right">
+                <div id="user-info" class="user-info" style="display: none;">
+                    <img id="user-avatar" class="user-avatar" alt="User">
+                    <span id="user-name"></span>
+                    <button onclick="signOut()" class="btn-secondary" style="margin-left: 12px; padding: 8px 16px;">Sign Out</button>
+                </div>
+                <div id="google-signin-container"></div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+        <!-- Bots Management Tab -->
+        <div id="bots-tab" class="tab-content active">
+            <div class="content-header">
+                <h1>Bot Management</h1>
+                <p class="subtitle">Deploy and manage your Telegram and Discord bots</p>
+            </div>
+
+            <!-- Add Bot Section -->
+            <div class="card add-bot-card">
+                <div style="margin-bottom: 16px;">
+                    <h2 style="margin-bottom: 8px;">Deploy Your Bot</h2>
+                    <p style="color: var(--text-secondary); font-size: 14px;">
+                        Add your Telegram or Discord bot to run 24/7 in the cloud. 
+                        Your bot will use the shared knowledge base that updates every 10 minutes.
+                    </p>
+                </div>
+                <form id="add-bot-form" class="bot-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Bot Name <span style="color: var(--status-error);">*</span></label>
+                            <input type="text" id="bot-name" placeholder="e.g., Support Bot" required>
+                            <span style="font-size: 12px; color: var(--text-muted);">Give your bot a friendly name</span>
+                        </div>
+                        <div class="form-group">
+                            <label>Platform <span style="color: var(--status-error);">*</span></label>
+                            <select id="bot-platform" required>
+                                <option value="">Select Platform</option>
+                                <option value="telegram">📱 Telegram</option>
+                                <option value="discord">💬 Discord</option>
+                            </select>
+                            <span style="font-size: 12px; color: var(--text-muted);">Where your bot will run</span>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Bot Token <span style="color: var(--status-error);">*</span></label>
+                            <input type="password" id="bot-token" placeholder="Paste your bot token here" required>
+                            <span style="font-size: 12px; color: var(--text-muted);">
+                                Get from <a href="https://t.me/BotFather" target="_blank" style="color: var(--accent-primary);">@BotFather</a> (Telegram) 
+                                or <a href="https://discord.com/developers/applications" target="_blank" style="color: var(--accent-primary);">Discord Dev Portal</a>
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <label>AI Model</label>
+                            <select id="bot-model">
+                                <option value="gpt-4o">GPT-4o (Recommended)</option>
+                                <option value="gpt-4o-mini">GPT-4o Mini (Faster)</option>
+                                <option value="claude-sonnet-4-20250514">Claude Sonnet 4</option>
+                            </select>
+                            <span style="font-size: 12px; color: var(--text-muted);">AI model for responses</span>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M8 3V13M3 8H13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        <span>Deploy Bot</span>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Bots List -->
+            <div class="bots-grid" id="bots-list">
+                <!-- Bot cards will be inserted here -->
+            </div>
+        </div>
+
+        <!-- Q&A Chat Tab -->
+        <div id="chat-tab" class="tab-content">
+            <div class="content-header">
+                <h1>Q&A Chat</h1>
+                <p class="subtitle">Ask questions about Auto Finance</p>
+            </div>
+
+            <div class="chat-container">
+                <div class="chat-messages" id="chat-messages">
+                    <div class="welcome-message">
+                        <div class="welcome-icon">💬</div>
+                        <h2>Welcome to Auto Finance Bot</h2>
+                        <p>Ask me anything about Auto Finance, Autopools, or DeFi strategies!</p>
+                    </div>
+                </div>
+                <div class="chat-input-container">
+                    <input type="text" id="chat-input" placeholder="Ask a question..." disabled>
+                    <button id="send-button" class="btn-primary" disabled>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M18 2L9 11M18 2L12 18L9 11M18 2L2 8L9 11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
                 </div>
             </div>
         </div>
-    </header>
 
-    <!-- Main Container -->
-    <main class="container">
-        <!-- Auth Gate -->
-        <div id="authGate" class="auth-gate">
-            <div class="auth-card">
-                <div class="auth-icon">🔐</div>
-                <h2>Welcome to Auto Finance Bot</h2>
-                <p>Sign in with your Google account to start asking questions</p>
-                <div id="googleSignInButton"></div>
+        <!-- Data Status Tab -->
+        <div id="data-tab" class="tab-content">
+            <div class="content-header">
+                <h1>Data Status</h1>
+                <p class="subtitle">Knowledge base scraping and updates</p>
             </div>
-        </div>
 
-        <!-- Chat Interface (hidden until signed in) -->
-        <div id="chatInterface" class="chat-interface" style="display: none;">
-            <!-- Messages Container -->
-            <div class="messages" id="messagesContainer">
-                <div class="welcome-message">
-                    <h2>👋 Welcome!</h2>
-                    <p>I'm here to help you with anything about Auto Finance - Autopools, plasmaUSD, yield strategies, and more!</p>
-                    <div class="example-questions">
-                        <p><strong>Try asking:</strong></p>
-                        <button class="example-btn" onclick="askExample('What are Autopools?')">What are Autopools?</button>
-                        <button class="example-btn" onclick="askExample('What is the current TVL?')">What is the current TVL?</button>
-                        <button class="example-btn" onclick="askExample('How do I deposit into an Autopool?')">How do I deposit?</button>
-                        <button class="example-btn" onclick="askExample('Is Auto Finance audited?')">Is it audited?</button>
+            <!-- Scraper Status Card -->
+            <div class="card" style="margin-bottom: 24px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                    <h2 style="margin: 0;">Auto-Scraper Status</h2>
+                    <button id="manual-scrape-btn" class="btn-primary" onclick="triggerManualScrape()">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="margin-right: 8px;">
+                            <path d="M13 2L3 12M13 2V7M13 2H8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        Refresh Now
+                    </button>
+                </div>
+                
+                <div class="data-status-grid">
+                    <div class="data-stat-item">
+                        <span class="data-stat-label">Status:</span>
+                        <span id="scraper-status" class="status-badge running">Running</span>
+                    </div>
+                    <div class="data-stat-item">
+                        <span class="data-stat-label">Last Scrape:</span>
+                        <span id="last-scrape-time">Never</span>
+                    </div>
+                    <div class="data-stat-item">
+                        <span class="data-stat-label">Next Scrape:</span>
+                        <span id="next-scrape-time">Calculating...</span>
+                    </div>
+                    <div class="data-stat-item">
+                        <span class="data-stat-label">Total Scrapes:</span>
+                        <span id="scrape-count">0</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Input Container -->
-            <div class="input-container">
-                <div class="input-wrapper">
-                    <textarea 
-                        id="questionInput" 
-                        placeholder="Ask anything about Auto Finance..." 
-                        rows="1"
-                        maxlength="500"
-                    ></textarea>
-                    <button id="sendButton" class="send-button" disabled>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                            <path d="M22 2L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </button>
-                    <button id="clearButton" class="clear-button" title="Clear conversation">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                            <path d="M3 6H21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                            <path d="M19 6V20C19 21 18 22 17 22H7C6 22 5 21 5 20V6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                            <path d="M8 6V4C8 3 9 2 10 2H14C15 2 16 3 16 4V6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                    </button>
+            <!-- Data Chunks Card -->
+            <div class="card" style="margin-bottom: 24px;">
+                <h2 style="margin-bottom: 16px;">Knowledge Base</h2>
+                <div class="stats-grid" style="grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));">
+                    <div class="stat-card">
+                        <div class="stat-icon">📚</div>
+                        <div class="stat-value" id="gitbook-chunks">0</div>
+                        <div class="stat-label">GitBook</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🌐</div>
+                        <div class="stat-value" id="website-chunks">0</div>
+                        <div class="stat-label">Website</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📝</div>
+                        <div class="stat-value" id="blog-chunks">0</div>
+                        <div class="stat-label">Blog</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📦</div>
+                        <div class="stat-value" id="total-chunks">0</div>
+                        <div class="stat-label">Total</div>
+                    </div>
                 </div>
-                <div class="input-footer">
-                    <span class="model-badge" id="modelBadge">Claude Sonnet 4</span>
-                    <span class="char-count" id="charCount">0/500</span>
+            </div>
+
+            <!-- Scrape History Card -->
+            <div class="card">
+                <h2 style="margin-bottom: 16px;">Recent Scrapes</h2>
+                <div id="scrape-history" class="scrape-history">
+                    <p style="color: var(--text-secondary); text-align: center; padding: 20px;">No scrape history yet</p>
                 </div>
             </div>
         </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <p>Powered by Claude & OpenAI | <a href="https://auto.finance" target="_blank">Auto Finance</a></p>
-    </footer>
+    <!-- Bot Details Modal -->
+    <div id="bot-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-bot-name">Bot Details</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="bot-status-section">
+                    <div class="status-badge" id="modal-status">Stopped</div>
+                    <div class="bot-info">
+                        <p><strong>Platform:</strong> <span id="modal-platform"></span></p>
+                        <p><strong>Model:</strong> <span id="modal-model"></span></p>
+                        <p><strong>Uptime:</strong> <span id="modal-uptime">N/A</span></p>
+                    </div>
+                </div>
+                <div class="logs-section">
+                    <h3>Activity Logs</h3>
+                    <div class="logs-container" id="modal-logs">
+                        <p class="no-logs">No logs available</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-delete-btn" class="btn-danger">Delete Bot</button>
+                <button id="modal-close-btn" class="btn-secondary">Close</button>
+            </div>
+        </div>
+    </div>
 
-    <script src="app.js"></script>
+    <script src="/app.js"></script>
 </body>
 </html>
-

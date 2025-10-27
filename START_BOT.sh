@@ -19,7 +19,7 @@ fi
 
 echo "Starting bot GUI..."
 echo ""
-python3 bot_gui_new.py
+python3 bot_gui.py
 
 if [ $? -ne 0 ]; then
     echo ""

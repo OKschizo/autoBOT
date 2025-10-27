@@ -1,0 +1,13 @@
+FROM python:3.11.9-slim
+WORKDIR /app
+RUN apt-get update && apt-get install -y gcc g++ && rm -rf /var/lib/apt/lists/*
+COPY backend/requirements.txt /app/backend/requirements.txt
+RUN pip install --no-cache-dir -r /app/backend/requirements.txt
+COPY conversation_manager.py rag_agent_complete.py rag_agent_openai.py conversation_storage.py system_prompts.json /app/
+COPY backend/ /app/backend/
+COPY frontend/ /app/frontend/
+COPY scraped_data /app/scraped_data
+RUN mkdir -p /app/data
+ENV PORT=8080 PYTHONPATH=/app
+EXPOSE 8080
+CMD uvicorn backend.api:app --host 0.0.0.0 --port $PORT
