@@ -1,4 +1,6 @@
+import os
 import time
+import logging
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 from urllib.parse import urljoin, urlparse
@@ -12,6 +14,8 @@ from scraper_common import (
     save_documents_markdown,
 )
 
+logger = logging.getLogger(__name__)
+
 
 class GitBookScraper:
     """Scraper for GitBook-based documentation."""
@@ -19,7 +23,12 @@ class GitBookScraper:
     def __init__(self, base_url: str, output_dir: str = "scraped_data"):
         self.base_url = base_url.rstrip("/")
         self.domain = urlparse(base_url).netloc
-        self.output_dir = Path(output_dir)
+        # Use absolute paths to ensure we save to the correct location
+        base_path = Path("/app") if os.path.exists("/app") else Path(".")
+        if os.path.isabs(output_dir):
+            self.output_dir = Path(output_dir)
+        else:
+            self.output_dir = base_path / output_dir
         self.output_dir.mkdir(exist_ok=True)
         self.visited_urls: set[str] = set()
         self.scraped_content: List[ScrapedDocument] = []
@@ -142,21 +151,43 @@ class GitBookScraper:
     def scrape_all(self, max_pages: Optional[int] = None) -> None:
         """Recursively scrape all pages starting from base_url."""
         print(f"Starting GitBook scrape: {self.base_url}", flush=True)
+        logger.info(f"GitBook scraper: Starting scrape of {self.base_url}")
         to_visit = [self.base_url]
         pages_scraped = 0
+        errors = []
 
-        while to_visit and (max_pages is None or pages_scraped < max_pages):
-            current_url = to_visit.pop(0)
-            new_links = self.scrape_page(current_url)
-            to_visit.extend(new_links)
-            pages_scraped += 1
+        try:
+            while to_visit and (max_pages is None or pages_scraped < max_pages):
+                current_url = to_visit.pop(0)
+                logger.info(f"GitBook scraper: Scraping page {pages_scraped + 1}: {current_url}")
+                
+                try:
+                    new_links = self.scrape_page(current_url)
+                    to_visit.extend(new_links)
+                    pages_scraped += 1
 
-            print(
-                f"Progress: {pages_scraped} pages scraped, {len(to_visit)} in queue",
-                flush=True,
-            )
+                    print(
+                        f"Progress: {pages_scraped} pages scraped, {len(to_visit)} in queue",
+                        flush=True,
+                    )
+                    logger.info(f"GitBook scraper: Progress - {pages_scraped} pages scraped, {len(to_visit)} in queue")
+                except Exception as exc:
+                    error_msg = f"Error scraping {current_url}: {exc}"
+                    logger.error(f"GitBook scraper: {error_msg}", exc_info=True)
+                    errors.append(error_msg)
+                    print(f"  [ERROR] {error_msg}", flush=True)
+                    # Continue with next page instead of failing completely
 
-        print(f"\nCompleted! Scraped {len(self.scraped_content)} pages", flush=True)
+            print(f"\nCompleted! Scraped {len(self.scraped_content)} pages", flush=True)
+            logger.info(f"GitBook scraper: Completed - {len(self.scraped_content)} pages scraped")
+            
+            if errors:
+                logger.warning(f"GitBook scraper: {len(errors)} errors occurred during scraping")
+                print(f"\n⚠️  {len(errors)} errors occurred during scraping", flush=True)
+        except Exception as exc:
+            logger.error(f"GitBook scraper: Fatal error: {exc}", exc_info=True)
+            print(f"\n[ERROR] GitBook scraper failed: {exc}", flush=True)
+            raise
 
     def save_to_json(self, filename: str = "gitbook_data.json") -> None:
         """Save scraped content to JSON file."""

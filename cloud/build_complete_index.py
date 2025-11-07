@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import json
 import os
+import hashlib
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
@@ -33,9 +34,11 @@ class CompleteIndexBuilder:
         )
         print("[BUILDER] Initialization complete.", flush=True)
 
-        self.docs_path = Path("scraped_data/gitbook_data.json")
-        self.website_path = Path("scraped_data/website/website_data.json")
-        self.blog_path = Path("scraped_data/blog/blog_posts.json")
+        # Use absolute paths to ensure we load from the correct location
+        base_path = Path("/app") if os.path.exists("/app") else Path(".")
+        self.docs_path = base_path / "scraped_data" / "gitbook_data.json"
+        self.website_path = base_path / "scraped_data" / "website" / "website_data.json"
+        self.blog_path = base_path / "scraped_data" / "blog" / "blog_posts.json"
 
     # ------------------------------------------------------------------#
     # Loading helpers
@@ -260,16 +263,62 @@ class CompleteIndexBuilder:
     # Build / verify
     # ------------------------------------------------------------------#
 
-    def build_index(self) -> None:
+    def _calculate_data_hash(self) -> str:
+        """Calculate hash of all data files to detect changes."""
+        hasher = hashlib.md5()
+        for path in [self.docs_path, self.website_path, self.blog_path]:
+            if path.exists():
+                with open(path, 'rb') as f:
+                    hasher.update(f.read())
+        return hasher.hexdigest()
+    
+    def _should_rebuild(self) -> bool:
+        """Check if index needs rebuilding based on data changes."""
+        data_hash = self._calculate_data_hash()
+        
+        # Check if collection exists and has matching hash
+        try:
+            collection = self.client.get_collection("auto_finance_complete")
+            metadata = collection.metadata or {}
+            stored_hash = metadata.get("data_hash")
+            
+            if stored_hash == data_hash:
+                print(f"[SKIP] Index is up-to-date (hash: {data_hash[:8]}...)", flush=True)
+                return False
+            else:
+                print(f"[REBUILD] Data changed (old: {stored_hash[:8] if stored_hash else 'none'}..., new: {data_hash[:8]}...)", flush=True)
+                return True
+        except Exception:
+            # Collection doesn't exist, need to build
+            print("[BUILD] No existing index found", flush=True)
+            return True
+
+    def build_index(self, progress_callback=None, force: bool = False) -> None:
         print("\n" + "=" * 60, flush=True)
         print("Building Complete Index", flush=True)
         print("=" * 60, flush=True)
+
+        # Check if rebuild is needed (unless forced)
+        if not force and not self._should_rebuild():
+            if progress_callback:
+                # Get existing collection count
+                try:
+                    collection = self.client.get_collection("auto_finance_complete")
+                    count = collection.count()
+                    progress_callback(count, count, "Index already up-to-date")
+                except:
+                    pass
+            return
 
         all_chunks = self.prepare_all_chunks()
 
         if not all_chunks:
             print("[ERROR] No chunks generated; aborting index build.", flush=True)
+            if progress_callback:
+                progress_callback(0, 0, "No chunks to index")
             return
+
+        data_hash = self._calculate_data_hash()
 
         try:
             self.client.delete_collection(name="auto_finance_complete")
@@ -280,11 +329,18 @@ class CompleteIndexBuilder:
         collection = self.client.create_collection(
             name="auto_finance_complete",
             embedding_function=self.embedding_function,
-            metadata={"description": "Complete Auto Finance data: docs + website + blog"},
+            metadata={
+                "description": "Complete Auto Finance data: docs + website + blog",
+                "data_hash": data_hash,
+            },
         )
 
         print("\n[STEP] Indexing chunks...", flush=True)
+        if progress_callback:
+            progress_callback(0, len(all_chunks), "Starting index build...")
+        
         batch_size = 100
+        total_batches = (len(all_chunks) - 1) // batch_size + 1
         for index in range(0, len(all_chunks), batch_size):
             batch = all_chunks[index : index + batch_size]
             metadatas = []
@@ -309,10 +365,13 @@ class CompleteIndexBuilder:
                 ids=[f"chunk_{index + offset}" for offset in range(len(batch))],
             )
 
-            print(
-                f"  Batch {index // batch_size + 1}/{(len(all_chunks) - 1) // batch_size + 1}",
-                flush=True,
-            )
+            batch_num = index // batch_size + 1
+            chunks_indexed = min(index + len(batch), len(all_chunks))
+            step_msg = f"Indexed batch {batch_num}/{total_batches} ({chunks_indexed}/{len(all_chunks)} chunks)"
+            print(f"  {step_msg}", flush=True)
+            
+            if progress_callback:
+                progress_callback(chunks_indexed, len(all_chunks), step_msg)
 
         print(f"\n[OK] Index built successfully with {len(all_chunks)} chunks.", flush=True)
 

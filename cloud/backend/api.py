@@ -7,7 +7,7 @@ import os
 import sys
 from typing import Optional, Dict, List
 from datetime import datetime
-from fastapi import FastAPI, HTTPException, Depends, Header, Response
+from fastapi import FastAPI, HTTPException, Depends, Header, Response, Query
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
@@ -25,7 +25,9 @@ from rag_agent_complete import CompleteRAGAgent
 from rag_agent_openai import OpenAIRAGAgent
 from dotenv import load_dotenv
 
-load_dotenv()
+# Load .env file only if it exists (for local development)
+# In Cloud Run, environment variables are set directly, so this won't override them
+load_dotenv(override=False)
 
 # Setup logging FIRST before any other imports that might use it
 logging.basicConfig(level=logging.INFO)
@@ -138,8 +140,14 @@ else:
     agent = CompleteRAGAgent()
     logger.info(f"Using Claude model: {model}")
 
-# Google OAuth client ID
-GOOGLE_CLIENT_ID = os.getenv('GOOGLE_CLIENT_ID', '')
+# Google OAuth client ID - try multiple ways to get it
+GOOGLE_CLIENT_ID = os.environ.get('GOOGLE_CLIENT_ID') or os.getenv('GOOGLE_CLIENT_ID', '')
+# Log for debugging (remove in production if sensitive)
+if GOOGLE_CLIENT_ID:
+    logger.info(f"GOOGLE_CLIENT_ID loaded: {GOOGLE_CLIENT_ID[:20]}... (length: {len(GOOGLE_CLIENT_ID)})")
+else:
+    logger.error("GOOGLE_CLIENT_ID is empty or not set!")
+    logger.error(f"Available env vars with 'GOOGLE': {[k for k in os.environ.keys() if 'GOOGLE' in k.upper()]}")
 
 # Serve static frontend files FIRST (before API routes)
 # Try multiple possible frontend locations
@@ -216,11 +224,14 @@ class AskRequest(BaseModel):
     user_id: str
     user_name: Optional[str] = None
     user_email: Optional[str] = None
+    thread_id: Optional[str] = None  # Conversation thread ID
+    system_prompt: Optional[str] = None  # Custom system prompt (Option A)
 
 class AskResponse(BaseModel):
     answer: str
     timestamp: str
     model: str
+    thread_id: Optional[str] = None  # Return thread_id so frontend can track it
 
 class ConversationMessage(BaseModel):
     role: str
@@ -278,9 +289,15 @@ async def health_check():
 @app.get("/api/config")
 async def get_config():
     """Get public configuration (safe to expose)"""
+    # Re-read env vars at request time to ensure we have latest values
+    current_client_id = os.environ.get('GOOGLE_CLIENT_ID') or os.getenv('GOOGLE_CLIENT_ID', '') or GOOGLE_CLIENT_ID
+    current_model = os.environ.get('BOT_MODEL') or os.getenv('BOT_MODEL', '') or model
+    
+    logger.info(f"Config requested - client_id length: {len(current_client_id)}, model: {current_model}")
+    
     return {
-        "google_client_id": GOOGLE_CLIENT_ID,
-        "model": model
+        "google_client_id": current_client_id,
+        "model": current_model
     }
 
 @app.post("/api/auth/google")
@@ -298,11 +315,17 @@ async def ask_question(request: AskRequest):
     try:
         logger.info(f"Question from {request.user_name or request.user_id}: {request.question}")
         
-        # Get conversation context for the user
+        # Get conversation context for the user (use thread_id if provided)
         user_id_int = int(request.user_id.replace('google_', '').encode().hex(), 16) % (10**10)
+        
+        # Use thread_id hash as chat_id for proper context isolation
+        chat_id_for_context = 0
+        if request.thread_id:
+            chat_id_for_context = hash(request.thread_id) % (10**10)
+        
         conv_context = conversation_manager.get_context(
             user_id=user_id_int,
-            chat_id=0  # Single chat per user in web interface
+            chat_id=chat_id_for_context
         )
         
         # Use the question directly (conversation context is maintained separately)
@@ -312,21 +335,35 @@ async def ask_question(request: AskRequest):
                 question=request.question,
                 model=model,
                 max_tokens=2000,
-                n_results=10  # Retrieve more chunks for better context
+                n_results=10,  # Retrieve more chunks for better context
+                system_prompt=request.system_prompt  # Pass custom prompt (Option A)
             )
             answer = result.get('answer', 'Sorry, I encountered an error processing your question.')
         except Exception as rag_error:
             logger.error(f"RAG agent error: {rag_error}", exc_info=True)
-            # Fallback answer if RAG fails (likely empty knowledge base)
-            answer = "⚠️ I'm having trouble accessing my knowledge base. The data might not be scraped yet. Please run `python scrape_all_data.py` to populate the knowledge base with Auto Finance documentation."
+            # Provide more specific error messages
+            error_str = str(rag_error)
+            if "401" in error_str or "authentication" in error_str.lower() or "invalid x-api-key" in error_str.lower():
+                answer = "⚠️ API authentication error. Please check that the Anthropic API key is configured correctly in Cloud Run environment variables."
+            elif "collection" in error_str.lower() or "index not built" in error_str.lower() or "No collection found" in error_str.lower():
+                answer = "⚠️ I'm having trouble accessing my knowledge base. The data might not be scraped yet. Please run a scrape from the Data Status page to populate the knowledge base."
+            else:
+                answer = f"⚠️ Error processing your question: {error_str[:200]}"
             result = {'usage': {'total_tokens': 0}}
         
-        # Add to conversation manager
-        user_id_int = int(request.user_id.replace('google_', '').encode().hex(), 16) % (10**10)
-        conversation_manager.add_message(user_id_int, 'user', request.question, 0)
-        conversation_manager.add_message(user_id_int, 'assistant', answer, 0)
+        # Create or use thread
+        thread_id = request.thread_id
+        if not thread_id:
+            # Create new thread for this conversation
+            thread_id = storage.create_thread(request.user_id)
         
-        # Save to persistent storage
+        # Add to conversation manager (use thread_id hash as chat_id for context)
+        user_id_int = int(request.user_id.replace('google_', '').encode().hex(), 16) % (10**10)
+        chat_id_int = hash(thread_id) % (10**10) if thread_id else 0  # Convert thread_id to int for manager
+        conversation_manager.add_message(user_id_int, 'user', request.question, chat_id_int)
+        conversation_manager.add_message(user_id_int, 'assistant', answer, chat_id_int)
+        
+        # Save to persistent storage with thread
         storage.save_conversation(
             user_id=request.user_id,
             username=request.user_name or 'User',
@@ -335,7 +372,9 @@ async def ask_question(request: AskRequest):
             question=request.question,
             answer=answer,
             model=model,
-            tokens_used=result.get('usage', {}).get('total_tokens', 0)
+            tokens_used=result.get('usage', {}).get('total_tokens', 0),
+            thread_id=thread_id,
+            system_prompt=request.system_prompt
         )
         
         logger.info(f"Successfully answered question from {request.user_name or request.user_id}")
@@ -343,7 +382,8 @@ async def ask_question(request: AskRequest):
         return AskResponse(
             answer=answer,
             timestamp=datetime.now().isoformat(),
-            model=model
+            model=model,
+            thread_id=thread_id
         )
         
     except Exception as e:
@@ -379,6 +419,107 @@ async def clear_conversation(request: ClearConversationRequest):
     except Exception as e:
         logger.error(f"Error clearing conversation: {e}")
         raise HTTPException(status_code=500, detail=str(e))
+
+# ============================================================================
+# CONVERSATION THREAD MANAGEMENT
+# ============================================================================
+
+class CreateThreadRequest(BaseModel):
+    user_id: str
+    title: Optional[str] = None
+
+class UpdateThreadTitleRequest(BaseModel):
+    user_id: str
+    title: str
+
+@app.post("/api/threads/create")
+async def create_thread(request: CreateThreadRequest):
+    """Create a new conversation thread"""
+    try:
+        thread_id = storage.create_thread(request.user_id, request.title)
+        return {"success": True, "thread_id": thread_id}
+    except Exception as e:
+        logger.error(f"Error creating thread: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/api/threads/{user_id}")
+async def get_user_threads(user_id: str):
+    """Get all conversation threads for a user"""
+    try:
+        threads = storage.get_user_threads(user_id)
+        return {"threads": threads}
+    except Exception as e:
+        logger.error(f"Error getting threads: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/api/threads/{thread_id}/messages")
+async def get_thread_messages(thread_id: str):
+    """Get all messages in a conversation thread"""
+    try:
+        messages = storage.get_thread_messages(thread_id)
+        return {"messages": messages}
+    except Exception as e:
+        logger.error(f"Error getting thread messages: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.delete("/api/threads/{thread_id}")
+async def delete_thread(thread_id: str, user_id: str = Query(..., description="User ID")):
+    """Delete a conversation thread"""
+    try:
+        success = storage.delete_thread(thread_id, user_id)
+        if not success:
+            raise HTTPException(status_code=404, detail="Thread not found or access denied")
+        return {"success": True, "message": "Thread deleted"}
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error deleting thread: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.put("/api/threads/{thread_id}/title")
+async def update_thread_title(thread_id: str, request: UpdateThreadTitleRequest):
+    """Update a thread's title"""
+    try:
+        success = storage.update_thread_title(thread_id, request.user_id, request.title)
+        if not success:
+            raise HTTPException(status_code=404, detail="Thread not found or access denied")
+        return {"success": True, "message": "Title updated"}
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error updating thread title: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+# ============================================================================
+# PROMPT TEMPLATES
+# ============================================================================
+
+@app.get("/api/prompts/templates")
+async def get_prompt_templates():
+    """Get available prompt templates"""
+    try:
+        import json
+        from pathlib import Path
+        
+        prompt_file = Path("system_prompts.json")
+        if prompt_file.exists():
+            with open(prompt_file, 'r') as f:
+                prompts = json.load(f)
+                return {
+                    "templates": [
+                        {"name": "default", "description": "Standard Auto Finance assistant"},
+                        {"name": "technical", "description": "Technical expert mode"},
+                        {"name": "beginner_friendly", "description": "Beginner-friendly explanations"},
+                        {"name": "marketing", "description": "Marketing-focused responses"},
+                        {"name": "seo_specialist", "description": "SEO specialist mode (auto-detected)"}
+                    ],
+                    "prompts": prompts
+                }
+        else:
+            return {"templates": [], "prompts": {}}
+    except Exception as e:
+        logger.error(f"Error getting prompt templates: {e}")
+        return {"templates": [], "prompts": {}}
 
 @app.get("/api/stats")
 async def get_stats():
@@ -547,13 +688,22 @@ async def get_scraper_status():
     return scraper_service.get_status()
 
 @app.post("/api/scraper/trigger")
-async def trigger_manual_scrape():
+async def trigger_manual_scrape(scrape_type: str = Query("full", description="Type of scrape: full, gitbook, website, or blog")):
     """Manually trigger a data scrape"""
     if not scraper_service:
+        logger.error("Scraper service not available")
         raise HTTPException(status_code=503, detail="Scraper service not available")
-    result = scraper_service.trigger_manual_scrape()
+    
+    if scrape_type not in ("full", "gitbook", "website", "blog"):
+        raise HTTPException(status_code=400, detail=f"Invalid scrape_type: {scrape_type}. Must be one of: full, gitbook, website, blog")
+    
+    full_scrape = (scrape_type == "full")
+    result = scraper_service.trigger_manual_scrape(full_scrape=full_scrape, scrape_type=scrape_type)
     if not result['success']:
-        raise HTTPException(status_code=400, detail=result['error'])
+        logger.warning(f"Failed to trigger scrape: {result.get('error', 'Unknown error')}")
+        raise HTTPException(status_code=400, detail=result.get('error', 'Unknown error'))
+    
+    logger.info(f"Manual {scrape_type} scrape triggered successfully: {result.get('message', '')}")
     return result
 
 @app.get("/api/test/playwright")

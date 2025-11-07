@@ -65,9 +65,22 @@ set REGION=us-central1
 echo 🏗️  Building and deploying to Cloud Run...
 echo    Service: %SERVICE_NAME%
 echo    Region: %REGION%
+echo    Using E2_HIGHCPU_8 machine for faster builds (8x faster)
 echo.
 
-REM Deploy to Cloud Run
+REM Verify frontend files exist
+if not exist "frontend\index.html" (
+    echo ❌ ERROR: frontend\index.html not found!
+    echo    Make sure you're running this from the cloud\ directory
+    pause
+    exit /b 1
+)
+
+echo ✅ Frontend files verified
+echo.
+
+REM Deploy to Cloud Run with faster build machine
+REM The cloudbuild.yaml will be used automatically if present
 gcloud run deploy %SERVICE_NAME% ^
   --source . ^
   --platform managed ^

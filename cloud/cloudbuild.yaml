@@ -1,16 +1,17 @@
 steps:
-  # Pull previous image for caching
+  # Pull previous image for caching (optional, speeds up builds)
   - name: 'gcr.io/cloud-builders/docker'
     entrypoint: 'bash'
     args: ['-c', 'docker pull gcr.io/$PROJECT_ID/autofinance-bot:latest || exit 0']
   
-  # Build with cache
+  # Build Docker image with layer caching (Cloud Build's native caching)
+  # Layer caching speeds up rebuilds when dependencies don't change
   - name: 'gcr.io/cloud-builders/docker'
-    dir: 'cloud'
     args: [
       'build',
       '-t', 'gcr.io/$PROJECT_ID/autofinance-bot:latest',
       '--cache-from', 'gcr.io/$PROJECT_ID/autofinance-bot:latest',
+      '--progress=plain',
       '.'
     ]
   
@@ -28,10 +29,10 @@ steps:
       '--allow-unauthenticated',
       '--memory', '4Gi',
       '--cpu', '2',
-      '--timeout', '600',
+      '--timeout', '300',
       '--max-instances', '10',
       '--set-env-vars',
-      'GOOGLE_CLIENT_ID=${_GOOGLE_CLIENT_ID},ANTHROPIC_API_KEY=${_ANTHROPIC_API_KEY},OPENAI_API_KEY=${_OPENAI_API_KEY},BOT_MODEL=${_BOT_MODEL}'
+      'GOOGLE_CLIENT_ID=${_GOOGLE_CLIENT_ID},ANTHROPIC_API_KEY=${_ANTHROPIC_API_KEY},OPENAI_API_KEY=${_OPENAI_API_KEY},BOT_MODEL=${_BOT_MODEL},TOKENIZERS_PARALLELISM=false,PLAYWRIGHT_BROWSERS_PATH=/root/.cache/ms-playwright,PLAYWRIGHT_REMOTE_BROWSER_ENDPOINT=${_PLAYWRIGHT_REMOTE_BROWSER_ENDPOINT}'
     ]
 
 images:
@@ -39,3 +40,4 @@ images:
 
 options:
   machineType: 'E2_HIGHCPU_8'  # 8x faster builds (~$0.16 per build vs free)
+  logging: CLOUD_LOGGING_ONLY

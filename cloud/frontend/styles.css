@@ -492,14 +492,224 @@ body {
    CHAT INTERFACE
    ============================================================================ */
 
+.chat-layout {
+    display: flex;
+    gap: var(--spacing-md);
+    height: calc(100vh - 200px);
+}
+
+.chat-sidebar {
+    width: 280px;
+    min-width: 280px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.sidebar-header {
+    padding: var(--spacing-md);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.sidebar-header .btn-primary {
+    width: 100%;
+    justify-content: center;
+}
+
+.sidebar-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--spacing-sm);
+}
+
+.thread-item {
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--border-radius-small);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-bottom: var(--spacing-xs);
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.thread-item:hover {
+    background: var(--bg-card-hover);
+}
+
+.thread-item.active {
+    background: rgba(191, 255, 0, 0.1);
+    border: 1px solid var(--accent-primary);
+}
+
+.thread-item-title {
+    flex: 1;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-primary);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.thread-item-preview {
+    font-size: 12px;
+    color: var(--text-secondary);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.thread-item-actions {
+    display: none;
+    gap: var(--spacing-xs);
+    align-items: center;
+}
+
+.thread-item:hover .thread-item-actions {
+    display: flex;
+}
+
+.thread-action-btn {
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.thread-action-btn:hover {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+.chat-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    min-width: 0;
+}
+
+.prompt-editor-panel {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
+
+.prompt-editor-header {
+    padding: var(--spacing-md);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.prompt-editor-header:hover {
+    background: var(--bg-card-hover);
+}
+
+.prompt-editor-title {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.prompt-status {
+    font-size: 12px;
+    color: var(--text-secondary);
+    font-weight: normal;
+    margin-left: var(--spacing-sm);
+}
+
+.prompt-toggle-icon {
+    transition: transform 0.3s ease;
+    color: var(--text-secondary);
+}
+
+.prompt-editor-panel.expanded .prompt-toggle-icon {
+    transform: rotate(180deg);
+}
+
+.prompt-editor-content {
+    padding: var(--spacing-md);
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.prompt-template-selector {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.prompt-template-selector label {
+    font-size: 14px;
+    color: var(--text-secondary);
+    white-space: nowrap;
+}
+
+.prompt-template-selector select {
+    flex: 1;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-small);
+    padding: var(--spacing-sm) var(--spacing-md);
+    color: var(--text-primary);
+    font-size: 14px;
+}
+
+#prompt-textarea {
+    width: 100%;
+    min-height: 150px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-small);
+    padding: var(--spacing-md);
+    color: var(--text-primary);
+    font-size: 13px;
+    font-family: 'Courier New', monospace;
+    resize: vertical;
+}
+
+#prompt-textarea:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.prompt-editor-actions {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: flex-end;
+}
+
 .chat-container {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius);
-    height: calc(100vh - 250px);
+    flex: 1;
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    min-height: 0;
 }
 
 .chat-messages {
@@ -572,6 +782,105 @@ body {
 .message.bot .message-content {
     background: var(--bg-secondary);
     color: var(--text-primary);
+}
+
+/* Markdown formatting styles for bot messages */
+.message.bot .message-content p {
+    margin: 0.5em 0;
+    line-height: 1.6;
+}
+
+.message.bot .message-content p:first-child {
+    margin-top: 0;
+}
+
+.message.bot .message-content p:last-child {
+    margin-bottom: 0;
+}
+
+.message.bot .message-content strong {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.message.bot .message-content em {
+    font-style: italic;
+}
+
+.message.bot .message-content code {
+    background: rgba(191, 255, 0, 0.15);
+    color: var(--accent-primary);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+}
+
+.message.bot .message-content pre {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-small);
+    padding: var(--spacing-sm) var(--spacing-md);
+    margin: 0.5em 0;
+    overflow-x: auto;
+}
+
+.message.bot .message-content pre code {
+    background: transparent;
+    padding: 0;
+    color: var(--text-primary);
+}
+
+.message.bot .message-content ul,
+.message.bot .message-content ol {
+    margin: 0.5em 0;
+    padding-left: 1.5em;
+}
+
+.message.bot .message-content li {
+    margin: 0.25em 0;
+    line-height: 1.6;
+}
+
+.message.bot .message-content h1,
+.message.bot .message-content h2,
+.message.bot .message-content h3,
+.message.bot .message-content h4,
+.message.bot .message-content h5,
+.message.bot .message-content h6 {
+    margin: 0.75em 0 0.5em 0;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.message.bot .message-content h1:first-child,
+.message.bot .message-content h2:first-child,
+.message.bot .message-content h3:first-child {
+    margin-top: 0;
+}
+
+.message.bot .message-content blockquote {
+    border-left: 3px solid var(--accent-primary);
+    padding-left: var(--spacing-md);
+    margin: 0.5em 0;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+.message.bot .message-content a {
+    color: var(--accent-primary);
+    text-decoration: underline;
+    transition: opacity 0.2s;
+}
+
+.message.bot .message-content a:hover {
+    opacity: 0.8;
+}
+
+.message.bot .message-content hr {
+    border: none;
+    border-top: 1px solid var(--border-color);
+    margin: 1em 0;
 }
 
 .message-loading {
@@ -854,6 +1163,20 @@ body {
     
     .stats-grid {
         grid-template-columns: 1fr;
+    }
+    
+    .chat-layout {
+        flex-direction: column;
+        height: auto;
+    }
+    
+    .chat-sidebar {
+        width: 100%;
+        max-height: 200px;
+    }
+    
+    .chat-main {
+        min-height: calc(100vh - 400px);
     }
 }
 

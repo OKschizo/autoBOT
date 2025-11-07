@@ -23,11 +23,25 @@ class ConversationStorage:
         conn = sqlite3.connect(self.db_path)
         cursor = conn.cursor()
         
-        # Conversations table
+        # Conversation threads (like ChatGPT conversations)
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS conversation_threads (
+                thread_id TEXT PRIMARY KEY,
+                user_id TEXT NOT NULL,
+                title TEXT,
+                created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+                updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+                message_count INTEGER DEFAULT 0,
+                last_message_preview TEXT
+            )
+        ''')
+        
+        # Conversations table (individual messages in threads)
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS conversations (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 user_id TEXT NOT NULL,
+                thread_id TEXT,
                 username TEXT,
                 chat_id TEXT NOT NULL,
                 chat_type TEXT,
@@ -37,7 +51,9 @@ class ConversationStorage:
                 answer TEXT NOT NULL,
                 model TEXT,
                 tokens_used INTEGER,
-                context_length INTEGER
+                context_length INTEGER,
+                system_prompt TEXT,
+                FOREIGN KEY (thread_id) REFERENCES conversation_threads(thread_id) ON DELETE CASCADE
             )
         ''')
         
@@ -56,6 +72,8 @@ class ConversationStorage:
         
         # Create indexes for faster searching
         cursor.execute('CREATE INDEX IF NOT EXISTS idx_user_id ON conversations(user_id)')
+        cursor.execute('CREATE INDEX IF NOT EXISTS idx_thread_id ON conversations(thread_id)')
+        cursor.execute('CREATE INDEX IF NOT EXISTS idx_user_threads ON conversation_threads(user_id)')
         cursor.execute('CREATE INDEX IF NOT EXISTS idx_timestamp ON conversations(timestamp)')
         cursor.execute('CREATE INDEX IF NOT EXISTS idx_platform ON conversations(platform)')
         
@@ -65,7 +83,8 @@ class ConversationStorage:
     def save_conversation(self, user_id: str, username: str, chat_id: str, 
                          question: str, answer: str, platform: str = 'telegram',
                          chat_type: str = 'private', model: str = None,
-                         tokens_used: int = None):
+                         tokens_used: int = None, thread_id: str = None,
+                         system_prompt: str = None):
         """Save a conversation exchange"""
         conn = sqlite3.connect(self.db_path)
         cursor = conn.cursor()
@@ -73,9 +92,32 @@ class ConversationStorage:
         # Save conversation
         cursor.execute('''
             INSERT INTO conversations 
-            (user_id, username, chat_id, chat_type, platform, question, answer, model, tokens_used)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-        ''', (user_id, username, chat_id, chat_type, platform, question, answer, model, tokens_used))
+            (user_id, thread_id, username, chat_id, chat_type, platform, question, answer, model, tokens_used, system_prompt)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ''', (user_id, thread_id, username, chat_id, chat_type, platform, question, answer, model, tokens_used, system_prompt))
+        
+        # Update thread if it exists
+        if thread_id:
+            # Generate title from first question if thread is new
+            cursor.execute('SELECT message_count FROM conversation_threads WHERE thread_id = ?', (thread_id,))
+            thread_exists = cursor.fetchone()
+            
+            if not thread_exists:
+                # Create new thread with title from first question
+                title = question[:50] + ('...' if len(question) > 50 else '')
+                cursor.execute('''
+                    INSERT INTO conversation_threads (thread_id, user_id, title, message_count, last_message_preview)
+                    VALUES (?, ?, ?, 1, ?)
+                ''', (thread_id, user_id, title, question[:100]))
+            else:
+                # Update existing thread
+                cursor.execute('''
+                    UPDATE conversation_threads 
+                    SET message_count = message_count + 1,
+                        updated_at = CURRENT_TIMESTAMP,
+                        last_message_preview = ?
+                    WHERE thread_id = ?
+                ''', (question[:100], thread_id))
         
         # Update user index
         cursor.execute('''
@@ -90,6 +132,114 @@ class ConversationStorage:
         
         conn.commit()
         conn.close()
+    
+    def create_thread(self, user_id: str, title: str = None) -> str:
+        """Create a new conversation thread"""
+        import uuid
+        thread_id = str(uuid.uuid4())
+        
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+        
+        cursor.execute('''
+            INSERT INTO conversation_threads (thread_id, user_id, title)
+            VALUES (?, ?, ?)
+        ''', (thread_id, user_id, title or 'New Conversation'))
+        
+        conn.commit()
+        conn.close()
+        
+        return thread_id
+    
+    def get_user_threads(self, user_id: str, limit: int = 50) -> List[Dict]:
+        """Get all conversation threads for a user"""
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+        
+        cursor.execute('''
+            SELECT thread_id, title, created_at, updated_at, message_count, last_message_preview
+            FROM conversation_threads
+            WHERE user_id = ?
+            ORDER BY updated_at DESC
+            LIMIT ?
+        ''', (user_id, limit))
+        
+        threads = []
+        for row in cursor.fetchall():
+            threads.append({
+                'thread_id': row[0],
+                'title': row[1],
+                'created_at': row[2],
+                'updated_at': row[3],
+                'message_count': row[4],
+                'last_message_preview': row[5]
+            })
+        
+        conn.close()
+        return threads
+    
+    def get_thread_messages(self, thread_id: str, limit: int = 100) -> List[Dict]:
+        """Get all messages in a conversation thread"""
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+        
+        cursor.execute('''
+            SELECT id, timestamp, question, answer, model, system_prompt
+            FROM conversations
+            WHERE thread_id = ?
+            ORDER BY timestamp ASC
+            LIMIT ?
+        ''', (thread_id, limit))
+        
+        messages = []
+        for row in cursor.fetchall():
+            messages.append({
+                'id': row[0],
+                'timestamp': row[1],
+                'question': row[2],
+                'answer': row[3],
+                'model': row[4],
+                'system_prompt': row[5]
+            })
+        
+        conn.close()
+        return messages
+    
+    def delete_thread(self, thread_id: str, user_id: str) -> bool:
+        """Delete a conversation thread (cascade deletes messages)"""
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+        
+        # Verify ownership
+        cursor.execute('SELECT user_id FROM conversation_threads WHERE thread_id = ?', (thread_id,))
+        result = cursor.fetchone()
+        
+        if not result or result[0] != user_id:
+            conn.close()
+            return False
+        
+        cursor.execute('DELETE FROM conversation_threads WHERE thread_id = ?', (thread_id,))
+        # Messages are cascade deleted by foreign key
+        
+        conn.commit()
+        conn.close()
+        return True
+    
+    def update_thread_title(self, thread_id: str, user_id: str, title: str) -> bool:
+        """Update a thread's title"""
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+        
+        cursor.execute('''
+            UPDATE conversation_threads 
+            SET title = ?
+            WHERE thread_id = ? AND user_id = ?
+        ''', (title, thread_id, user_id))
+        
+        updated = cursor.rowcount > 0
+        conn.commit()
+        conn.close()
+        return updated
     
     def get_user_conversations(self, user_id: str, limit: int = 50) -> List[Dict]:
         """Get all conversations for a user"""

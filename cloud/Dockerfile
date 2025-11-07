@@ -11,6 +11,9 @@ RUN apt-get update && apt-get install -y \
 
 # Copy backend requirements first (for better caching)
 COPY backend/requirements.txt /app/backend/requirements.txt
+
+# Install Python packages
+# Note: Using --no-cache-dir to reduce image size, but layer caching will speed up rebuilds
 RUN pip install --no-cache-dir -r /app/backend/requirements.txt
 
 # Install Playwright browsers
@@ -40,6 +43,8 @@ RUN mkdir -p /app/data
 # Environment variables (will be set in Cloud Run)
 ENV PORT=8080
 ENV PYTHONPATH=/app
+ENV TOKENIZERS_PARALLELISM=false
+ENV PLAYWRIGHT_BROWSERS_PATH=/root/.cache/ms-playwright
 
 # Expose port (Cloud Run uses PORT env var)
 EXPOSE 8080

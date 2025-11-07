@@ -6,6 +6,9 @@
     <title>Auto Finance Bot Manager</title>
     <link rel="stylesheet" href="/styles.css">
     <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <!-- Markdown parser and HTML sanitizer for chat formatting -->
+    <script src="https://cdn.jsdelivr.net/npm/marked@11.1.1/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"></script>
 </head>
 <body>
     <!-- Top Navigation Bar -->
@@ -108,26 +111,77 @@
 
         <!-- Q&A Chat Tab -->
         <div id="chat-tab" class="tab-content">
-            <div class="content-header">
-                <h1>Q&A Chat</h1>
-                <p class="subtitle">Ask questions about Auto Finance</p>
-            </div>
-
-            <div class="chat-container">
-                <div class="chat-messages" id="chat-messages">
-                    <div class="welcome-message">
-                        <div class="welcome-icon">💬</div>
-                        <h2>Welcome to Auto Finance Bot</h2>
-                        <p>Ask me anything about Auto Finance, Autopools, or DeFi strategies!</p>
+            <div class="chat-layout">
+                <!-- Sidebar for Conversation Threads -->
+                <aside class="chat-sidebar" id="chat-sidebar">
+                    <div class="sidebar-header">
+                        <button class="btn-primary" id="new-thread-btn" onclick="createNewThread()">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M8 3V13M3 8H13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                            <span>New Conversation</span>
+                        </button>
                     </div>
-                </div>
-                <div class="chat-input-container">
-                    <input type="text" id="chat-input" placeholder="Ask a question..." disabled>
-                    <button id="send-button" class="btn-primary" disabled>
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                            <path d="M18 2L9 11M18 2L12 18L9 11M18 2L2 8L9 11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </button>
+                    <div class="sidebar-content" id="threads-list">
+                        <p style="color: var(--text-secondary); text-align: center; padding: 20px;">No conversations yet</p>
+                    </div>
+                </aside>
+
+                <!-- Main Chat Area -->
+                <div class="chat-main">
+                    <!-- Prompt Editor Panel -->
+                    <div class="prompt-editor-panel" id="prompt-editor-panel">
+                        <div class="prompt-editor-header" onclick="togglePromptEditor()">
+                            <div class="prompt-editor-title">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="margin-right: 8px;">
+                                    <path d="M8 2L2 6L8 10L14 6L8 2Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M2 10L8 14L14 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                <span>System Prompt</span>
+                                <span class="prompt-status" id="prompt-status">Default</span>
+                            </div>
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" class="prompt-toggle-icon" id="prompt-toggle-icon">
+                                <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div class="prompt-editor-content" id="prompt-editor-content" style="display: none;">
+                            <div class="prompt-template-selector">
+                                <label>Template:</label>
+                                <select id="prompt-template-select" onchange="loadPromptTemplate()">
+                                    <option value="">Custom</option>
+                                    <option value="default">Default</option>
+                                    <option value="technical">Technical</option>
+                                    <option value="beginner_friendly">Beginner Friendly</option>
+                                    <option value="marketing">Marketing</option>
+                                    <option value="seo_specialist">SEO Specialist</option>
+                                </select>
+                            </div>
+                            <textarea id="prompt-textarea" placeholder="Enter custom system prompt or select a template above..."></textarea>
+                            <div class="prompt-editor-actions">
+                                <button class="btn-secondary" onclick="resetPrompt()">Reset</button>
+                                <button class="btn-primary" onclick="savePrompt()">Use This Prompt</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Chat Container -->
+                    <div class="chat-container">
+                        <div class="chat-messages" id="chat-messages">
+                            <div class="welcome-message">
+                                <div class="welcome-icon">💬</div>
+                                <h2>Welcome to Auto Finance Bot</h2>
+                                <p>Ask me anything about Auto Finance, Autopools, or DeFi strategies!</p>
+                            </div>
+                        </div>
+                        <div class="chat-input-container">
+                            <input type="text" id="chat-input" placeholder="Ask a question..." disabled>
+                            <button id="send-button" class="btn-primary" disabled>
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path d="M18 2L9 11M18 2L12 18L9 11M18 2L2 8L9 11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -143,12 +197,23 @@
             <div class="card" style="margin-bottom: 24px;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
                     <h2 style="margin: 0;">Auto-Scraper Status</h2>
-                    <button id="manual-scrape-btn" class="btn-primary" onclick="triggerManualScrape()">
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="margin-right: 8px;">
-                            <path d="M13 2L3 12M13 2V7M13 2H8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                        Refresh Now
-                    </button>
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                        <button id="manual-scrape-btn" class="btn-primary" onclick="triggerManualScrape('full')" title="Scrape all sources (GitBook + Website + Blog)">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="margin-right: 8px;">
+                                <path d="M13 2L3 12M13 2V7M13 2H8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                            Full Scrape
+                        </button>
+                        <button id="gitbook-scrape-btn" class="btn-secondary" onclick="triggerManualScrape('gitbook')" title="Scrape only GitBook documentation">
+                            📚 GitBook
+                        </button>
+                        <button id="website-scrape-btn" class="btn-secondary" onclick="triggerManualScrape('website')" title="Scrape only website (live data)">
+                            🌐 Website
+                        </button>
+                        <button id="blog-scrape-btn" class="btn-secondary" onclick="triggerManualScrape('blog')" title="Scrape only blog">
+                            📝 Blog
+                        </button>
+                    </div>
                 </div>
                 
                 <div class="data-status-grid">
@@ -198,6 +263,65 @@
                 </div>
             </div>
 
+            <!-- Scrape Progress Card (shown when scraping) -->
+            <div id="scrape-progress-container" class="card" style="margin-bottom: 24px; display: none;">
+                <h2 style="margin-bottom: 16px;">📊 Current Scrape Progress</h2>
+                <div style="margin-bottom: 16px;">
+                    <div style="font-size: 14px; color: var(--text-secondary); margin-bottom: 8px;">Stage:</div>
+                    <div id="scrape-stage" style="font-size: 16px; font-weight: 600; color: var(--accent-primary); margin-bottom: 12px;">-</div>
+                    <div style="font-size: 14px; color: var(--text-secondary); margin-bottom: 8px;">Status:</div>
+                    <div id="scrape-current-step" style="font-size: 14px; color: var(--text-primary);">Waiting...</div>
+                </div>
+                
+                <!-- GitBook Progress -->
+                <div id="gitbook-progress" style="margin-bottom: 16px; display: none;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                        <span style="font-size: 14px; color: var(--text-secondary);">GitBook Pages</span>
+                        <span class="progress-text" style="font-size: 14px; color: var(--text-secondary);">0/0</span>
+                    </div>
+                    <div class="progress-bar" style="width: 100%; height: 8px; background: var(--bg-secondary); border-radius: 4px; overflow: hidden;">
+                        <div class="progress-bar-fill" style="height: 100%; background: var(--accent-primary); transition: width 0.3s; width: 0%;"></div>
+                    </div>
+                </div>
+                
+                <!-- Website Progress -->
+                <div id="website-progress" style="margin-bottom: 16px; display: none;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                        <span style="font-size: 14px; color: var(--text-secondary);">Website Pages</span>
+                        <span class="progress-text" style="font-size: 14px; color: var(--text-secondary);">0/0</span>
+                    </div>
+                    <div class="progress-bar" style="width: 100%; height: 8px; background: var(--bg-secondary); border-radius: 4px; overflow: hidden;">
+                        <div class="progress-bar-fill" style="height: 100%; background: var(--accent-primary); transition: width 0.3s; width: 0%;"></div>
+                    </div>
+                </div>
+                
+                <!-- Blog Progress -->
+                <div id="blog-progress" style="margin-bottom: 16px; display: none;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                        <span style="font-size: 14px; color: var(--text-secondary);">Blog Posts</span>
+                        <span class="progress-text" style="font-size: 14px; color: var(--text-secondary);">0/0</span>
+                    </div>
+                    <div class="progress-bar" style="width: 100%; height: 8px; background: var(--bg-secondary); border-radius: 4px; overflow: hidden;">
+                        <div class="progress-bar-fill" style="height: 100%; background: var(--accent-primary); transition: width 0.3s; width: 0%;"></div>
+                    </div>
+                </div>
+                
+                <!-- Index Progress -->
+                <div id="index-progress" style="margin-bottom: 16px; display: none;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                        <span style="font-size: 14px; color: var(--text-secondary);">Index Chunks</span>
+                        <span class="progress-text" style="font-size: 14px; color: var(--text-secondary);">0/0</span>
+                    </div>
+                    <div class="progress-bar" style="width: 100%; height: 8px; background: var(--bg-secondary); border-radius: 4px; overflow: hidden;">
+                        <div class="progress-bar-fill" style="height: 100%; background: var(--accent-primary); transition: width 0.3s; width: 0%;"></div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 16px; padding: 12px; background: var(--bg-secondary); border-radius: 8px; font-size: 12px; color: var(--text-secondary);">
+                    💡 <strong>Tip:</strong> View detailed logs in <a href="https://console.cloud.google.com/logs/query" target="_blank" style="color: var(--accent-primary);">Google Cloud Console</a>
+                </div>
+            </div>
+
             <!-- Scrape History Card -->
             <div class="card">
                 <h2 style="margin-bottom: 16px;">Recent Scrapes</h2>
@@ -207,6 +331,26 @@
             </div>
         </div>
     </main>
+
+    <!-- Thread Title Edit Modal -->
+    <div id="thread-title-modal" class="modal">
+        <div class="modal-content" style="max-width: 500px;">
+            <div class="modal-header">
+                <h2>Edit Conversation Title</h2>
+                <button class="modal-close" onclick="closeThreadTitleModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Title:</label>
+                    <input type="text" id="thread-title-input" placeholder="Enter conversation title..." style="width: 100%;">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="closeThreadTitleModal()">Cancel</button>
+                <button class="btn-primary" onclick="saveThreadTitle()">Save</button>
+            </div>
+        </div>
+    </div>
 
     <!-- Bot Details Modal -->
     <div id="bot-modal" class="modal">
